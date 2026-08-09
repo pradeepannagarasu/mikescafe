@@ -58,7 +58,7 @@ export function Reservation() {
         className="absolute inset-0 opacity-30"
         style={{
           backgroundImage:
-            "url(/images/gallery/dining-room.jpg)",
+            "url(/images/gallery/good-food-good-vibes.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

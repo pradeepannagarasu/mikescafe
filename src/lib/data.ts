@@ -27,6 +27,7 @@ export const PLATES = {
 
 /** Cafe atmosphere & gallery photography */
 export const GALLERY_SHOTS = {
+  goodFoodVibes: "/images/gallery/good-food-good-vibes.jpg",
   goodVibes: "/images/gallery/good-vibes-neon.jpg",
   fullEnglishPlate: "/images/gallery/full-english-plate.jpg",
   mikesMoments: "/images/gallery/mikes-moments.jpg",
@@ -402,75 +403,75 @@ export const defaultContent: SiteContent = {
   gallery: [
     {
       id: "g1",
+      src: GALLERY_SHOTS.goodFoodVibes,
+      alt: "Mike's Cafe - Good Food, Good Vibes",
+      span: "wide",
+    },
+    {
+      id: "g2",
       src: GALLERY_SHOTS.goodVibes,
       alt: "Good vibes only neon sign at Mike's Cafe",
       span: "wide",
     },
     {
-      id: "g2",
+      id: "g3",
       src: GALLERY_SHOTS.diningRoom,
       alt: "Dining room with red booths and neon glow",
       span: "tall",
     },
     {
-      id: "g3",
+      id: "g4",
       src: GALLERY_SHOTS.fullEnglishPlate,
       alt: "Full English breakfast plate",
       span: "tall",
     },
     {
-      id: "g4",
+      id: "g5",
       src: GALLERY_SHOTS.mikesMoments,
       alt: "MIKES marquee, coffee and breakfast moments",
       span: "normal",
     },
     {
-      id: "g5",
+      id: "g6",
       src: GALLERY_SHOTS.cafeCounter,
       alt: "Cafe counter, booths and Good Food neon",
       span: "tall",
     },
     {
-      id: "g6",
+      id: "g7",
       src: GALLERY_SHOTS.boothsNeon,
       alt: "Booth seating and brick wall neon",
       span: "wide",
     },
     {
-      id: "g7",
+      id: "g8",
       src: PLATES.eggsBenedict,
       alt: "Eggs Benedict",
       span: "normal",
     },
     {
-      id: "g8",
+      id: "g9",
       src: PLATES.frenchToast,
       alt: "French toast",
       span: "wide",
     },
     {
-      id: "g9",
+      id: "g10",
       src: PLATES.english,
       alt: "Classic Full English at Mike's",
       span: "tall",
     },
     {
-      id: "g10",
+      id: "g11",
       src: PLATES.bagels,
       alt: "Mike's bagels",
       span: "normal",
     },
     {
-      id: "g11",
+      id: "g12",
       src: PLATES.pancake,
       alt: "Homemade pancakes",
       span: "normal",
-    },
-    {
-      id: "g12",
-      src: PLATES.mediterranean,
-      alt: "Mediterranean breakfast",
-      span: "wide",
     },
   ],
 };
@@ -609,10 +610,10 @@ export const timeline = [
 ];
 
 export const instagramPosts = [
+  GALLERY_SHOTS.goodFoodVibes,
   GALLERY_SHOTS.goodVibes,
   GALLERY_SHOTS.fullEnglishPlate,
   GALLERY_SHOTS.diningRoom,
   PLATES.eggsBenedict,
   GALLERY_SHOTS.cafeCounter,
-  PLATES.frenchToast,
 ];
