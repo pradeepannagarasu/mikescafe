@@ -2,7 +2,7 @@
 
 Italian deli template site — panini, piadina, lasagna & mains. Eat in or collect.
 
-Live Worker: `https://piccola.pradeepandigital.workers.dev`
+Live Worker: `https://mikescafe.pradeepandigital.workers.dev`
 
 ## Quick start
 
@@ -21,7 +21,7 @@ npm run dev
 Edit → commit → push main → Cloudflare builds → live
 ```
 
-Worker name: `piccola` (short URL). Bindings include `MIKES_BOOKINGS` KV for live bookings.
+Worker name in Cloudflare CI: `mikescafe` (must match Wrangler `name` + `WORKER_SELF_REFERENCE`). Bindings include `MIKES_BOOKINGS` KV for live bookings.
 
 ## Environment
 
@@ -33,5 +33,5 @@ Worker name: `piccola` (short URL). Bindings include `MIKES_BOOKINGS` KV for liv
 
 ## Notes
 
-- Logo: text wordmark until a logo file is added
+- Branding is **La Piccola Deli**; the Cloudflare worker project is still named `mikescafe` for deploy compatibility.
 - Address / phone / hours: placeholders editable in Admin

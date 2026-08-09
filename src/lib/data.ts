@@ -8,7 +8,7 @@ export const SITE = {
   tagline: "Italian deli — panini, pasta, coffee & fresh favourites",
   rating: 4.8,
   reviewCount: 120,
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://piccola.pradeepandigital.workers.dev",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mikescafe.pradeepandigital.workers.dev",
   logo: "/images/logo.png",
   logoLight: "/images/logo-light.png",
   instagram: "https://www.instagram.com/",

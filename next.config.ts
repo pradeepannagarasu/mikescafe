@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://piccola.pradeepandigital.workers.dev";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://mikescafe.pradeepandigital.workers.dev";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
