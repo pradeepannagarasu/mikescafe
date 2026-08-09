@@ -30,6 +30,7 @@ export const PLATES = {
 
 /** Cafe atmosphere & gallery photography */
 export const GALLERY_SHOTS = {
+  hero: "/images/hero-interior.jpg",
   goodFoodVibes: "/images/gallery/good-food-good-vibes.jpg",
   goodVibes: "/images/gallery/good-vibes-neon.jpg",
   fullEnglishPlate: "/images/gallery/full-english-plate.jpg",

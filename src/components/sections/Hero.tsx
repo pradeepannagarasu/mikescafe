@@ -3,10 +3,10 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { PLATES, SITE } from "@/lib/data";
+import { GALLERY_SHOTS, SITE } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
 
-const HERO_IMAGE = PLATES.english;
+const HERO_IMAGE = GALLERY_SHOTS.hero;
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -27,11 +27,11 @@ export function Hero() {
       <motion.div style={{ y }} className="absolute inset-0">
         <Image
           src={HERO_IMAGE}
-          alt="Full English breakfast at Mike's Cafe"
+          alt="Mike's Cafe dining room — Good vibes only neon, Notting Hill"
           fill
           priority
           sizes="100vw"
-          className="object-cover scale-105"
+          className="object-cover object-[center_40%] scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-walnut/55 via-walnut/35 to-walnut/75" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(44,33,24,0.45)_100%)]" />
