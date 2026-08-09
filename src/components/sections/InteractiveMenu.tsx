@@ -162,7 +162,7 @@ export function InteractiveMenu() {
         <SectionHeading
           eyebrow="The Menu"
           title="Order Made Simple"
-          subtitle="Browse by category — every item sits in its own section. Tap a category to focus, or All to scroll the full menu."
+          subtitle="Browse by category, every item sits in its own section. Tap a category to focus, or All to scroll the full menu."
         />
 
         {content.specialOfTheDay && (

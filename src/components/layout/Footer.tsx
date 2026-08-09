@@ -21,7 +21,7 @@ export function Footer() {
               Italian Deli
             </p>
             <p className="mt-6 text-ivory/65 leading-relaxed max-w-xs">
-              Panini, piadina, lasagna and Italian mains — made fresh for eat-in or collect.
+              Panini, piadina, lasagna and Italian mains, made fresh for eat-in or collect.
             </p>
           </div>
 

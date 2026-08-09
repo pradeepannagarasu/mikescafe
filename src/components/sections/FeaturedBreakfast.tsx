@@ -69,7 +69,7 @@ export function FeaturedBreakfast() {
         <SectionHeading
           eyebrow="Favourites"
           title="Italian Classics Worth Coming Back For"
-          subtitle="Browse by category. The strip scrolls for you — hover or tap to pause, then add to your order."
+          subtitle="Browse by category. The strip scrolls for you, hover or tap to pause, then add to your order."
         />
 
         <div

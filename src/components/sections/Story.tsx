@@ -73,7 +73,7 @@ export function Story() {
         <SectionHeading
           eyebrow="Our Story"
           title="Italian Deli Favourites, Made Fresh"
-          subtitle="La Piccola Deli is a neighbourhood counter for panini, piadina, lasagna and Italian mains — cooked simply, served generously."
+          subtitle="La Piccola Deli is a neighbourhood counter for panini, piadina, lasagna and Italian mains, cooked simply, served generously."
         />
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -82,7 +82,7 @@ export function Story() {
               <div ref={imageRef} className="absolute inset-[-8%] will-change-transform">
                 <Image
                   src="/images/story-heritage.jpg"
-                  alt="La Piccola Deli — our place"
+                  alt="La Piccola Deli, our place"
                   fill
                   priority
                   className="object-cover object-center"
@@ -101,7 +101,7 @@ export function Story() {
                 key={item.year}
                 className="timeline-item border-t border-walnut/10 py-7 sm:py-8 md:py-10"
               >
-                <div className="flex flex-col gap-3 sm:gap-4 md:grid md:grid-cols-[minmax(7.5rem,9rem)_minmax(0,1fr)] md:gap-10 md:items-start">
+                <div className="flex flex-col gap-3 sm:gap-4 md:grid md:grid-cols-[minmax(7.5rem, 9rem)_minmax(0, 1fr)] md:gap-10 md:items-start">
                   <p className="font-serif text-2xl sm:text-3xl md:text-4xl text-racing leading-none break-words">
                     {item.year}
                   </p>

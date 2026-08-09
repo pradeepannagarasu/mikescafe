@@ -32,7 +32,7 @@ export function Gallery() {
         <SectionHeading
           eyebrow="Atmosphere"
           title="Plates From the Counter"
-          subtitle="Panini, piadina, lasagna and Italian mains — a look at what’s cooking at La Piccola."
+          subtitle="Panini, piadina, lasagna and Italian mains, a look at what’s cooking at La Piccola."
         />
 
         <div className="columns-2 md:columns-3 gap-4 md:gap-5 space-y-4 md:space-y-5">

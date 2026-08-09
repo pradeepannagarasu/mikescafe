@@ -18,7 +18,7 @@ export function SignatureDishes() {
         <SectionHeading
           eyebrow="Signatures"
           title="Dishes With a Story"
-          subtitle="Editorial favourites — the recipes, the ingredients, and our notes from the counter."
+          subtitle="Editorial favourites, the recipes, the ingredients, and our notes from the counter."
         />
 
         <div className="space-y-28 md:space-y-40">
@@ -56,7 +56,7 @@ export function SignatureDishes() {
                   <p className="text-[11px] tracking-[0.28em] uppercase text-copper mb-4">
                     Signature · {formatPrice(dish.price)}
                   </p>
-                  <h3 className="font-serif text-[clamp(2.2rem,4vw,3.6rem)] leading-[1.05] text-walnut">
+                  <h3 className="font-serif text-[clamp(2.2rem, 4vw, 3.6rem)] leading-[1.05] text-walnut">
                     {dish.name}
                   </h3>
                   <p className="mt-5 text-muted leading-relaxed">{dish.story}</p>

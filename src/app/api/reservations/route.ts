@@ -21,7 +21,7 @@ const hits = new Map<string, { count: number; resetAt: number }>();
 
 function getClientIp(request: Request) {
   return (
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-forwarded-for")?.split(", ")[0]?.trim() ||
     request.headers.get("x-real-ip") ||
     "unknown"
   );
@@ -39,7 +39,7 @@ function isRateLimited(ip: string) {
 }
 
 function isValidPhone(phone: string) {
-  return /^[+()\d\s-]{7,20}$/.test(phone.trim());
+  return /^[+()\d\s-]{7, 20}$/.test(phone.trim());
 }
 
 function isValidDate(date: string) {
@@ -171,7 +171,7 @@ export async function POST(request: Request) {
     booking,
     message:
       fulfillment === "collect"
-        ? "Thanks for your collect order — we'll start preparing it for you."
-        : "Thanks for booking to eat in — we'll get your table ready for you.",
+        ? "Thanks for your collect order, we'll start preparing it for you."
+        : "Thanks for booking to eat in, we'll get your table ready for you.",
   });
 }

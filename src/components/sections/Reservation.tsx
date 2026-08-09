@@ -70,8 +70,8 @@ export function Reservation() {
       setMessage(
         json.message ??
           (fulfillment === "collect"
-            ? "Thanks for your collect order — we'll start preparing it for you."
-            : "Thanks for booking to eat in — we'll get your table ready for you.")
+            ? "Thanks for your collect order, we'll start preparing it for you."
+            : "Thanks for booking to eat in, we'll get your table ready for you.")
       );
       setStatus("success");
     } catch {
@@ -116,13 +116,13 @@ export function Reservation() {
               </p>
               <h3 className="font-serif text-3xl md:text-4xl text-ivory">
                 {lastFulfillment === "collect"
-                  ? "Thanks — we're on it"
-                  : "Thanks — see you soon"}
+                  ? "Thanks, we're on it"
+                  : "Thanks, see you soon"}
               </h3>
               <p className="text-ivory/75 max-w-md mx-auto leading-relaxed">
                 {lastFulfillment === "collect"
-                  ? "We've got your collect order. The kitchen will prepare it for your chosen time — we'll call if we need anything."
-                  : "We've got your eat-in booking. We'll make sure your table is ready — we'll call to confirm if needed."}
+                  ? "We've got your collect order. The kitchen will prepare it for your chosen time, we'll call if we need anything."
+                  : "We've got your eat-in booking. We'll make sure your table is ready, we'll call to confirm if needed."}
               </p>
               <p className="text-sm text-gold/90">{message}</p>
               <Button

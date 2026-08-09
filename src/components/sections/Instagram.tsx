@@ -13,7 +13,7 @@ export function Instagram() {
         <SectionHeading
           eyebrow="Instagram"
           title={SITE.instagramHandle}
-          subtitle="Follow the lunch rush — panini, piadina, and fresh plates."
+          subtitle="Follow the lunch rush, panini, piadina, and fresh plates."
         />
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">

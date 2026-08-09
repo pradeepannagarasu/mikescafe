@@ -6,7 +6,7 @@ import { menuCatalog } from "@/lib/menu-catalog";
 export const SITE = {
   name: "La Piccola Deli",
   established: 2020,
-  tagline: "Italian deli — panini, pasta, coffee & fresh favourites",
+  tagline: "Italian deli, panini, pasta, coffee & fresh favourites",
   rating: 4.8,
   reviewCount: 120,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mikescafe.pradeepandigital.workers.dev",
@@ -41,7 +41,7 @@ export const defaultContent: SiteContent = {
   },
   specialOfTheDay: {
     name: "Lasagna Bolognese",
-    description: "Slow-layered beef lasagna — order ahead for eat-in or collect.",
+    description: "Slow-layered beef lasagna, order ahead for eat-in or collect.",
     price: 12,
   },
   openingHours: [
@@ -64,7 +64,7 @@ export const defaultContent: SiteContent = {
   announcements: [
     {
       id: "a1",
-      text: "Order menu for eat-in or collect — catering & shop available too",
+      text: "Order menu for eat-in or collect, catering & shop available too",
       active: true,
     },
   ],
@@ -142,7 +142,7 @@ export const timeline = [
   {
     year: "Kitchen",
     title: "From panini to pasta",
-    text: "Panini, lasagna, mains and coffee — for eat-in or collect.",
+    text: "Panini, lasagna, mains and coffee, for eat-in or collect.",
   },
   {
     year: "Today",

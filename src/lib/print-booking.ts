@@ -30,7 +30,7 @@ export function printBookingTicket(booking: Booking) {
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>La Piccola Deli — ${esc(kind)}</title>
+  <title>La Piccola Deli, ${esc(kind)}</title>
   <style>
     @page { margin: 10mm; }
     body { font-family: Georgia, "Times New Roman", serif; color: #1a1a1a; padding: 12px; }
@@ -66,7 +66,7 @@ export function printBookingTicket(booking: Booking) {
 </body>
 </html>`;
 
-  const w = window.open("", "_blank", "noopener,noreferrer,width=480,height=720");
+  const w = window.open("", "_blank", "noopener, noreferrer, width=480, height=720");
   if (!w) return;
   w.document.open();
   w.document.write(html);

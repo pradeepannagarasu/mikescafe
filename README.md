@@ -1,6 +1,6 @@
 # La Piccola Deli
 
-Italian deli template site — panini, piadina, lasagna & mains. Eat in or collect.
+Italian deli template site, panini, piadina, lasagna & mains. Eat in or collect.
 
 Live Worker: `https://mikescafe.pradeepandigital.workers.dev`
 

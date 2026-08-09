@@ -38,6 +38,6 @@ export function playNewBookingAlert() {
       void ctx.close();
     }, 1600);
   } catch {
-    // Autoplay / AudioContext blocked — ignore
+    // Autoplay / AudioContext blocked, ignore
   }
 }

@@ -179,7 +179,7 @@ export function BookingsPanel() {
           Live bookings from the website appear here within seconds.
           {newCount > 0 && (
             <span className="ml-2 font-medium text-racing">
-              {newCount} new — print or update status.
+              {newCount} new, print or update status.
             </span>
           )}
         </div>
@@ -330,7 +330,7 @@ export function BookingsPanel() {
 
       {!loading && shown.length === 0 && (
         <p className="text-sm text-muted py-10 text-center border border-dashed border-walnut/15 rounded-sm">
-          No bookings yet. Keep this tab open — new reserve/collect requests appear here with an
+          No bookings yet. Keep this tab open, new reserve/collect requests appear here with an
           alert sound.
         </p>
       )}
@@ -341,7 +341,7 @@ export function BookingsPanel() {
             key={b.id}
             className={cn(
               "border rounded-sm bg-ivory p-4 md:p-5 space-y-3",
-              b.status === "new" ? "border-racing/50 shadow-[0_0_0_1px_rgba(120,40,30,0.15)]" : "border-walnut/10"
+              b.status === "new" ? "border-racing/50 shadow-[0_0_0_1px_rgba(120, 40, 30, 0.15)]" : "border-walnut/10"
             )}
           >
             <div className="flex flex-wrap items-start justify-between gap-3">

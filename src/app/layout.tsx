@@ -20,7 +20,7 @@ const outfit = Outfit({
 
 const title = `${SITE.name} | Italian Deli | Panini, Piadina & Lasagna`;
 const description =
-  "La Piccola Deli — Italian panini, piadina, lasagna and mains. Order ahead to eat in or collect.";
+  "La Piccola Deli, Italian panini, piadina, lasagna and mains. Order ahead to eat in or collect.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),

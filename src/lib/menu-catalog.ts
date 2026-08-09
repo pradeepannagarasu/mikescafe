@@ -107,12 +107,12 @@ function build(specs: Spec[]): MenuItem[] {
 
 /** Primary click & collect food + core drinks; catering & shop are separate groups */
 export const menuCatalog: MenuItem[] = build([
-  // —— ORDER: Breakfast ——
+  // ORDER: Breakfast
   { name: "Avocado On Toast", price: 10.5, category: "breakfast", favourite: true },
   { name: "Scrambled Eggs On Toast", price: 11.5, category: "breakfast", favourite: true },
   { name: "Greek Yoghurt Granola", price: 5.8, category: "breakfast" },
 
-  // —— ORDER: Panini ——
+  // ORDER: Panini
   {
     name: "Panino Al Crudo",
     price: 9.5,
@@ -120,7 +120,7 @@ export const menuCatalog: MenuItem[] = build([
     favourite: true,
     featured: true,
     description: "Classic panino with cured ham.",
-    story: "A Piccola counter favourite — simple, generous, Italian.",
+    story: "A Piccola counter favourite, simple, generous, Italian.",
   },
   {
     name: "Panino Al Cotto",
@@ -142,7 +142,7 @@ export const menuCatalog: MenuItem[] = build([
     favourite: true,
   },
 
-  // —— ORDER: Piadina ——
+  // ORDER: Piadina
   {
     name: "Piadina Mortadella",
     price: 9.5,
@@ -160,7 +160,7 @@ export const menuCatalog: MenuItem[] = build([
     story: "Thin grilled piadina with Parma ham.",
   },
 
-  // —— ORDER: Focaccia ——
+  // ORDER: Focaccia
   { name: "Focaccia Mortadella", price: 7.5, category: "focaccia" },
   { name: "Focaccia Salame And Scamorza", price: 7.5, category: "focaccia" },
   {
@@ -172,7 +172,7 @@ export const menuCatalog: MenuItem[] = build([
   },
   { name: "Focaccia Slice", price: 2.8, category: "focaccia" },
 
-  // —— ORDER: Croissants ——
+  // ORDER: Croissants
   { name: "Croissant Plain", price: 2.9, category: "croissants" },
   { name: "Croissant Chocolate", price: 3.4, category: "croissants", favourite: true },
   { name: "Croissant Apricot", price: 3.4, category: "croissants" },
@@ -181,18 +181,18 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Ham And Cheese Croissant", price: 7.5, category: "croissants" },
   { name: "Mozzarella And Tomato Croissant", price: 7.5, category: "croissants" },
 
-  // —— ORDER: Pizzas ——
+  // ORDER: Pizzas
   { name: "Pizza Margherita", price: 6.5, category: "pizza", favourite: true },
   { name: "Pizza Bianca", price: 6.5, category: "pizza" },
 
-  // —— ORDER: Savouries ——
+  // ORDER: Savouries
   { name: "Frittata Homemade", price: 7, category: "savouries", favourite: true },
   { name: "Valdostana", price: 6, category: "savouries" },
   { name: "Pasqualina", price: 6, category: "savouries" },
   { name: "Panzerotto Mediterraneo", price: 5.5, category: "savouries" },
   { name: "Arancino", price: 4.8, category: "savouries", favourite: true },
 
-  // —— ORDER: Sweet Bakery ——
+  // ORDER: Sweet Bakery
   { name: "Bombolone Cioccolata", price: 3.4, category: "bakery" },
   { name: "Bombolone Crema", price: 3.4, category: "bakery" },
   { name: "Bombolone Marmellata", price: 3.4, category: "bakery" },
@@ -202,7 +202,7 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Baci Di Dama", price: 1, category: "bakery" },
   { name: "Cannolini", price: 1.5, category: "bakery" },
 
-  // —— ORDER: Pasta ——
+  // ORDER: Pasta
   { name: "Pasta Al Pesto", price: 8.5, category: "pasta", favourite: true },
   { name: "Pasta Al Pomodoro", price: 8.5, category: "pasta", favourite: true },
   { name: "Arrabbiata Pasta", price: 8.5, category: "pasta" },
@@ -214,14 +214,14 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Cous Cous Main", price: 9.5, category: "pasta" },
   { name: "Cous Cous Chicken Main", price: 12, category: "pasta" },
 
-  // —— ORDER: Lasagna ——
+  // ORDER: Lasagna
   {
     name: "Lasagna Bolognese",
     price: 12,
     category: "lasagna",
     favourite: true,
     featured: true,
-    story: "Slow-layered beef lasagna — comfort food done the Italian way.",
+    story: "Slow-layered beef lasagna, comfort food done the Italian way.",
   },
   {
     name: "Lasagna Al Pesto",
@@ -232,7 +232,7 @@ export const menuCatalog: MenuItem[] = build([
     story: "Bright pesto lasagna from the Piccola kitchen.",
   },
 
-  // —— ORDER: Mains ——
+  // ORDER: Mains
   {
     name: "Aubergine Parmigiana",
     price: 12,
@@ -265,7 +265,7 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Leek And Potatoes Soup", price: 6.5, category: "mains" },
   { name: "Butternut Squash Soup", price: 6.5, category: "mains" },
 
-  // —— ORDER: Sides ——
+  // ORDER: Sides
   { name: "Roasted Potatoes", price: 6.5, category: "sides" },
   { name: "Roast Peppers", price: 6.5, category: "sides" },
   { name: "Steamed Broccoli", price: 6.5, category: "sides" },
@@ -275,14 +275,14 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Steamed Rice", price: 4.5, category: "sides" },
   { name: "Mixed Roasted Vegetables", price: 6.5, category: "sides" },
 
-  // —— ORDER: Cold Starters ——
+  // ORDER: Cold Starters
   { name: "Bresaola Carpaccio", price: 13.5, category: "starters", favourite: true },
   { name: "La Caprese Di Bufala", price: 12.5, category: "starters", favourite: true },
   { name: "La Caprese Di Burrata", price: 12.5, category: "starters" },
   { name: "Parma Ham Platter With Focaccia", price: 12.5, category: "starters", favourite: true },
   { name: "Sourdough Sliced", price: 2, category: "starters" },
 
-  // —— ORDER: Desserts (text-only — no plate photos) ——
+  // ORDER: Desserts (text-only, no plate photos)
   { name: "Mixed Fruits Tarte", price: 6.5, category: "desserts", image: "" },
   { name: "Homemade Tiramisu", price: 6.5, category: "desserts", favourite: true, image: "" },
   { name: "Baked Cheesecake Blueberries", price: 5.5, category: "desserts", image: "" },
@@ -297,7 +297,7 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Torta Caprese", price: 5.5, category: "desserts", image: "" },
   { name: "Large Fruit Tarte - Whole", price: 55, category: "desserts", image: "" },
 
-  // —— DRINKS: Coffee & Tea ——
+  // DRINKS: Coffee & Tea
   { name: "Espresso", price: 1.8, category: "coffee" },
   { name: "Double Espresso", price: 2.4, category: "coffee" },
   { name: "Macchiato", price: 2.9, category: "coffee" },
@@ -317,11 +317,11 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Green Tea", price: 3.6, category: "coffee" },
   { name: "Peppermint Tea", price: 3.6, category: "coffee" },
 
-  // —— DRINKS: Fresh Juice ——
+  // DRINKS: Fresh Juice
   { name: "Orange Juice", price: 6, category: "juice" },
   { name: "Orange Carrot Lemon Juice", price: 6.2, category: "juice" },
 
-  // —— DRINKS: Soft ——
+  // DRINKS: Soft
   { name: "Coca Cola In Can", price: 2.5, category: "soft-drinks" },
   { name: "Diet Coke In Can", price: 2.5, category: "soft-drinks" },
   { name: "Estathe Lemon", price: 3.5, category: "soft-drinks" },
@@ -338,13 +338,13 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Still Water", price: 2, category: "soft-drinks" },
   { name: "Sparkling Water", price: 2, category: "soft-drinks" },
 
-  // —— DRINKS: Beer ——
+  // DRINKS: Beer
   { name: "Moretti Beer", price: 5.5, category: "beer" },
   { name: "Moretti Beer Zero", price: 5.5, category: "beer" },
   { name: "Messina Cristalli Di Sale", price: 5.5, category: "beer" },
   { name: "Ichnusa Non Filtrata", price: 5.5, category: "beer" },
 
-  // —— DRINKS: Wine (priced only) ——
+  // DRINKS: Wine (priced only)
   { name: "Gavi 125ml", price: 6.7, category: "wine", description: "Wine by the glass" },
   { name: "Chianti 125ml", price: 6.7, category: "wine", description: "Wine by the glass" },
   { name: "Prosecco 125ml", price: 6.7, category: "wine", description: "Wine by the glass" },
@@ -352,7 +352,7 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Piccolo Gavi Di Gavi", price: 35, category: "wine", description: "White wine bottle" },
   { name: "Amarone Classico - Velluto Meroni", price: 69.9, category: "wine", description: "Red wine bottle" },
 
-  // —— CATERING ——
+  // CATERING
   { name: "Lasagna Bolognese (Catering)", price: 55, category: "catering" },
   { name: "Lasagna Al Pesto (Catering)", price: 55, category: "catering" },
   { name: "Lasagna Ai Funghi (Catering)", price: 55, category: "catering" },
@@ -373,7 +373,7 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Baked Cheese Cake (Catering)", price: 38, category: "catering" },
   { name: "Large Fruit Tarte (Catering)", price: 55, category: "catering" },
 
-  // —— SHOP (curated retail — easy browse, not every SKU) ——
+  // SHOP (curated retail, easy browse, not every SKU)
   { name: "Mortadella Bologna IGP With Pistachio 170g", price: 6, category: "shop", description: "Charcuterie" },
   { name: "Cooked Ham High Quality 170g", price: 9.5, category: "shop", description: "Charcuterie" },
   { name: "Bresaola Punta D'Anca 100g", price: 9.5, category: "shop", description: "Charcuterie" },
