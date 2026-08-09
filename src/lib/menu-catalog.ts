@@ -1,5 +1,6 @@
 import type { MenuCategory, MenuGroup, MenuItem } from "@/types";
 import { PLATES } from "@/lib/plates";
+import { DISH_PHOTOS } from "@/lib/dish-photos";
 
 type Spec = {
   name: string;
@@ -87,7 +88,7 @@ function build(specs: Spec[]): MenuItem[] {
     const image =
       s.image !== undefined
         ? s.image || undefined
-        : fallbackImage(category);
+        : DISH_PHOTOS[s.name] ?? fallbackImage(category);
     out.push({
       id,
       name: s.name,
@@ -116,7 +117,6 @@ export const menuCatalog: MenuItem[] = build([
     name: "Panino Al Crudo",
     price: 9.5,
     category: "panini",
-    image: PLATES.parmaPanini,
     favourite: true,
     featured: true,
     description: "Classic panino with cured ham.",
@@ -126,7 +126,6 @@ export const menuCatalog: MenuItem[] = build([
     name: "Panino Al Cotto",
     price: 9.5,
     category: "panini",
-    image: PLATES.salutarePanini,
     favourite: true,
   },
   {
@@ -220,7 +219,6 @@ export const menuCatalog: MenuItem[] = build([
     name: "Lasagna Bolognese",
     price: 12,
     category: "lasagna",
-    image: PLATES.beefLasagna,
     favourite: true,
     featured: true,
     story: "Slow-layered beef lasagna — comfort food done the Italian way.",
@@ -229,7 +227,6 @@ export const menuCatalog: MenuItem[] = build([
     name: "Lasagna Al Pesto",
     price: 12,
     category: "lasagna",
-    image: PLATES.pestoBasilLasagna,
     favourite: true,
     featured: true,
     story: "Bright pesto lasagna from the Piccola kitchen.",

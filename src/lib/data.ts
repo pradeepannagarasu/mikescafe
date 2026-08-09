@@ -1,5 +1,6 @@
 import type { BuilderItem, SiteContent } from "@/types";
 import { PLATES } from "@/lib/plates";
+import { DISH_PHOTOS } from "@/lib/dish-photos";
 import { menuCatalog } from "@/lib/menu-catalog";
 
 export const SITE = {
@@ -107,16 +108,16 @@ export const defaultContent: SiteContent = {
     },
   ],
   gallery: [
-    { id: "g1", src: PLATES.parmaPanini, alt: "Parma panini", span: "wide" },
-    { id: "g2", src: PLATES.meatballs, alt: "Meatballs", span: "normal" },
-    { id: "g3", src: PLATES.beefLasagna, alt: "Beef lasagna", span: "tall" },
-    { id: "g4", src: PLATES.parmaPiadina, alt: "Parma piadina", span: "normal" },
+    { id: "g1", src: PLATES.parmaPanini, alt: "Panino al crudo", span: "wide" },
+    { id: "g2", src: PLATES.pizzaMargherita, alt: "Pizza Margherita", span: "normal" },
+    { id: "g3", src: PLATES.beefLasagna, alt: "Lasagna bolognese", span: "tall" },
+    { id: "g4", src: PLATES.arancino, alt: "Arancino", span: "normal" },
     { id: "g5", src: PLATES.aubergineParmigiana, alt: "Aubergine parmigiana", span: "wide" },
-    { id: "g6", src: PLATES.chickenEscalope, alt: "Chicken escalope", span: "normal" },
-    { id: "g7", src: PLATES.pestoBasilLasagna, alt: "Pesto lasagna", span: "tall" },
-    { id: "g8", src: PLATES.salutarePanini, alt: "Salutare panini", span: "normal" },
-    { id: "g9", src: PLATES.vegPiadina, alt: "Veg piadina", span: "wide" },
-    { id: "g10", src: PLATES.spinachLasagna, alt: "Spinach lasagna", span: "normal" },
+    { id: "g6", src: PLATES.avocadoToast, alt: "Avocado on toast", span: "normal" },
+    { id: "g7", src: PLATES.pestoBasilLasagna, alt: "Lasagna al pesto", span: "tall" },
+    { id: "g8", src: PLATES.salutarePanini, alt: "Panino al cotto", span: "normal" },
+    { id: "g9", src: PLATES.parmaPiadina, alt: "Parma piadina", span: "wide" },
+    { id: "g10", src: DISH_PHOTOS["Pasta Al Pesto"], alt: "Pasta al pesto", span: "normal" },
   ],
 };
 
@@ -151,10 +152,10 @@ export const timeline = [
 ];
 
 export const instagramPosts = [
-  PLATES.parmaPanini,
-  PLATES.meatballs,
-  PLATES.beefLasagna,
-  PLATES.parmaPiadina,
-  PLATES.aubergineParmigiana,
-  PLATES.pestoBasilLasagna,
+  DISH_PHOTOS["Panino Al Crudo"],
+  DISH_PHOTOS["Arancino"],
+  DISH_PHOTOS["Lasagna Bolognese"],
+  DISH_PHOTOS["Pizza Margherita"],
+  DISH_PHOTOS["Pasta Al Pesto"],
+  DISH_PHOTOS["Croissant Chocolate"],
 ];
