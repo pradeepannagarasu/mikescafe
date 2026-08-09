@@ -81,8 +81,8 @@ export function Story() {
             <div className="overflow-hidden rounded-sm aspect-[4/5] md:aspect-[5/6] relative bg-vintage">
               <div ref={imageRef} className="absolute inset-[-8%] will-change-transform">
                 <Image
-                  src="/images/menu/parma-panini.jpg"
-                  alt="Parma panini at La Piccola Deli"
+                  src="/images/hero-interior.jpg"
+                  alt="La Piccola Deli — our place"
                   fill
                   priority
                   className="object-cover object-center"
@@ -91,7 +91,7 @@ export function Story() {
               </div>
             </div>
             <p className="mt-4 text-[11px] tracking-[0.2em] uppercase text-muted">
-              Fresh fillings · Grilled breads · Ready to collect
+              Our heritage · La Piccola Deli
             </p>
           </Reveal>
 
