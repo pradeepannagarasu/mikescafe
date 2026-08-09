@@ -11,14 +11,17 @@ import type { MenuCategory, MenuItem } from "@/types";
 
 const CATEGORY_ORDER: { id: MenuCategory; label: string }[] = [
   { id: "breakfast", label: "Breakfast" },
-  { id: "sandwiches", label: "Sandwiches" },
+  { id: "panini", label: "Panini" },
+  { id: "piadina", label: "Piadina" },
+  { id: "focaccia", label: "Focaccia" },
+  { id: "croissants", label: "Croissants" },
   { id: "pizza", label: "Pizzas" },
-  { id: "pasta", label: "Pasta" },
-  { id: "mains", label: "Mains" },
-  { id: "desserts", label: "Desserts" },
   { id: "savouries", label: "Savouries" },
-  { id: "bakery", label: "Bakery" },
+  { id: "pasta", label: "Pasta" },
+  { id: "lasagna", label: "Lasagna" },
+  { id: "mains", label: "Mains" },
   { id: "starters", label: "Starters" },
+  { id: "desserts", label: "Desserts" },
 ];
 
 export function FeaturedBreakfast() {
@@ -33,15 +36,18 @@ export function FeaturedBreakfast() {
   );
 
   const tabs = useMemo(() => {
-    const present = new Set(favourites.map((i) => i.category));
+    const present = new Set(
+      favourites.filter((i) => i.image).map((i) => i.category)
+    );
     return CATEGORY_ORDER.filter((c) => present.has(c.id));
   }, [favourites]);
 
   const [active, setActive] = useState<MenuCategory | null>(null);
-  const category = active ?? tabs[0]?.id ?? "sandwiches";
+  const category = active ?? tabs[0]?.id ?? "panini";
 
   const filtered = useMemo(
-    () => favourites.filter((i) => i.category === category),
+    () =>
+      favourites.filter((i) => i.category === category && Boolean(i.image)),
     [favourites, category]
   );
 
@@ -152,7 +158,9 @@ export function FeaturedBreakfast() {
               className="grid sm:grid-cols-[140px_1fr_auto] gap-4 sm:gap-6 items-center bg-ivory border border-walnut/10 rounded-sm p-4 sm:p-5"
             >
               <div className="relative aspect-square sm:aspect-[4/5] rounded-sm overflow-hidden bg-vintage max-w-[140px]">
-                <Image src={selected.image} alt={selected.name} fill className="object-cover" sizes="140px" />
+                {selected.image ? (
+                  <Image src={selected.image} alt={selected.name} fill className="object-cover" sizes="140px" />
+                ) : null}
               </div>
               <div>
                 <p className="text-[10px] tracking-[0.2em] uppercase text-copper mb-1">Selected</p>
@@ -216,13 +224,15 @@ function FavouriteScrollCard({
       )}
     >
       <div className="img-reveal relative aspect-[4/5] rounded-sm bg-vintage overflow-hidden">
-        <Image
-          src={item.image}
-          alt={real ? item.name : ""}
-          fill
-          className="object-cover"
-          sizes="280px"
-        />
+        {item.image ? (
+          <Image
+            src={item.image}
+            alt={real ? item.name : ""}
+            fill
+            className="object-cover"
+            sizes="280px"
+          />
+        ) : null}
         <span className="absolute top-2.5 left-2.5 text-[9px] tracking-[0.14em] uppercase bg-racing text-ivory px-2 py-1">
           Favourite
         </span>

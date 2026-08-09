@@ -9,7 +9,7 @@ import { formatPrice } from "@/lib/utils";
 export function SignatureDishes() {
   const { content } = useContent();
   const dishes = content.menuItems.filter(
-    (i) => content.featuredDishIds.includes(i.id) && i.story
+    (i) => content.featuredDishIds.includes(i.id) && i.story && i.image
   );
 
   return (
@@ -38,7 +38,7 @@ export function SignatureDishes() {
                 >
                   <div className="img-reveal absolute inset-0">
                     <Image
-                      src={dish.image}
+                      src={dish.image!}
                       alt={dish.name}
                       fill
                       className="object-cover"

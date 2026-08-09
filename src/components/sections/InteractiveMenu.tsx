@@ -165,48 +165,75 @@ export function InteractiveMenu() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-7 sm:gap-x-5 sm:gap-y-8 md:gap-x-6 md:gap-y-10">
           <AnimatePresence mode="popLayout">
-            {filtered.map((item) => (
-              <motion.article
-                key={item.id}
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.25 }}
-                className="group flex flex-col h-full"
-              >
-                <div className="img-reveal relative aspect-[4/5] sm:aspect-[5/4] rounded-sm bg-vintage">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="mt-3 sm:mt-4 flex flex-col gap-1.5 flex-1">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="font-serif text-base sm:text-xl md:text-2xl text-walnut leading-tight">
-                      {item.name}
-                    </h3>
-                    <span className="text-copper text-sm whitespace-nowrap pt-0.5">
-                      {formatPrice(item.price)}
-                    </span>
-                  </div>
-                  {item.description ? (
-                    <p className="text-xs sm:text-sm text-muted line-clamp-2">
-                      {item.description}
-                    </p>
-                  ) : null}
-                </div>
-                <button
-                  type="button"
-                  onClick={() => addItem(item)}
-                  className="mt-3 sm:mt-4 w-full min-h-10 sm:min-h-11 text-[10px] sm:text-[11px] tracking-[0.12em] uppercase border border-walnut/15 hover:border-racing hover:bg-racing hover:text-ivory transition-colors rounded-sm"
+            {filtered.map((item) => {
+              const textOnly = !item.image;
+              return (
+                <motion.article
+                  key={item.id}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.25 }}
+                  className={cn(
+                    "group flex h-full",
+                    textOnly
+                      ? "col-span-2 md:col-span-3 flex-row items-center gap-4 border-b border-walnut/10 py-3"
+                      : "flex-col"
+                  )}
                 >
-                  Add to order
-                </button>
-              </motion.article>
-            ))}
+                  {!textOnly && (
+                    <div className="img-reveal relative aspect-[4/5] sm:aspect-[5/4] rounded-sm bg-vintage">
+                      <Image
+                        src={item.image!}
+                        alt={item.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw, 33vw"
+                      />
+                    </div>
+                  )}
+                  <div
+                    className={cn(
+                      "flex flex-col gap-1.5 flex-1",
+                      textOnly ? "min-w-0" : "mt-3 sm:mt-4"
+                    )}
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <h3
+                        className={cn(
+                          "font-serif text-walnut leading-tight",
+                          textOnly
+                            ? "text-lg sm:text-xl"
+                            : "text-base sm:text-xl md:text-2xl"
+                        )}
+                      >
+                        {item.name}
+                      </h3>
+                      <span className="text-copper text-sm whitespace-nowrap pt-0.5">
+                        {formatPrice(item.price)}
+                      </span>
+                    </div>
+                    {item.description ? (
+                      <p className="text-xs sm:text-sm text-muted line-clamp-2">
+                        {item.description}
+                      </p>
+                    ) : null}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => addItem(item)}
+                    className={cn(
+                      "text-[10px] sm:text-[11px] tracking-[0.12em] uppercase border border-walnut/15 hover:border-racing hover:bg-racing hover:text-ivory transition-colors rounded-sm",
+                      textOnly
+                        ? "shrink-0 px-4 min-h-10"
+                        : "mt-3 sm:mt-4 w-full min-h-10 sm:min-h-11"
+                    )}
+                  >
+                    {textOnly ? "Add" : "Add to order"}
+                  </button>
+                </motion.article>
+              );
+            })}
           </AnimatePresence>
         </div>
 

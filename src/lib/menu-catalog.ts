@@ -7,6 +7,7 @@ type Spec = {
   category: MenuCategory;
   group?: MenuGroup;
   description?: string;
+  /** Pass empty string for text-only items (no photo) */
   image?: string;
   favourite?: boolean;
   featured?: boolean;
@@ -36,12 +37,18 @@ function groupFor(category: MenuCategory): MenuGroup {
   return "order";
 }
 
-function fallbackImage(category: MenuCategory): string {
+function fallbackImage(category: MenuCategory): string | undefined {
   switch (category) {
     case "breakfast":
       return PLATES.italianoVegPanini;
-    case "sandwiches":
+    case "panini":
       return PLATES.parmaPanini;
+    case "piadina":
+      return PLATES.parmaPiadina;
+    case "focaccia":
+      return PLATES.chickenPanini;
+    case "croissants":
+      return PLATES.vegPiadina;
     case "pizza":
       return PLATES.salutarePanini;
     case "savouries":
@@ -50,6 +57,8 @@ function fallbackImage(category: MenuCategory): string {
       return PLATES.vegPiadina;
     case "pasta":
       return PLATES.beefLasagna;
+    case "lasagna":
+      return PLATES.beefLasagna;
     case "mains":
       return PLATES.aubergineParmigiana;
     case "sides":
@@ -57,7 +66,7 @@ function fallbackImage(category: MenuCategory): string {
     case "starters":
       return PLATES.parmaPiadina;
     case "desserts":
-      return PLATES.pestoBasilLasagna;
+      return undefined;
     case "catering":
       return PLATES.beefLasagna;
     default:
@@ -75,6 +84,10 @@ function build(specs: Spec[]): MenuItem[] {
     seen.add(id);
     const category = s.category;
     const group = s.group ?? groupFor(category);
+    const image =
+      s.image !== undefined
+        ? s.image || undefined
+        : fallbackImage(category);
     out.push({
       id,
       name: s.name,
@@ -82,7 +95,7 @@ function build(specs: Spec[]): MenuItem[] {
       price: s.price,
       category,
       group,
-      image: s.image ?? fallbackImage(category),
+      ...(image ? { image } : {}),
       favourite: s.favourite,
       featured: s.featured,
       story: s.story,
@@ -93,16 +106,16 @@ function build(specs: Spec[]): MenuItem[] {
 
 /** Primary click & collect food + core drinks; catering & shop are separate groups */
 export const menuCatalog: MenuItem[] = build([
-  // —— ORDER: Cooked Breakfast ——
+  // —— ORDER: Breakfast ——
   { name: "Avocado On Toast", price: 10.5, category: "breakfast", favourite: true },
   { name: "Scrambled Eggs On Toast", price: 11.5, category: "breakfast", favourite: true },
   { name: "Greek Yoghurt Granola", price: 5.8, category: "breakfast" },
 
-  // —— ORDER: Sandwiches ——
+  // —— ORDER: Panini ——
   {
     name: "Panino Al Crudo",
     price: 9.5,
-    category: "sandwiches",
+    category: "panini",
     image: PLATES.parmaPanini,
     favourite: true,
     featured: true,
@@ -112,45 +125,62 @@ export const menuCatalog: MenuItem[] = build([
   {
     name: "Panino Al Cotto",
     price: 9.5,
-    category: "sandwiches",
+    category: "panini",
     image: PLATES.salutarePanini,
     favourite: true,
   },
   {
     name: "Panino Italiano - Wholegrain",
     price: 9.5,
-    category: "sandwiches",
+    category: "panini",
     image: PLATES.italianoVegPanini,
     favourite: true,
   },
   {
+    name: "Panino Salmon And Cream Cheese",
+    price: 10,
+    category: "panini",
+    favourite: true,
+  },
+
+  // —— ORDER: Piadina ——
+  {
     name: "Piadina Mortadella",
     price: 9.5,
-    category: "sandwiches",
+    category: "piadina",
     image: PLATES.salutarePiadina,
     favourite: true,
   },
   {
     name: "Piadina Parma Ham",
     price: 9.5,
-    category: "sandwiches",
+    category: "piadina",
     image: PLATES.parmaPiadina,
     favourite: true,
     featured: true,
     story: "Thin grilled piadina with Parma ham.",
   },
-  { name: "Focaccia Mortadella", price: 7.5, category: "sandwiches" },
-  { name: "Focaccia Salame And Scamorza", price: 7.5, category: "sandwiches" },
+
+  // —— ORDER: Focaccia ——
+  { name: "Focaccia Mortadella", price: 7.5, category: "focaccia" },
+  { name: "Focaccia Salame And Scamorza", price: 7.5, category: "focaccia" },
   {
     name: "Focaccia Chicken Escalope",
     price: 10,
-    category: "sandwiches",
+    category: "focaccia",
     image: PLATES.chickenPanini,
     favourite: true,
   },
-  { name: "Panino Salmon And Cream Cheese", price: 10, category: "sandwiches", favourite: true },
-  { name: "Ham And Cheese Croissant", price: 7.5, category: "sandwiches" },
-  { name: "Mozzarella And Tomato Croissant", price: 7.5, category: "sandwiches" },
+  { name: "Focaccia Slice", price: 2.8, category: "focaccia" },
+
+  // —— ORDER: Croissants ——
+  { name: "Croissant Plain", price: 2.9, category: "croissants" },
+  { name: "Croissant Chocolate", price: 3.4, category: "croissants", favourite: true },
+  { name: "Croissant Apricot", price: 3.4, category: "croissants" },
+  { name: "Croissant Custard", price: 3.4, category: "croissants" },
+  { name: "Croissant Pistachio", price: 3.4, category: "croissants" },
+  { name: "Ham And Cheese Croissant", price: 7.5, category: "croissants" },
+  { name: "Mozzarella And Tomato Croissant", price: 7.5, category: "croissants" },
 
   // —— ORDER: Pizzas ——
   { name: "Pizza Margherita", price: 6.5, category: "pizza", favourite: true },
@@ -164,11 +194,6 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Arancino", price: 4.8, category: "savouries", favourite: true },
 
   // —— ORDER: Sweet Bakery ——
-  { name: "Croissant Plain", price: 2.9, category: "bakery" },
-  { name: "Croissant Chocolate", price: 3.4, category: "bakery", favourite: true },
-  { name: "Croissant Apricot", price: 3.4, category: "bakery" },
-  { name: "Croissant Custard", price: 3.4, category: "bakery" },
-  { name: "Croissant Pistachio", price: 3.4, category: "bakery" },
   { name: "Bombolone Cioccolata", price: 3.4, category: "bakery" },
   { name: "Bombolone Crema", price: 3.4, category: "bakery" },
   { name: "Bombolone Marmellata", price: 3.4, category: "bakery" },
@@ -178,7 +203,7 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Baci Di Dama", price: 1, category: "bakery" },
   { name: "Cannolini", price: 1.5, category: "bakery" },
 
-  // —— ORDER: Pasta & Rice ——
+  // —— ORDER: Pasta ——
   { name: "Pasta Al Pesto", price: 8.5, category: "pasta", favourite: true },
   { name: "Pasta Al Pomodoro", price: 8.5, category: "pasta", favourite: true },
   { name: "Arrabbiata Pasta", price: 8.5, category: "pasta" },
@@ -189,10 +214,13 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Gnocchi Alla Sorrentina", price: 10.5, category: "pasta" },
   { name: "Cous Cous Main", price: 9.5, category: "pasta" },
   { name: "Cous Cous Chicken Main", price: 12, category: "pasta" },
+  { name: "Set Menu Pasta", price: 10.5, category: "pasta" },
+
+  // —— ORDER: Lasagna ——
   {
     name: "Lasagna Bolognese",
     price: 12,
-    category: "pasta",
+    category: "lasagna",
     image: PLATES.beefLasagna,
     favourite: true,
     featured: true,
@@ -201,13 +229,12 @@ export const menuCatalog: MenuItem[] = build([
   {
     name: "Lasagna Al Pesto",
     price: 12,
-    category: "pasta",
+    category: "lasagna",
     image: PLATES.pestoBasilLasagna,
     favourite: true,
     featured: true,
     story: "Bright pesto lasagna from the Piccola kitchen.",
   },
-  { name: "Set Menu Pasta", price: 10.5, category: "pasta" },
 
   // —— ORDER: Mains ——
   {
@@ -259,22 +286,21 @@ export const menuCatalog: MenuItem[] = build([
   { name: "La Caprese Di Burrata", price: 12.5, category: "starters" },
   { name: "Parma Ham Platter With Focaccia", price: 12.5, category: "starters", favourite: true },
   { name: "Sourdough Sliced", price: 2, category: "starters" },
-  { name: "Focaccia Slice", price: 2.8, category: "starters" },
 
-  // —— ORDER: Desserts ——
-  { name: "Mixed Fruits Tarte", price: 6.5, category: "desserts" },
-  { name: "Homemade Tiramisu", price: 6.5, category: "desserts", favourite: true },
-  { name: "Baked Cheesecake Blueberries", price: 5.5, category: "desserts" },
-  { name: "Handmade Classic Cannoli", price: 6.5, category: "desserts", favourite: true },
-  { name: "Chocolate Brownies", price: 3.7, category: "desserts" },
-  { name: "Eclairs Coffee", price: 4.5, category: "desserts" },
-  { name: "Eclairs Vanilla", price: 4.5, category: "desserts" },
-  { name: "Eclairs Chocolate", price: 4.5, category: "desserts" },
-  { name: "Eclairs Pistachio", price: 5.5, category: "desserts" },
-  { name: "Torta Della Nonna", price: 5.5, category: "desserts" },
-  { name: "Strudel", price: 5.5, category: "desserts" },
-  { name: "Torta Caprese", price: 5.5, category: "desserts" },
-  { name: "Large Fruit Tarte - Whole", price: 55, category: "desserts" },
+  // —— ORDER: Desserts (text-only — no plate photos) ——
+  { name: "Mixed Fruits Tarte", price: 6.5, category: "desserts", image: "" },
+  { name: "Homemade Tiramisu", price: 6.5, category: "desserts", favourite: true, image: "" },
+  { name: "Baked Cheesecake Blueberries", price: 5.5, category: "desserts", image: "" },
+  { name: "Handmade Classic Cannoli", price: 6.5, category: "desserts", favourite: true, image: "" },
+  { name: "Chocolate Brownies", price: 3.7, category: "desserts", image: "" },
+  { name: "Eclairs Coffee", price: 4.5, category: "desserts", image: "" },
+  { name: "Eclairs Vanilla", price: 4.5, category: "desserts", image: "" },
+  { name: "Eclairs Chocolate", price: 4.5, category: "desserts", image: "" },
+  { name: "Eclairs Pistachio", price: 5.5, category: "desserts", image: "" },
+  { name: "Torta Della Nonna", price: 5.5, category: "desserts", image: "" },
+  { name: "Strudel", price: 5.5, category: "desserts", image: "" },
+  { name: "Torta Caprese", price: 5.5, category: "desserts", image: "" },
+  { name: "Large Fruit Tarte - Whole", price: 55, category: "desserts", image: "" },
 
   // —— DRINKS: Coffee & Tea ——
   { name: "Espresso", price: 1.8, category: "coffee" },
@@ -385,11 +411,15 @@ export const MENU_GROUPS: { id: MenuGroup; label: string; hint: string }[] = [
 
 export const ORDER_CATEGORIES: { id: MenuCategory; label: string }[] = [
   { id: "breakfast", label: "Breakfast" },
-  { id: "sandwiches", label: "Sandwiches" },
+  { id: "panini", label: "Panini" },
+  { id: "piadina", label: "Piadina" },
+  { id: "focaccia", label: "Focaccia" },
+  { id: "croissants", label: "Croissants" },
   { id: "pizza", label: "Pizzas" },
   { id: "savouries", label: "Savouries" },
   { id: "bakery", label: "Sweet Bakery" },
-  { id: "pasta", label: "Pasta & Rice" },
+  { id: "pasta", label: "Pasta" },
+  { id: "lasagna", label: "Lasagna" },
   { id: "mains", label: "Mains" },
   { id: "sides", label: "Sides" },
   { id: "starters", label: "Cold Starters" },

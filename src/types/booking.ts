@@ -14,7 +14,7 @@ export interface CartLine {
   id: string;
   name: string;
   price: number;
-  image: string;
+  image?: string;
   qty: number;
 }
 
@@ -45,7 +45,7 @@ export function cartFromMenuItem(item: MenuItem, qty = 1): CartLine {
     id: item.id,
     name: item.name,
     price: item.price,
-    image: item.image,
+    ...(item.image ? { image: item.image } : {}),
     qty,
   };
 }

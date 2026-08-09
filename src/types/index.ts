@@ -2,11 +2,15 @@ export type MenuGroup = "order" | "drinks" | "catering" | "shop";
 
 export type MenuCategory =
   | "breakfast"
-  | "sandwiches"
+  | "panini"
+  | "piadina"
+  | "focaccia"
+  | "croissants"
   | "pizza"
   | "savouries"
   | "bakery"
   | "pasta"
+  | "lasagna"
   | "mains"
   | "sides"
   | "starters"
@@ -27,7 +31,8 @@ export interface MenuItem {
   category: MenuCategory;
   /** order = primary click & collect food; drinks / catering / shop are secondary */
   group: MenuGroup;
-  image: string;
+  /** Omit for text-only categories (e.g. desserts) */
+  image?: string;
   favourite?: boolean;
   featured?: boolean;
   ingredients?: string[];

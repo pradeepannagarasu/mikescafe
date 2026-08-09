@@ -76,7 +76,13 @@ export function CartDrawer() {
               {items.map((line) => (
                 <div key={line.id} className="flex gap-3 border-b border-walnut/8 pb-4">
                   <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-sm bg-vintage">
-                    <Image src={line.image} alt="" fill className="object-cover" sizes="64px" />
+                    {line.image ? (
+                      <Image src={line.image} alt="" fill className="object-cover" sizes="64px" />
+                    ) : (
+                      <span className="absolute inset-0 flex items-center justify-center font-serif text-lg text-walnut/40">
+                        {line.name.slice(0, 1)}
+                      </span>
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between gap-2">
