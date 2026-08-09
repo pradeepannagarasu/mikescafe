@@ -81,7 +81,7 @@ const restaurantSchema = {
   name: SITE.name,
   image: `${SITE.url}/images/english-breakfast.jpg`,
   url: SITE.url,
-  telephone: "+44-20-7229-5491",
+  telephone: "+44-20-7229-3757",
   servesCuisine: ["British", "Breakfast", "Cafe"],
   priceRange: "££",
   menu: `${SITE.url}/#menu`,
@@ -108,9 +108,15 @@ const restaurantSchema = {
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "08:00",
-      closes: "16:00",
+      dayOfWeek: ["Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "08:30",
+      closes: "15:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Sunday",
+      opens: "09:00",
+      closes: "15:00",
     },
   ],
 };

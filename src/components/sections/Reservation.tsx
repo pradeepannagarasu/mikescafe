@@ -187,7 +187,7 @@ export function Reservation() {
               defaultValue={2}
             />
             <Field label="Date" name="date" type="date" required min={minDate} />
-            <Field label="Time" name="time" type="time" required min="08:00" max="15:30" />
+            <Field label="Time" name="time" type="time" required min="08:30" max="15:00" />
           </div>
           <div>
             <label htmlFor="notes" className="block text-[11px] tracking-[0.2em] uppercase text-gold mb-2">

@@ -37,7 +37,7 @@ export const GALLERY_SHOTS = {
 } as const;
 
 export const defaultContent: SiteContent = {
-  phone: "+44 20 7229 5491",
+  phone: "020 7229 3757",
   email: "hello@mikescafenottinghill.co.uk",
   address: {
     line1: "12 Blenheim Crescent",
@@ -55,11 +55,11 @@ export const defaultContent: SiteContent = {
   openingHours: [
     { day: "Monday", hours: "Closed", closed: true },
     { day: "Tuesday", hours: "Closed", closed: true },
-    { day: "Wednesday", hours: "8:00 AM - 4:00 PM" },
-    { day: "Thursday", hours: "8:00 AM - 4:00 PM" },
-    { day: "Friday", hours: "8:00 AM - 4:00 PM" },
-    { day: "Saturday", hours: "8:00 AM - 4:00 PM" },
-    { day: "Sunday", hours: "8:00 AM - 4:00 PM" },
+    { day: "Wednesday", hours: "8:30 AM - 3:00 PM" },
+    { day: "Thursday", hours: "8:30 AM - 3:00 PM" },
+    { day: "Friday", hours: "8:30 AM - 3:00 PM" },
+    { day: "Saturday", hours: "8:30 AM - 3:00 PM" },
+    { day: "Sunday", hours: "9:00 AM - 3:00 PM" },
   ],
   featuredDishIds: [
     "full-english",
