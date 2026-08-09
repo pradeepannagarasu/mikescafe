@@ -1,15 +1,16 @@
 "use client";
 
-import { useMemo, useState, useSyncExternalStore } from "react";
+import { useMemo, useState, useSyncExternalStore, type FormEvent } from "react";
 import {
   BOOKING_STATUS_LABEL,
+  addBooking,
   readBookings,
   removeBooking,
   subscribeBookings,
   updateBookingStatus,
 } from "@/lib/bookings-store";
 import { formatPrice, cn } from "@/lib/utils";
-import type { BookingStatus } from "@/types/booking";
+import type { Booking, BookingStatus, FulfillmentType } from "@/types/booking";
 
 const STATUSES: BookingStatus[] = [
   "new",
@@ -23,6 +24,7 @@ const STATUSES: BookingStatus[] = [
 export function BookingsPanel() {
   const bookings = useSyncExternalStore(subscribeBookings, readBookings, () => []);
   const [filter, setFilter] = useState<BookingStatus | "all">("all");
+  const [showManual, setShowManual] = useState(false);
 
   const shown = useMemo(() => {
     if (filter === "all") return bookings;
@@ -35,12 +37,112 @@ export function BookingsPanel() {
     return map;
   }, [bookings]);
 
+  const onManual = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const fulfillment = (fd.get("fulfillment") as FulfillmentType) || "dine-in";
+    const booking: Booking = {
+      id: `bk_manual_${Date.now().toString(36)}`,
+      createdAt: new Date().toISOString(),
+      status: "confirmed",
+      fulfillment,
+      name: String(fd.get("name") || "").trim(),
+      phone: String(fd.get("phone") || "").trim(),
+      guests: Number(fd.get("guests") || 2),
+      date: String(fd.get("date") || ""),
+      time: String(fd.get("time") || ""),
+      notes: String(fd.get("notes") || "").trim() || undefined,
+      items: [],
+      total: Number(fd.get("total") || 0),
+    };
+    if (!booking.name || !booking.phone || !booking.date || !booking.time) return;
+    addBooking(booking);
+    e.currentTarget.reset();
+    setShowManual(false);
+  };
+
   return (
     <div className="space-y-6">
-      <div className="rounded-sm border border-copper/30 bg-copper/5 px-4 py-3 text-sm text-walnut/80">
-        Bookings from this browser are tracked here end to end: New → Confirmed → Preparing → Ready →
-        Completed. Confirm by phone, then update status as the kitchen progresses.
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="rounded-sm border border-copper/30 bg-copper/5 px-4 py-3 text-sm text-walnut/80 flex-1">
+          Track every booking: New → Confirmed → Preparing → Ready → Completed. Website orders land
+          here on this device; add phone bookings manually below.
+        </div>
+        <button
+          type="button"
+          onClick={() => setShowManual((v) => !v)}
+          className="shrink-0 px-4 py-2.5 text-[11px] tracking-[0.14em] uppercase bg-racing text-ivory rounded-sm"
+        >
+          {showManual ? "Close form" : "Add booking"}
+        </button>
       </div>
+
+      {showManual && (
+        <form
+          onSubmit={onManual}
+          className="border border-walnut/10 rounded-sm p-4 grid sm:grid-cols-2 gap-3 bg-cream/50"
+        >
+          <select
+            name="fulfillment"
+            className="border border-walnut/15 rounded-sm px-3 py-2 text-sm bg-ivory sm:col-span-2"
+          >
+            <option value="dine-in">Eat in</option>
+            <option value="collect">Collect</option>
+          </select>
+          <input
+            name="name"
+            required
+            placeholder="Guest name"
+            className="border border-walnut/15 rounded-sm px-3 py-2 text-sm bg-ivory"
+          />
+          <input
+            name="phone"
+            required
+            placeholder="Phone"
+            className="border border-walnut/15 rounded-sm px-3 py-2 text-sm bg-ivory"
+          />
+          <input
+            name="guests"
+            type="number"
+            min={1}
+            max={12}
+            defaultValue={2}
+            className="border border-walnut/15 rounded-sm px-3 py-2 text-sm bg-ivory"
+          />
+          <input
+            name="total"
+            type="number"
+            min={0}
+            step={0.5}
+            defaultValue={0}
+            placeholder="Total £"
+            className="border border-walnut/15 rounded-sm px-3 py-2 text-sm bg-ivory"
+          />
+          <input
+            name="date"
+            type="date"
+            required
+            className="border border-walnut/15 rounded-sm px-3 py-2 text-sm bg-ivory"
+          />
+          <input
+            name="time"
+            type="time"
+            required
+            className="border border-walnut/15 rounded-sm px-3 py-2 text-sm bg-ivory"
+          />
+          <input
+            name="notes"
+            placeholder="Notes / order details"
+            className="border border-walnut/15 rounded-sm px-3 py-2 text-sm bg-ivory sm:col-span-2"
+          />
+          <button
+            type="submit"
+            className="sm:col-span-2 min-h-11 bg-racing text-ivory text-[11px] tracking-[0.14em] uppercase rounded-sm"
+          >
+            Save booking
+          </button>
+        </form>
+      )}
 
       <div className="flex gap-2 overflow-x-auto pb-1">
         <FilterChip
