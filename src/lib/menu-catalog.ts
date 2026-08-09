@@ -75,6 +75,28 @@ function fallbackImage(category: MenuCategory): string | undefined {
   }
 }
 
+/** Catering trays reuse the matching counter plate photos */
+const CATERING_PHOTOS: Record<string, string> = {
+  "Lasagna Bolognese (Catering)": DISH_PHOTOS["Lasagna Bolognese"],
+  "Lasagna Al Pesto (Catering)": DISH_PHOTOS["Lasagna Al Pesto"],
+  "Lasagna Ai Funghi (Catering)": DISH_PHOTOS["Lasagna Bolognese"],
+  "Cous Cous With Vegetables (Catering)": DISH_PHOTOS["Cous Cous Main"],
+  "Traditional Meat Balls In Tomato Sauce (24 Pcs)":
+    DISH_PHOTOS["Polpette Al Pomodoro With Rice"],
+  "Spezzatino Di Manzo Con Piselli E Patate":
+    DISH_PHOTOS["Marinated Roast Chicken Breast With Potatoes"],
+  "Cotoletta Alla Milanese (6 Pieces)": DISH_PHOTOS["Chicken Cotoletta With Salad"],
+  "Parmigiana Di Melanzane (Catering)": DISH_PHOTOS["Aubergine Parmigiana"],
+  "Roast Potatoes (Catering)": DISH_PHOTOS["Roasted Potatoes"],
+  "Broccoli With Fresh Chilli And Garlic": DISH_PHOTOS["Steamed Broccoli"],
+  "Zucchine Alla Scapece": DISH_PHOTOS["Grilled Courgettes"],
+  "Roasted Season Vegetables (Catering)": DISH_PHOTOS["Mixed Roasted Vegetables"],
+  "Aubergine Caponata (Catering)": DISH_PHOTOS["Caponata Di Melanzane"],
+  "Pizza Margherita (Catering)": DISH_PHOTOS["Pizza Margherita"],
+  "Pizza Sausage And Mushroom (Catering)": DISH_PHOTOS["Pizza Bianca"],
+  "Focaccia Ligure": DISH_PHOTOS["Focaccia Slice"],
+};
+
 function build(specs: Spec[]): MenuItem[] {
   const seen = new Set<string>();
   const out: MenuItem[] = [];
@@ -88,7 +110,7 @@ function build(specs: Spec[]): MenuItem[] {
     const image =
       s.image !== undefined
         ? s.image || undefined
-        : DISH_PHOTOS[s.name] ?? fallbackImage(category);
+        : DISH_PHOTOS[s.name] ?? CATERING_PHOTOS[s.name] ?? fallbackImage(category);
     out.push({
       id,
       name: s.name,
