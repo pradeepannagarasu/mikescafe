@@ -85,7 +85,8 @@ export function Story() {
                   alt="La Piccola Deli, our place"
                   fill
                   priority
-                  className="object-cover object-center"
+                  quality={92}
+                  className="object-cover object-center brightness-[1.05] contrast-[1.06] saturate-[1.1]"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
               </div>
