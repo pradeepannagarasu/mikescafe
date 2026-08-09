@@ -229,6 +229,7 @@ function FavouriteScrollCard({
             src={item.image}
             alt={real ? item.name : ""}
             fill
+            quality={92}
             className="object-cover"
             sizes="280px"
           />

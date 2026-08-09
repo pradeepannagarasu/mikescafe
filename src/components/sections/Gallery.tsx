@@ -50,6 +50,7 @@ export function Gallery() {
                 src={img.src}
                 alt={img.alt}
                 fill
+                quality={92}
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 33vw"
               />

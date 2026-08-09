@@ -38,6 +38,7 @@ function MenuItemCard({
             src={item.image!}
             alt={item.name}
             fill
+            quality={92}
             className="object-cover"
             sizes="(max-width: 768px) 50vw, 33vw"
           />
