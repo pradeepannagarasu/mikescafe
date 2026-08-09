@@ -25,6 +25,16 @@ export const PLATES = {
   smashedAvocado: "/images/smashed-avocado-bacon.jpg",
 } as const;
 
+/** Cafe atmosphere & gallery photography */
+export const GALLERY_SHOTS = {
+  goodVibes: "/images/gallery/good-vibes-neon.jpg",
+  fullEnglishPlate: "/images/gallery/full-english-plate.jpg",
+  mikesMoments: "/images/gallery/mikes-moments.jpg",
+  diningRoom: "/images/gallery/dining-room.jpg",
+  cafeCounter: "/images/gallery/cafe-counter.jpg",
+  boothsNeon: "/images/gallery/booths-and-neon.jpg",
+} as const;
+
 export const defaultContent: SiteContent = {
   phone: "+44 20 7229 5491",
   email: "hello@mikescafenottinghill.co.uk",
@@ -392,68 +402,74 @@ export const defaultContent: SiteContent = {
   gallery: [
     {
       id: "g1",
-      src: PLATES.english,
-      alt: "Full English breakfast at Mike's Cafe",
-      span: "tall",
+      src: GALLERY_SHOTS.goodVibes,
+      alt: "Good vibes only neon sign at Mike's Cafe",
+      span: "wide",
     },
     {
       id: "g2",
+      src: GALLERY_SHOTS.diningRoom,
+      alt: "Dining room with red booths and neon glow",
+      span: "tall",
+    },
+    {
+      id: "g3",
+      src: GALLERY_SHOTS.fullEnglishPlate,
+      alt: "Full English breakfast plate",
+      span: "tall",
+    },
+    {
+      id: "g4",
+      src: GALLERY_SHOTS.mikesMoments,
+      alt: "MIKES marquee, coffee and breakfast moments",
+      span: "normal",
+    },
+    {
+      id: "g5",
+      src: GALLERY_SHOTS.cafeCounter,
+      alt: "Cafe counter, booths and Good Food neon",
+      span: "tall",
+    },
+    {
+      id: "g6",
+      src: GALLERY_SHOTS.boothsNeon,
+      alt: "Booth seating and brick wall neon",
+      span: "wide",
+    },
+    {
+      id: "g7",
       src: PLATES.eggsBenedict,
       alt: "Eggs Benedict",
       span: "normal",
     },
     {
-      id: "g3",
+      id: "g8",
       src: PLATES.frenchToast,
       alt: "French toast",
       span: "wide",
     },
     {
-      id: "g4",
+      id: "g9",
+      src: PLATES.english,
+      alt: "Classic Full English at Mike's",
+      span: "tall",
+    },
+    {
+      id: "g10",
       src: PLATES.bagels,
       alt: "Mike's bagels",
       span: "normal",
     },
     {
-      id: "g5",
-      src: PLATES.mediterranean,
-      alt: "Mediterranean breakfast",
-      span: "tall",
-    },
-    {
-      id: "g6",
+      id: "g11",
       src: PLATES.pancake,
       alt: "Homemade pancakes",
       span: "normal",
     },
     {
-      id: "g7",
-      src: PLATES.veggie,
-      alt: "Vegetarian English",
-      span: "wide",
-    },
-    {
-      id: "g8",
-      src: PLATES.spicyScramble,
-      alt: "Spicy scrambled eggs",
-      span: "normal",
-    },
-    {
-      id: "g9",
-      src: PLATES.smashedAvocado,
-      alt: "Smashed avocado and bacon",
-      span: "tall",
-    },
-    {
-      id: "g10",
-      src: PLATES.gammonEggs,
-      alt: "Gammon and eggs",
-      span: "normal",
-    },
-    {
-      id: "g11",
-      src: PLATES.bloodyMary,
-      alt: "Bloody Mary",
+      id: "g12",
+      src: PLATES.mediterranean,
+      alt: "Mediterranean breakfast",
       span: "wide",
     },
   ],
@@ -593,10 +609,10 @@ export const timeline = [
 ];
 
 export const instagramPosts = [
-  PLATES.english,
+  GALLERY_SHOTS.goodVibes,
+  GALLERY_SHOTS.fullEnglishPlate,
+  GALLERY_SHOTS.diningRoom,
   PLATES.eggsBenedict,
+  GALLERY_SHOTS.cafeCounter,
   PLATES.frenchToast,
-  PLATES.bagels,
-  PLATES.mediterranean,
-  PLATES.pancake,
 ];

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { timeline } from "@/lib/data";
+import { timeline, GALLERY_SHOTS } from "@/lib/data";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -81,8 +81,8 @@ export function Story() {
             <div className="overflow-hidden rounded-sm aspect-[4/5] relative">
               <div ref={imageRef} className="absolute inset-[-12%] will-change-transform">
                 <Image
-                  src="/images/english-breakfast.jpg"
-                  alt="Mike's Cafe Full English breakfast"
+                  src={GALLERY_SHOTS.diningRoom}
+                  alt="Inside Mike's Cafe - booths, brick and neon"
                   fill
                   className="object-cover grayscale-[30%] contrast-[1.05]"
                   sizes="(max-width: 1024px) 100vw, 40vw"
