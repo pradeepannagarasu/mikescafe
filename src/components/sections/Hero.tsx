@@ -28,11 +28,11 @@ export function Hero() {
       <motion.div style={{ y }} className="absolute inset-0">
         <Image
           src={HERO_IMAGE}
-          alt="Parma panini at La Piccola Deli"
+          alt="La Piccola Deli counter and interior"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center scale-105"
+          className="object-cover object-[center_45%] scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-walnut/60 via-walnut/40 to-walnut/80" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(26,32,24,0.5)_100%)]" />
