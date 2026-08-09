@@ -8,6 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { formatPrice, cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/context/CartContext";
+import { ORDER_SUBMITTED_EVENT } from "@/lib/cart-store";
 import type { BuilderItem, MenuItem } from "@/types";
 
 const BASE_PRICE = 4.5;
@@ -97,6 +98,15 @@ export function BreakfastBuilder() {
     const t = window.setTimeout(() => setJustAdded(null), 1800);
     return () => window.clearTimeout(t);
   }, [justAdded]);
+
+  useEffect(() => {
+    const resetPlate = () => {
+      setSelected([]);
+      setJustAdded(null);
+    };
+    window.addEventListener(ORDER_SUBMITTED_EVENT, resetPlate);
+    return () => window.removeEventListener(ORDER_SUBMITTED_EVENT, resetPlate);
+  }, []);
 
   const add = (id: string) => {
     const item = builderItems.find((i) => i.id === id);

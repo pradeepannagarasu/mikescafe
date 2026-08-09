@@ -15,6 +15,7 @@ import {
   cartCount,
   cartTotal,
   clearCart,
+  clearCartAfterOrder,
   readCart,
   subscribeCart,
   writeCart,
@@ -29,6 +30,7 @@ type CartContextValue = {
   setQty: (id: string, qty: number) => void;
   removeItem: (id: string) => void;
   clear: () => void;
+  clearAfterOrder: () => void;
   open: boolean;
   setOpen: (open: boolean) => void;
 };
@@ -70,6 +72,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clear = useCallback(() => clearCart(), []);
 
+  const clearAfterOrder = useCallback(() => {
+    clearCartAfterOrder();
+    setOpen(false);
+  }, []);
+
   const value = useMemo(
     () => ({
       items,
@@ -79,10 +86,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setQty,
       removeItem,
       clear,
+      clearAfterOrder,
       open,
       setOpen,
     }),
-    [items, addItem, setQty, removeItem, clear, open]
+    [items, addItem, setQty, removeItem, clear, clearAfterOrder, open]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

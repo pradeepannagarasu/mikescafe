@@ -2,6 +2,7 @@ import type { CartLine } from "@/types/booking";
 
 export const CART_STORAGE_KEY = "mikes-cafe-cart-v1";
 export const CART_EVENT = "mikes-cafe-cart-change";
+export const ORDER_SUBMITTED_EVENT = "mikes-cafe-order-submitted";
 
 const EMPTY_CART: CartLine[] = [];
 
@@ -36,6 +37,12 @@ export function writeCart(items: CartLine[]) {
 
 export function clearCart() {
   writeCart([]);
+}
+
+/** Clear bag after a successful reserve/collect and notify UI (builder, drawer). */
+export function clearCartAfterOrder() {
+  writeCart([]);
+  window.dispatchEvent(new Event(ORDER_SUBMITTED_EVENT));
 }
 
 export function subscribeCart(onStoreChange: () => void) {

@@ -11,7 +11,7 @@ import type { FulfillmentType } from "@/types/booking";
 
 export function Reservation() {
   const { content } = useContent();
-  const { items, total, clear } = useCart();
+  const { items, total, clearAfterOrder } = useCart();
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
   const [fulfillment, setFulfillment] = useState<FulfillmentType>("dine-in");
@@ -32,6 +32,7 @@ export function Reservation() {
       price: i.price,
       qty: i.qty,
     }));
+    const payloadTotal = total;
 
     try {
       const res = await fetch("/api/reservations", {
@@ -47,7 +48,7 @@ export function Reservation() {
           website: data.get("website"),
           fulfillment,
           items: payloadItems,
-          total,
+          total: payloadTotal,
         }),
       });
 
@@ -62,16 +63,17 @@ export function Reservation() {
         return;
       }
 
+      // Empty bag + builder before swapping to thank-you UI
+      clearAfterOrder();
+      form.reset();
       setLastFulfillment(fulfillment);
-      setStatus("success");
       setMessage(
         json.message ??
           (fulfillment === "collect"
             ? "Thanks for your collect order — we'll start preparing it for you."
             : "Thanks for booking to eat in — we'll get your table ready for you.")
       );
-      form.reset();
-      clear();
+      setStatus("success");
     } catch {
       setStatus("error");
       setMessage(`Unable to send. Please call ${content.phone}.`);
