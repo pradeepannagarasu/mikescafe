@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { useContent } from "@/context/ContentContext";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -9,35 +8,10 @@ import { formatPrice } from "@/lib/utils";
 export function FeaturedBreakfast() {
   const { content } = useContent();
   const favourites = content.menuItems.filter((i) => i.favourite);
-  const items = [...favourites, ...favourites];
-  const trackRef = useRef<HTMLDivElement>(null);
-  const paused = useRef(false);
-  const offset = useRef(0);
+  // Triple the list so CSS -33.333% loop stays seamless with gaps
+  const items = [...favourites, ...favourites, ...favourites];
 
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let frame = 0;
-    const speed = 0.35; // px per frame-ish
-
-    const tick = () => {
-      if (!paused.current && track) {
-        offset.current -= speed;
-        const half = track.scrollWidth / 2;
-        if (Math.abs(offset.current) >= half) offset.current = 0;
-        track.style.transform = `translate3d(${offset.current}px,0,0)`;
-      }
-      frame = requestAnimationFrame(tick);
-    };
-
-    // Prefer CSS when available; JS drives as reliable fallback
-    track.classList.add("marquee-js");
-    frame = requestAnimationFrame(tick);
-
-    return () => cancelAnimationFrame(frame);
-  }, []);
+  if (favourites.length === 0) return null;
 
   return (
     <section id="breakfast" className="bg-cream py-24 md:py-32 overflow-hidden">
@@ -49,31 +23,18 @@ export function FeaturedBreakfast() {
         />
       </div>
 
-      <div
-        className="relative"
-        onMouseEnter={() => {
-          paused.current = true;
-        }}
-        onMouseLeave={() => {
-          paused.current = false;
-        }}
-        onTouchStart={() => {
-          paused.current = true;
-        }}
-        onTouchEnd={() => {
-          paused.current = false;
-        }}
-      >
-        <div ref={trackRef} className="marquee-track gap-6 md:gap-8 pl-4 will-change-transform">
+      <div className="relative marquee-mask">
+        <div className="marquee-track gap-6 md:gap-8 pl-4">
           {items.map((item, idx) => (
             <article
               key={`${item.id}-${idx}`}
               className="w-[280px] md:w-[360px] shrink-0 group"
+              aria-hidden={idx >= favourites.length}
             >
               <div className="img-reveal relative aspect-[4/5] rounded-sm bg-vintage">
                 <Image
                   src={item.image}
-                  alt={item.name}
+                  alt={idx < favourites.length ? item.name : ""}
                   fill
                   className="object-cover"
                   sizes="360px"

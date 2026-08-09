@@ -17,36 +17,54 @@ export function Story() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const section = sectionRef.current;
+    if (!section) return;
+
     const ctx = gsap.context(() => {
       if (imageRef.current) {
-        gsap.to(imageRef.current, {
-          yPercent: -14,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
+        gsap.fromTo(
+          imageRef.current,
+          { yPercent: 8 },
+          {
+            yPercent: -14,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
       }
 
-      gsap.from(".timeline-item", {
-        opacity: 0,
-        x: -32,
-        stagger: 0.12,
-        duration: 0.8,
-        ease: "power3.out",
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: ".timeline-list",
-          start: "top 80%",
-          once: true,
-        },
-      });
-    }, sectionRef);
+      const items = section.querySelectorAll(".timeline-item");
+      const list = section.querySelector(".timeline-list");
+      if (items.length && list) {
+        gsap.fromTo(
+          items,
+          { opacity: 0, x: -28 },
+          {
+            opacity: 1,
+            x: 0,
+            stagger: 0.12,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: list,
+              start: "top 82%",
+              once: true,
+            },
+          }
+        );
+      }
+    }, section);
 
-    return () => ctx.revert();
+    const refresh = window.setTimeout(() => ScrollTrigger.refresh(), 400);
+    return () => {
+      window.clearTimeout(refresh);
+      ctx.revert();
+    };
   }, []);
 
   return (

@@ -79,7 +79,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <Button
               href="#reserve"
-              variant={scrolled ? "primary" : "secondary"}
+              variant="gold"
               className="hidden sm:inline-flex !py-2.5 !px-5 !text-[11px] !min-h-10"
             >
               Reserve

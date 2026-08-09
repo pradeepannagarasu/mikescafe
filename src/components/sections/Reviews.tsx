@@ -33,8 +33,15 @@ function Stars({ rating }: { rating: number }) {
 export function Reviews() {
   const { content } = useContent();
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    { loop: true, align: "start" },
-    [Autoplay({ delay: 4200, stopOnInteraction: false, stopOnMouseEnter: true })]
+    { loop: true, align: "start", duration: 30 },
+    [
+      Autoplay({
+        delay: 4200,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+        playOnInit: true,
+      }),
+    ]
   );
 
   const onKey = useCallback(
