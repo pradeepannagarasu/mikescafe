@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://mikescafenottinghill.co.uk";
@@ -65,3 +66,5 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+initOpenNextCloudflareForDev();
