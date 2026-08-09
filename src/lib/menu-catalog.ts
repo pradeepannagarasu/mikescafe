@@ -412,7 +412,6 @@ export const ORDER_CATEGORIES: { id: MenuCategory; label: string }[] = [
   { id: "croissants", label: "Croissants" },
   { id: "pizza", label: "Pizzas" },
   { id: "savouries", label: "Savouries" },
-  { id: "bakery", label: "Sweet Bakery" },
   { id: "pasta", label: "Pasta" },
   { id: "lasagna", label: "Lasagna" },
   { id: "mains", label: "Mains" },
