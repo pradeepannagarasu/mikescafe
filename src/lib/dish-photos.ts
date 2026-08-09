@@ -37,5 +37,6 @@ export const DISH_PHOTOS: Record<string, string> = {
   "Pizza Bianca": "/images/dishes/pizza-bianca.jpg",
   "Pizza Margherita": "/images/dishes/pizza-margherita.jpg",
   "Roastbeef Rocket And Parmesan": "/images/dishes/roastbeef-rocket-and-parmesan.jpg",
+  "Scrambled Eggs On Toast": "/images/dishes/scrambled-eggs-on-toast.jpg",
   "Valdostana": "/images/dishes/valdostana.jpg"
 } as const;
