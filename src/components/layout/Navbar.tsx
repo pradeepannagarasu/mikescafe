@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
-import { navLinks, SITE } from "@/lib/data";
+import { navLinks } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/ui/Logo";
 import { useContent } from "@/context/ContentContext";
 
 export function Navbar() {
@@ -38,22 +39,25 @@ export function Navbar() {
         )}
       >
         <div className="section-pad mx-auto max-w-[1400px] flex items-center justify-between gap-6">
-          <a href="#home" className="group relative z-10">
-            <span
-              className={cn(
-                "font-serif text-2xl md:text-[1.7rem] tracking-tight transition-colors",
-                scrolled || open ? "text-walnut" : "text-ivory"
-              )}
-            >
-              {SITE.name}
-            </span>
-            <span
-              className={cn(
-                "block text-[9px] tracking-[0.3em] uppercase mt-0.5 transition-colors",
-                scrolled || open ? "text-copper" : "text-gold"
-              )}
-            >
-              Since {SITE.established}
+          <a href="#home" className="group relative z-10 inline-flex items-center gap-3" aria-label="Mike's Cafe home">
+            <Logo size="nav" priority />
+            <span className="hidden sm:flex flex-col leading-tight">
+              <span
+                className={cn(
+                  "font-serif text-lg md:text-xl tracking-tight transition-colors",
+                  scrolled || open ? "text-walnut" : "text-ivory"
+                )}
+              >
+                Mike&apos;s Cafe
+              </span>
+              <span
+                className={cn(
+                  "text-[9px] tracking-[0.28em] uppercase transition-colors",
+                  scrolled || open ? "text-copper" : "text-gold"
+                )}
+              >
+                Good vibes only
+              </span>
             </span>
           </a>
 

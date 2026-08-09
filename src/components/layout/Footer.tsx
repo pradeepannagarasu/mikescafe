@@ -1,9 +1,9 @@
 "use client";
 
 import { FaInstagram, FaFacebookF, FaTripadvisor } from "react-icons/fa";
-import { SITE } from "@/lib/data";
+import { SITE, navLinks } from "@/lib/data";
 import { useContent } from "@/context/ContentContext";
-import { navLinks } from "@/lib/data";
+import { Logo } from "@/components/ui/Logo";
 
 export function Footer() {
   const { content } = useContent();
@@ -14,9 +14,11 @@ export function Footer() {
       <div className="section-pad mx-auto max-w-[1400px] py-20 md:py-28">
         <div className="grid gap-14 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <p className="font-serif text-4xl tracking-tight">{SITE.name}</p>
-            <p className="mt-3 text-[11px] tracking-[0.28em] uppercase text-gold">
-              Since {SITE.established}
+            <a href="#home" className="inline-block" aria-label="Mike's Cafe home">
+              <Logo size="footer" />
+            </a>
+            <p className="mt-5 text-[11px] tracking-[0.28em] uppercase text-gold">
+              Since {SITE.established} · Good vibes only
             </p>
             <p className="mt-6 text-ivory/65 leading-relaxed max-w-xs">
               A legendary Notting Hill breakfast café — warm mornings, red booths,

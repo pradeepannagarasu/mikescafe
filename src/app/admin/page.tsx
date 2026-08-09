@@ -133,9 +133,19 @@ export default function AdminPage() {
     <div className="min-h-screen bg-cream">
       <header className="border-b border-walnut/10 bg-ivory sticky top-0 z-20">
         <div className="section-pad mx-auto max-w-6xl py-4 flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <p className="font-serif text-2xl text-walnut">Mike&apos;s Cafe Admin</p>
-            <p className="text-xs text-muted">Content saves in this browser until a backend CMS is connected</p>
+          <div className="flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/mikeslogo.png"
+              alt=""
+              width={40}
+              height={40}
+              className="h-10 w-10 rounded-sm object-cover ring-1 ring-walnut/10"
+            />
+            <div>
+              <p className="font-serif text-2xl text-walnut">Mike&apos;s Cafe Admin</p>
+              <p className="text-xs text-muted">Content saves in this browser until a backend CMS is connected</p>
+            </div>
           </div>
           <div className="flex items-center gap-3">
             {saved && (

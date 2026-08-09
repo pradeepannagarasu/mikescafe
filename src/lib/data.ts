@@ -7,6 +7,7 @@ export const SITE = {
   rating: 4.6,
   reviewCount: 1000,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mikescafenottinghill.co.uk",
+  logo: "/mikeslogo.png",
 };
 
 export const defaultContent: SiteContent = {
