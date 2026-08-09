@@ -81,7 +81,7 @@ export function Story() {
             <div className="overflow-hidden rounded-sm aspect-[4/5] md:aspect-[5/6] relative bg-vintage">
               <div ref={imageRef} className="absolute inset-[-8%] will-change-transform">
                 <Image
-                  src="/images/hero-interior.jpg"
+                  src="/images/story-heritage.jpg"
                   alt="La Piccola Deli — our place"
                   fill
                   priority
