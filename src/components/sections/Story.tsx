@@ -73,7 +73,7 @@ export function Story() {
         <SectionHeading
           eyebrow="Our Heritage"
           title="Serving London's Breakfast Since 1962"
-          subtitle="From a humble Notting Hill morning spot to a beloved London institution — Mike's Cafe has welcomed locals, dreamers and travellers for over sixty years."
+          subtitle="From a humble Notting Hill morning spot to a beloved London institution - Mike's Cafe has welcomed locals, dreamers and travellers for over sixty years."
         />
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">

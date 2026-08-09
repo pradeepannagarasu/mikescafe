@@ -19,7 +19,7 @@ export function FeaturedBreakfast() {
         <SectionHeading
           eyebrow="Morning Favourites"
           title="Breakfast Worth Crossing London For"
-          subtitle="Slow-cooked classics and house signatures — the plates that made Mike's a Notting Hill ritual."
+          subtitle="Slow-cooked classics and house signatures - the plates that made Mike's a Notting Hill ritual."
         />
       </div>
 

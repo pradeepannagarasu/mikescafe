@@ -44,7 +44,7 @@ export function Reservation() {
       }
 
       setStatus("success");
-      setMessage(json.message ?? "Thank you — we'll confirm shortly.");
+      setMessage(json.message ?? "Thank you - we'll confirm shortly.");
       form.reset();
     } catch {
       setStatus("error");

@@ -32,7 +32,7 @@ export function Gallery() {
         <SectionHeading
           eyebrow="Atmosphere"
           title="Moments From Blenheim Crescent"
-          subtitle="Steam, sunlight, and red booths — a Pinterest-style look at mornings at Mike's."
+          subtitle="Steam, sunlight, and red booths - a Pinterest-style look at mornings at Mike's."
         />
 
         <div className="columns-2 md:columns-3 gap-4 md:gap-5 space-y-4 md:space-y-5">

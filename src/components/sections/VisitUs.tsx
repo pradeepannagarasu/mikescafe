@@ -16,7 +16,7 @@ export function VisitUs() {
         <SectionHeading
           eyebrow="Find Us"
           title="Visit Mike's Cafe"
-          subtitle="12 Blenheim Crescent, in the heart of Notting Hill — mornings smell like coffee and toast."
+          subtitle="12 Blenheim Crescent, in the heart of Notting Hill - mornings smell like coffee and toast."
         />
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12">

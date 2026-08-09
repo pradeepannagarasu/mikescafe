@@ -20,7 +20,7 @@ const outfit = Outfit({
 
 const title = `${SITE.name} | Breakfast Notting Hill | Since ${SITE.established}`;
 const description =
-  "Mike's Cafe — London's beloved breakfast destination since 1962. Full English, eggs Benedict & more at 12 Blenheim Crescent, Notting Hill. ★ 4.6 from 1000+ reviews.";
+  "Mike's Cafe - London's beloved breakfast destination since 1962. Full English, eggs Benedict & more at 12 Blenheim Crescent, Notting Hill. ★ 4.6 from 1000+ reviews.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),

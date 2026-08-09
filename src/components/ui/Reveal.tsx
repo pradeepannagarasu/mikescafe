@@ -31,7 +31,7 @@ function getReduceSnapshot() {
 }
 
 /**
- * Reliable scroll reveal — never leaves content stuck at opacity 0.
+ * Reliable scroll reveal - never leaves content stuck at opacity 0.
  */
 export function Reveal({
   children,

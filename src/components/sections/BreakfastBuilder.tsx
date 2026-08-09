@@ -112,7 +112,7 @@ export function BreakfastBuilder() {
           light
           eyebrow="Build Your Own"
           title="Create Your Own Breakfast"
-          subtitle="Tap ingredients — watch them land on the plate, mix, then finish as a full Mike's breakfast."
+          subtitle="Tap ingredients - watch them land on the plate, mix, then finish as a full Mike's breakfast."
         />
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -286,7 +286,7 @@ export function BreakfastBuilder() {
               <div className="mt-8 flex flex-col items-center gap-3">
                 <p className="text-[11px] tracking-[0.2em] uppercase text-ivory/50 text-center">
                   {isComplete
-                    ? "Your breakfast is plated — reserve to enjoy it at Mike's"
+                    ? "Your breakfast is plated - reserve to enjoy it at Mike's"
                     : selected.length === 0
                       ? "Pick eggs, meats, sides & veg"
                       : `Mixing ${selectedItems.length} ingredient${selectedItems.length === 1 ? "" : "s"}… add a few more to finish`}

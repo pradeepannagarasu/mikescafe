@@ -21,7 +21,7 @@ export function Footer() {
               Since {SITE.established} · Good vibes only
             </p>
             <p className="mt-6 text-ivory/65 leading-relaxed max-w-xs">
-              A legendary Notting Hill breakfast café — warm mornings, red booths,
+              A legendary Notting Hill breakfast café - warm mornings, red booths,
               and London heritage on every plate.
             </p>
           </div>

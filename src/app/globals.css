@@ -165,16 +165,25 @@ html.app-booting .boot-line {
 .announce-track {
   display: flex;
   width: max-content;
-  animation: announce-marquee 28s linear infinite;
+  animation: announce-marquee 32s linear infinite;
   will-change: transform;
+}
+
+.announce-group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.announce-segment {
+  white-space: nowrap;
 }
 
 @keyframes announce-marquee {
   from {
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -279,12 +288,15 @@ button {
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
-  .announce-track,
   .scroll-line,
   .animate-float,
   .boot-line,
   html.app-booting .boot-line {
     animation: none !important;
+  }
+
+  .announce-track {
+    animation-duration: 60s !important;
   }
 
   .marquee-mask {

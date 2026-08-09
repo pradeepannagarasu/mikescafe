@@ -18,7 +18,7 @@ export function SignatureDishes() {
         <SectionHeading
           eyebrow="Signatures"
           title="Dishes With a Story"
-          subtitle="Editorial favourites — the recipes, the ingredients, and the chef's word."
+          subtitle="Editorial favourites - the recipes, the ingredients, and the chef's word."
         />
 
         <div className="space-y-28 md:space-y-40">

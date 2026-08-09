@@ -44,7 +44,7 @@ export function InteractiveMenu() {
         <SectionHeading
           eyebrow="The Menu"
           title="Whatever Morning Calls For"
-          subtitle="From the Full English to fresh juices — browse, search, and find your plate."
+          subtitle="From the Full English to fresh juices - browse, search, and find your plate."
         />
 
         {content.specialOfTheDay && (

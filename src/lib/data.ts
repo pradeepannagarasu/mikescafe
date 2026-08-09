@@ -44,11 +44,11 @@ export const defaultContent: SiteContent = {
   openingHours: [
     { day: "Monday", hours: "Closed", closed: true },
     { day: "Tuesday", hours: "Closed", closed: true },
-    { day: "Wednesday", hours: "8:00 AM – 4:00 PM" },
-    { day: "Thursday", hours: "8:00 AM – 4:00 PM" },
-    { day: "Friday", hours: "8:00 AM – 4:00 PM" },
-    { day: "Saturday", hours: "8:00 AM – 4:00 PM" },
-    { day: "Sunday", hours: "8:00 AM – 4:00 PM" },
+    { day: "Wednesday", hours: "8:00 AM - 4:00 PM" },
+    { day: "Thursday", hours: "8:00 AM - 4:00 PM" },
+    { day: "Friday", hours: "8:00 AM - 4:00 PM" },
+    { day: "Saturday", hours: "8:00 AM - 4:00 PM" },
+    { day: "Sunday", hours: "8:00 AM - 4:00 PM" },
   ],
   featuredDishIds: [
     "full-english",
@@ -59,7 +59,7 @@ export const defaultContent: SiteContent = {
   announcements: [
     {
       id: "a1",
-      text: "Weekend mornings fill quickly — reserve ahead for parties of 4+",
+      text: "Weekend mornings fill quickly - reserve ahead for parties of 4+",
       active: true,
     },
   ],
@@ -68,7 +68,7 @@ export const defaultContent: SiteContent = {
       id: "full-english",
       name: "Full English",
       description:
-        "Two eggs, bacon, sausage, beans, mushrooms, tomato, toast — the London classic since 1962.",
+        "Two eggs, bacon, sausage, beans, mushrooms, tomato, toast - the London classic since 1962.",
       price: 13.5,
       category: "breakfast",
       image: PLATES.english,
@@ -84,7 +84,7 @@ export const defaultContent: SiteContent = {
         "Sourdough toast",
       ],
       story:
-        "Our Full English has been the heart of the morning rush on Blenheim Crescent for over sixty years — cooked the same way Mike intended.",
+        "Our Full English has been the heart of the morning rush on Blenheim Crescent for over sixty years - cooked the same way Mike intended.",
       chefNote: "Ask for your eggs fried, scrambled or poached.",
     },
     {
@@ -106,7 +106,7 @@ export const defaultContent: SiteContent = {
         "Toast",
       ],
       story:
-        "Born from regulars who asked for 'just a bit more' — The Big Boy became legend.",
+        "Born from regulars who asked for 'just a bit more' - The Big Boy became legend.",
       chefNote: "A proper challenge. Few leave hungry.",
     },
     {
@@ -271,7 +271,7 @@ export const defaultContent: SiteContent = {
     {
       id: "filter-coffee",
       name: "Filter Coffee",
-      description: "Slow-brewed house blend — rich and warming.",
+      description: "Slow-brewed house blend - rich and warming.",
       price: 3.2,
       category: "drinks",
       image:
@@ -290,7 +290,7 @@ export const defaultContent: SiteContent = {
       id: "bloody-mary",
       name: "Bloody Mary",
       description:
-        "House vodka, tomato juice, Worcestershire, Tabasco, celery salt — a Mike's morning classic.",
+        "House vodka, tomato juice, Worcestershire, Tabasco, celery salt - a Mike's morning classic.",
       price: 8.5,
       category: "drinks",
       image: PLATES.bloodyMary,
@@ -338,7 +338,7 @@ export const defaultContent: SiteContent = {
       id: "r1",
       name: "Sarah Mitchell",
       rating: 5,
-      text: "Best Full English in Notting Hill — no contest. The booths, the smell of coffee, the friendly staff. Feels like home every single time.",
+      text: "Best Full English in Notting Hill - no contest. The booths, the smell of coffee, the friendly staff. Feels like home every single time.",
       date: "2 weeks ago",
       avatar:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
@@ -356,7 +356,7 @@ export const defaultContent: SiteContent = {
       id: "r3",
       name: "Elena Rossi",
       rating: 5,
-      text: "Tourists and locals packed in together — that's how you know it's real. Eggs Benedict was perfect.",
+      text: "Tourists and locals packed in together - that's how you know it's real. Eggs Benedict was perfect.",
       date: "3 weeks ago",
       avatar:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
@@ -383,7 +383,7 @@ export const defaultContent: SiteContent = {
       id: "r6",
       name: "Oliver Wright",
       rating: 5,
-      text: "A proper greasy spoon elevated with love. Red booths, morning light through the windows — cinematic.",
+      text: "A proper greasy spoon elevated with love. Red booths, morning light through the windows - cinematic.",
       date: "2 months ago",
       avatar:
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80",
@@ -573,7 +573,7 @@ export const timeline = [
   {
     year: "1962",
     title: "The Beginning",
-    text: "Mike opened the doors on Blenheim Crescent with a simple promise — honest breakfast, strong tea, and a warm seat for everyone.",
+    text: "Mike opened the doors on Blenheim Crescent with a simple promise - honest breakfast, strong tea, and a warm seat for everyone.",
   },
   {
     year: "1978",
@@ -583,7 +583,7 @@ export const timeline = [
   {
     year: "1995",
     title: "Film & Fame",
-    text: "As the area appeared on screens worldwide, visitors found what locals already knew — the best breakfast in W11.",
+    text: "As the area appeared on screens worldwide, visitors found what locals already knew - the best breakfast in W11.",
   },
   {
     year: "Today",
