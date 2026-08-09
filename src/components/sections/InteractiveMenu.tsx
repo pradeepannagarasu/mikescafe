@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useContent } from "@/context/ContentContext";
 import { useCart } from "@/context/CartContext";
@@ -12,8 +11,76 @@ import {
   DRINK_CATEGORIES,
   MENU_GROUPS,
   ORDER_CATEGORIES,
+  menuCatalog,
 } from "@/lib/menu-catalog";
-import type { MenuCategory, MenuGroup } from "@/types";
+import type { MenuCategory, MenuGroup, MenuItem } from "@/types";
+
+function MenuItemCard({
+  item,
+  onAdd,
+}: {
+  item: MenuItem;
+  onAdd: (item: MenuItem) => void;
+}) {
+  const textOnly = !item.image;
+  return (
+    <article
+      className={cn(
+        "group flex h-full",
+        textOnly
+          ? "col-span-2 md:col-span-3 flex-row items-center gap-4 border-b border-walnut/10 py-3"
+          : "flex-col"
+      )}
+    >
+      {!textOnly && (
+        <div className="img-reveal relative aspect-[4/5] sm:aspect-[5/4] rounded-sm bg-vintage">
+          <Image
+            src={item.image!}
+            alt={item.name}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 50vw, 33vw"
+          />
+        </div>
+      )}
+      <div
+        className={cn(
+          "flex flex-col gap-1.5 flex-1",
+          textOnly ? "min-w-0" : "mt-3 sm:mt-4"
+        )}
+      >
+        <div className="flex items-start justify-between gap-2">
+          <h3
+            className={cn(
+              "font-serif text-walnut leading-tight",
+              textOnly ? "text-lg sm:text-xl" : "text-base sm:text-xl md:text-2xl"
+            )}
+          >
+            {item.name}
+          </h3>
+          <span className="text-copper text-sm whitespace-nowrap pt-0.5">
+            {formatPrice(item.price)}
+          </span>
+        </div>
+        {item.description ? (
+          <p className="text-xs sm:text-sm text-muted line-clamp-2">{item.description}</p>
+        ) : null}
+      </div>
+      <button
+        type="button"
+        onClick={() => onAdd(item)}
+        className={cn(
+          "text-[10px] sm:text-[11px] tracking-[0.12em] uppercase border border-walnut/15 hover:border-racing hover:bg-racing hover:text-ivory transition-colors rounded-sm",
+          textOnly
+            ? "shrink-0 px-4 min-h-10"
+            : "mt-3 sm:mt-4 w-full min-h-10 sm:min-h-11"
+        )}
+      >
+        {textOnly ? "Add" : "Add to order"}
+      </button>
+    </article>
+  );
+}
 
 export function InteractiveMenu() {
   const { content } = useContent();
@@ -21,7 +88,6 @@ export function InteractiveMenu() {
   const [group, setGroup] = useState<MenuGroup>("order");
   const [category, setCategory] = useState<MenuCategory | "all">("all");
   const [query, setQuery] = useState("");
-  const [favouritesOnly, setFavouritesOnly] = useState(false);
 
   const categoryTabs = useMemo(() => {
     if (group === "order") return ORDER_CATEGORIES;
@@ -29,25 +95,65 @@ export function InteractiveMenu() {
     return [];
   }, [group]);
 
+  /** Always prefer the live catalog so categories stay complete after updates */
+  const sourceItems = useMemo(() => {
+    const byId = new Map(content.menuItems.map((i) => [i.id, i]));
+    return menuCatalog.map((item) => {
+      const edited = byId.get(item.id);
+      if (!edited) return item;
+      return {
+        ...item,
+        price: edited.price,
+        description: edited.description || item.description,
+        favourite: edited.favourite ?? item.favourite,
+      };
+    });
+  }, [content.menuItems]);
+
   useEffect(() => {
     setCategory("all");
-    setFavouritesOnly(false);
+    setQuery("");
   }, [group]);
 
-  const filtered = useMemo(() => {
-    return content.menuItems.filter((item) => {
-      const matchGroup = item.group === group;
-      const matchCat = category === "all" || item.category === category;
-      const matchQuery =
-        !query ||
-        item.name.toLowerCase().includes(query.toLowerCase()) ||
-        item.description.toLowerCase().includes(query.toLowerCase());
-      const matchFav = !favouritesOnly || item.favourite;
-      return matchGroup && matchCat && matchQuery && matchFav;
-    });
-  }, [content.menuItems, group, category, query, favouritesOnly]);
+  const matchQuery = (item: MenuItem) =>
+    !query ||
+    item.name.toLowerCase().includes(query.toLowerCase()) ||
+    item.description.toLowerCase().includes(query.toLowerCase());
 
+  const sections = useMemo(() => {
+    const inGroup = sourceItems.filter((i) => i.group === group && matchQuery(i));
+
+    if (categoryTabs.length === 0) {
+      return inGroup.length
+        ? [{ id: group as MenuCategory | MenuGroup, label: MENU_GROUPS.find((g) => g.id === group)?.label ?? "Items", items: inGroup }]
+        : [];
+    }
+
+    const tabs =
+      category === "all"
+        ? categoryTabs
+        : categoryTabs.filter((t) => t.id === category);
+
+    return tabs
+      .map((tab) => ({
+        id: tab.id,
+        label: tab.label,
+        items: inGroup.filter((i) => i.category === tab.id),
+      }))
+      .filter((section) => section.items.length > 0);
+  }, [sourceItems, group, category, query, categoryTabs]);
+
+  const totalVisible = sections.reduce((n, s) => n + s.items.length, 0);
   const groupHint = MENU_GROUPS.find((g) => g.id === group)?.hint ?? "";
+
+  const counts = useMemo(() => {
+    const map = new Map<MenuCategory, number>();
+    for (const item of sourceItems) {
+      if (item.group !== group) continue;
+      map.set(item.category, (map.get(item.category) ?? 0) + 1);
+    }
+    return map;
+  }, [sourceItems, group]);
 
   return (
     <section id="menu" className="bg-ivory py-24 md:py-32">
@@ -55,7 +161,7 @@ export function InteractiveMenu() {
         <SectionHeading
           eyebrow="The Menu"
           title="Order Made Simple"
-          subtitle="Start with the primary Order menu. Drinks, catering trays and the shop are one tap away."
+          subtitle="Browse by category — every item sits in its own section. Tap a category to focus, or All to scroll the full menu."
         />
 
         {content.specialOfTheDay && (
@@ -77,7 +183,6 @@ export function InteractiveMenu() {
           </div>
         )}
 
-        {/* Primary group switcher */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6">
           {MENU_GROUPS.map((g) => (
             <button
@@ -118,126 +223,73 @@ export function InteractiveMenu() {
             />
           </div>
 
-          <div className="flex items-center gap-3 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-none">
-            <button
-              type="button"
-              onClick={() => setCategory("all")}
-              className={cn(
-                "shrink-0 px-4 py-2.5 text-[11px] tracking-[0.16em] uppercase rounded-sm border transition-all min-h-11",
-                category === "all"
-                  ? "bg-racing text-ivory border-racing"
-                  : "bg-transparent text-walnut/70 border-walnut/15 hover:border-walnut/35"
-              )}
-            >
-              All
-            </button>
-            {categoryTabs.map((c) => (
+          {categoryTabs.length > 0 && (
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-none">
               <button
-                key={c.id}
                 type="button"
-                onClick={() => setCategory(c.id)}
+                onClick={() => setCategory("all")}
                 className={cn(
                   "shrink-0 px-4 py-2.5 text-[11px] tracking-[0.16em] uppercase rounded-sm border transition-all min-h-11",
-                  category === c.id
+                  category === "all"
                     ? "bg-racing text-ivory border-racing"
                     : "bg-transparent text-walnut/70 border-walnut/15 hover:border-walnut/35"
                 )}
               >
-                {c.label}
+                All sections
               </button>
-            ))}
-            {group === "order" && (
-              <button
-                type="button"
-                onClick={() => setFavouritesOnly((v) => !v)}
-                className={cn(
-                  "shrink-0 px-4 py-2.5 text-[11px] tracking-[0.16em] uppercase rounded-sm border transition-all min-h-11",
-                  favouritesOnly
-                    ? "bg-copper text-ivory border-copper"
-                    : "bg-transparent text-walnut/70 border-walnut/15"
-                )}
-              >
-                Favourites
-              </button>
-            )}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-7 sm:gap-x-5 sm:gap-y-8 md:gap-x-6 md:gap-y-10">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((item) => {
-              const textOnly = !item.image;
-              return (
-                <motion.article
-                  key={item.id}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.25 }}
-                  className={cn(
-                    "group flex h-full",
-                    textOnly
-                      ? "col-span-2 md:col-span-3 flex-row items-center gap-4 border-b border-walnut/10 py-3"
-                      : "flex-col"
-                  )}
-                >
-                  {!textOnly && (
-                    <div className="img-reveal relative aspect-[4/5] sm:aspect-[5/4] rounded-sm bg-vintage">
-                      <Image
-                        src={item.image!}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 50vw, 33vw"
-                      />
-                    </div>
-                  )}
-                  <div
-                    className={cn(
-                      "flex flex-col gap-1.5 flex-1",
-                      textOnly ? "min-w-0" : "mt-3 sm:mt-4"
-                    )}
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <h3
-                        className={cn(
-                          "font-serif text-walnut leading-tight",
-                          textOnly
-                            ? "text-lg sm:text-xl"
-                            : "text-base sm:text-xl md:text-2xl"
-                        )}
-                      >
-                        {item.name}
-                      </h3>
-                      <span className="text-copper text-sm whitespace-nowrap pt-0.5">
-                        {formatPrice(item.price)}
-                      </span>
-                    </div>
-                    {item.description ? (
-                      <p className="text-xs sm:text-sm text-muted line-clamp-2">
-                        {item.description}
-                      </p>
-                    ) : null}
-                  </div>
+              {categoryTabs.map((c) => {
+                const count = counts.get(c.id) ?? 0;
+                if (!count) return null;
+                return (
                   <button
+                    key={c.id}
                     type="button"
-                    onClick={() => addItem(item)}
+                    onClick={() => setCategory(c.id)}
                     className={cn(
-                      "text-[10px] sm:text-[11px] tracking-[0.12em] uppercase border border-walnut/15 hover:border-racing hover:bg-racing hover:text-ivory transition-colors rounded-sm",
-                      textOnly
-                        ? "shrink-0 px-4 min-h-10"
-                        : "mt-3 sm:mt-4 w-full min-h-10 sm:min-h-11"
+                      "shrink-0 px-4 py-2.5 text-[11px] tracking-[0.16em] uppercase rounded-sm border transition-all min-h-11",
+                      category === c.id
+                        ? "bg-racing text-ivory border-racing"
+                        : "bg-transparent text-walnut/70 border-walnut/15 hover:border-walnut/35"
                     )}
                   >
-                    {textOnly ? "Add" : "Add to order"}
+                    {c.label}
+                    <span
+                      className={cn(
+                        "ml-2 tabular-nums",
+                        category === c.id ? "text-ivory/70" : "text-muted"
+                      )}
+                    >
+                      {count}
+                    </span>
                   </button>
-                </motion.article>
-              );
-            })}
-          </AnimatePresence>
+                );
+              })}
+            </div>
+          )}
         </div>
 
-        {filtered.length === 0 && (
+        <div className="space-y-14 md:space-y-16">
+          {sections.map((section) => (
+            <div key={String(section.id)} id={`menu-${section.id}`}>
+              <div className="mb-6 flex items-end justify-between gap-4 border-b border-walnut/10 pb-3">
+                <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl text-walnut">
+                  {section.label}
+                </h3>
+                <p className="text-[11px] tracking-[0.16em] uppercase text-muted shrink-0 pb-1">
+                  {section.items.length}{" "}
+                  {section.items.length === 1 ? "item" : "items"}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-7 sm:gap-x-5 sm:gap-y-8 md:gap-x-6 md:gap-y-10">
+                {section.items.map((item) => (
+                  <MenuItemCard key={item.id} item={item} onAdd={addItem} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {totalVisible === 0 && (
           <p className="text-center text-muted py-16">No items match your search.</p>
         )}
       </div>
