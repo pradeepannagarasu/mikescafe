@@ -1,7 +1,7 @@
 import type { SiteContent } from "@/types";
 import { defaultContent } from "@/lib/data";
 
-export const CONTENT_STORAGE_KEY = "piccola-deli-content-v13";
+export const CONTENT_STORAGE_KEY = "piccola-deli-content-v14";
 export const CONTENT_EVENT = "piccola-deli-content-change";
 
 let cachedRaw: string | null | undefined;
