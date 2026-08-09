@@ -6,7 +6,7 @@ export const SITE = {
   tagline: "London's Beloved Breakfast Destination",
   rating: 4.6,
   reviewCount: 1000,
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mikescafenottinghill.co.uk",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mikescafe.pradeepandigital.workers.dev",
   logo: "/mikeslogo.png",
 };
 
@@ -267,8 +267,7 @@ export const defaultContent: SiteContent = {
       description: "Seasonal soup with warm bread and butter.",
       price: 7.5,
       category: "lunch",
-      image:
-        "https://images.unsplash.com/photo-1547592166-23acba13379d?w=900&q=80",
+      image: "/images/soup.jpg",
     },
     {
       id: "jacket",

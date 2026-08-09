@@ -63,18 +63,37 @@ export function BookingsPanel() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="rounded-sm border border-copper/30 bg-copper/5 px-4 py-3 text-sm text-walnut/80 flex-1">
           Track every booking: New → Confirmed → Preparing → Ready → Completed. Website orders land
           here on this device; add phone bookings manually below.
         </div>
-        <button
-          type="button"
-          onClick={() => setShowManual((v) => !v)}
-          className="shrink-0 px-4 py-2.5 text-[11px] tracking-[0.14em] uppercase bg-racing text-ivory rounded-sm"
-        >
-          {showManual ? "Close form" : "Add booking"}
-        </button>
+        <div className="flex gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={() => {
+              const blob = new Blob([JSON.stringify(bookings, null, 2)], {
+                type: "application/json",
+              });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = `mikes-bookings-${new Date().toISOString().slice(0, 10)}.json`;
+              a.click();
+              URL.revokeObjectURL(url);
+            }}
+            className="px-4 py-2.5 text-[11px] tracking-[0.14em] uppercase border border-walnut/20 rounded-sm hover:border-walnut/40"
+          >
+            Export JSON
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowManual((v) => !v)}
+            className="px-4 py-2.5 text-[11px] tracking-[0.14em] uppercase bg-racing text-ivory rounded-sm"
+          >
+            {showManual ? "Close form" : "Add booking"}
+          </button>
+        </div>
       </div>
 
       {showManual && (

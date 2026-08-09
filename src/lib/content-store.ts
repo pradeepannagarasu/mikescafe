@@ -1,7 +1,7 @@
 import type { SiteContent } from "@/types";
 import { defaultContent } from "@/lib/data";
 
-export const CONTENT_STORAGE_KEY = "mikes-cafe-content-v4";
+export const CONTENT_STORAGE_KEY = "mikes-cafe-content-v5";
 export const CONTENT_EVENT = "mikes-cafe-content-change";
 
 export function readStoredContent(): SiteContent {
