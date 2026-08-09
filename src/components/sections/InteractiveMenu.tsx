@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiOutlineSearch } from "react-icons/hi";
@@ -8,44 +8,54 @@ import { useContent } from "@/context/ContentContext";
 import { useCart } from "@/context/CartContext";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { formatPrice, cn } from "@/lib/utils";
-import type { MenuCategory } from "@/types";
-
-const categories: { id: MenuCategory | "all"; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "panini", label: "Panini" },
-  { id: "piadina", label: "Piadina" },
-  { id: "lasagna", label: "Lasagna" },
-  { id: "mains", label: "Mains" },
-  { id: "drinks", label: "Drinks" },
-  { id: "desserts", label: "Desserts" },
-];
+import {
+  DRINK_CATEGORIES,
+  MENU_GROUPS,
+  ORDER_CATEGORIES,
+} from "@/lib/menu-catalog";
+import type { MenuCategory, MenuGroup } from "@/types";
 
 export function InteractiveMenu() {
   const { content } = useContent();
   const { addItem } = useCart();
+  const [group, setGroup] = useState<MenuGroup>("order");
   const [category, setCategory] = useState<MenuCategory | "all">("all");
   const [query, setQuery] = useState("");
   const [favouritesOnly, setFavouritesOnly] = useState(false);
 
+  const categoryTabs = useMemo(() => {
+    if (group === "order") return ORDER_CATEGORIES;
+    if (group === "drinks") return DRINK_CATEGORIES;
+    return [];
+  }, [group]);
+
+  useEffect(() => {
+    setCategory("all");
+    setFavouritesOnly(false);
+  }, [group]);
+
   const filtered = useMemo(() => {
     return content.menuItems.filter((item) => {
+      const matchGroup = item.group === group;
       const matchCat = category === "all" || item.category === category;
       const matchQuery =
         !query ||
         item.name.toLowerCase().includes(query.toLowerCase()) ||
         item.description.toLowerCase().includes(query.toLowerCase());
       const matchFav = !favouritesOnly || item.favourite;
-      return matchCat && matchQuery && matchFav;
+      return matchGroup && matchCat && matchQuery && matchFav;
     });
-  }, [content.menuItems, category, query, favouritesOnly]);
+  }, [content.menuItems, group, category, query, favouritesOnly]);
+
+  const groupHint = MENU_GROUPS.find((g) => g.id === group)?.hint ?? "";
 
   return (
     <section id="menu" className="bg-ivory py-24 md:py-32">
       <div className="section-pad mx-auto max-w-[1400px]">
         <SectionHeading
           eyebrow="The Menu"
-          title="Whatever Morning Calls For"
-          subtitle="From the Full English to fresh juices - browse, search, and find your plate."
+          title="Order Made Simple"
+          subtitle="Start with the primary Order menu. Drinks, catering trays and the shop are one tap away."
         />
 
         {content.specialOfTheDay && (
@@ -67,12 +77,41 @@ export function InteractiveMenu() {
           </div>
         )}
 
+        {/* Primary group switcher */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6">
+          {MENU_GROUPS.map((g) => (
+            <button
+              key={g.id}
+              type="button"
+              onClick={() => setGroup(g.id)}
+              className={cn(
+                "rounded-sm border px-4 py-3 text-left transition-colors min-h-14",
+                group === g.id
+                  ? "border-racing bg-racing text-ivory"
+                  : "border-walnut/15 bg-cream/50 hover:border-walnut/35"
+              )}
+            >
+              <span className="block text-[11px] tracking-[0.16em] uppercase">{g.label}</span>
+              <span
+                className={cn(
+                  "block text-xs mt-1",
+                  group === g.id ? "text-ivory/70" : "text-muted"
+                )}
+              >
+                {g.hint}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <p className="text-sm text-muted mb-6">{groupHint}</p>
+
         <div className="flex flex-col gap-6 mb-10">
           <div className="relative max-w-md">
             <HiOutlineSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} />
             <input
               type="search"
-              placeholder="Search the menu…"
+              placeholder={`Search ${group}…`}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="w-full bg-cream border border-walnut/10 rounded-sm pl-11 pr-4 py-3.5 text-sm placeholder:text-muted/70 focus:border-copper/50 outline-none transition-colors"
@@ -80,7 +119,19 @@ export function InteractiveMenu() {
           </div>
 
           <div className="flex items-center gap-3 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-none">
-            {categories.map((c) => (
+            <button
+              type="button"
+              onClick={() => setCategory("all")}
+              className={cn(
+                "shrink-0 px-4 py-2.5 text-[11px] tracking-[0.16em] uppercase rounded-sm border transition-all min-h-11",
+                category === "all"
+                  ? "bg-racing text-ivory border-racing"
+                  : "bg-transparent text-walnut/70 border-walnut/15 hover:border-walnut/35"
+              )}
+            >
+              All
+            </button>
+            {categoryTabs.map((c) => (
               <button
                 key={c.id}
                 type="button"
@@ -95,18 +146,20 @@ export function InteractiveMenu() {
                 {c.label}
               </button>
             ))}
-            <button
-              type="button"
-              onClick={() => setFavouritesOnly((v) => !v)}
-              className={cn(
-                "shrink-0 px-4 py-2.5 text-[11px] tracking-[0.16em] uppercase rounded-sm border transition-all min-h-11",
-                favouritesOnly
-                  ? "bg-copper text-ivory border-copper"
-                  : "bg-transparent text-walnut/70 border-walnut/15"
-              )}
-            >
-              Favourites
-            </button>
+            {group === "order" && (
+              <button
+                type="button"
+                onClick={() => setFavouritesOnly((v) => !v)}
+                className={cn(
+                  "shrink-0 px-4 py-2.5 text-[11px] tracking-[0.16em] uppercase rounded-sm border transition-all min-h-11",
+                  favouritesOnly
+                    ? "bg-copper text-ivory border-copper"
+                    : "bg-transparent text-walnut/70 border-walnut/15"
+                )}
+              >
+                Favourites
+              </button>
+            )}
           </div>
         </div>
 
@@ -139,9 +192,11 @@ export function InteractiveMenu() {
                       {formatPrice(item.price)}
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-muted line-clamp-2">
-                    {item.description}
-                  </p>
+                  {item.description ? (
+                    <p className="text-xs sm:text-sm text-muted line-clamp-2">
+                      {item.description}
+                    </p>
+                  ) : null}
                 </div>
                 <button
                   type="button"
@@ -156,7 +211,7 @@ export function InteractiveMenu() {
         </div>
 
         {filtered.length === 0 && (
-          <p className="text-center text-muted py-16">No dishes match your search.</p>
+          <p className="text-center text-muted py-16">No items match your search.</p>
         )}
       </div>
     </section>

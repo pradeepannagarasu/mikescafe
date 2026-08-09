@@ -1,10 +1,23 @@
+export type MenuGroup = "order" | "drinks" | "catering" | "shop";
+
 export type MenuCategory =
-  | "panini"
-  | "piadina"
-  | "lasagna"
+  | "breakfast"
+  | "sandwiches"
+  | "pizza"
+  | "savouries"
+  | "bakery"
+  | "pasta"
   | "mains"
-  | "drinks"
-  | "desserts";
+  | "sides"
+  | "starters"
+  | "desserts"
+  | "coffee"
+  | "juice"
+  | "soft-drinks"
+  | "beer"
+  | "wine"
+  | "catering"
+  | "shop";
 
 export interface MenuItem {
   id: string;
@@ -12,6 +25,8 @@ export interface MenuItem {
   description: string;
   price: number;
   category: MenuCategory;
+  /** order = primary click & collect food; drinks / catering / shop are secondary */
+  group: MenuGroup;
   image: string;
   favourite?: boolean;
   featured?: boolean;

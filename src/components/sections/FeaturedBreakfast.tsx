@@ -10,12 +10,15 @@ import { formatPrice, cn } from "@/lib/utils";
 import type { MenuCategory, MenuItem } from "@/types";
 
 const CATEGORY_ORDER: { id: MenuCategory; label: string }[] = [
-  { id: "panini", label: "Panini" },
-  { id: "piadina", label: "Piadina" },
-  { id: "lasagna", label: "Lasagna" },
+  { id: "breakfast", label: "Breakfast" },
+  { id: "sandwiches", label: "Sandwiches" },
+  { id: "pizza", label: "Pizzas" },
+  { id: "pasta", label: "Pasta" },
   { id: "mains", label: "Mains" },
-  { id: "drinks", label: "Drinks" },
   { id: "desserts", label: "Desserts" },
+  { id: "savouries", label: "Savouries" },
+  { id: "bakery", label: "Bakery" },
+  { id: "starters", label: "Starters" },
 ];
 
 export function FeaturedBreakfast() {
@@ -25,7 +28,7 @@ export function FeaturedBreakfast() {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const favourites = useMemo(
-    () => content.menuItems.filter((i) => i.favourite),
+    () => content.menuItems.filter((i) => i.favourite && i.group === "order"),
     [content.menuItems]
   );
 
@@ -35,7 +38,7 @@ export function FeaturedBreakfast() {
   }, [favourites]);
 
   const [active, setActive] = useState<MenuCategory | null>(null);
-  const category = active ?? tabs[0]?.id ?? "panini";
+  const category = active ?? tabs[0]?.id ?? "sandwiches";
 
   const filtered = useMemo(
     () => favourites.filter((i) => i.category === category),

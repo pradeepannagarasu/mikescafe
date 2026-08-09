@@ -138,7 +138,7 @@ export default function AdminPage() {
       <header className="border-b border-walnut/10 bg-ivory sticky top-0 z-20">
         <div className="section-pad mx-auto max-w-6xl py-4 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Logo size="admin" className="text-walnut" />
+            <Logo size="admin" />
             <div>
               <p className="font-serif text-2xl text-walnut">La Piccola Admin</p>
               <p className="text-xs text-muted">Bookings sync live · content saves in this browser</p>
