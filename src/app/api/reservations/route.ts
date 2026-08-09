@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { saveBooking } from "@/lib/server-bookings";
 import type { Booking, BookingItem, FulfillmentType } from "@/types/booking";
 
 type ReservationBody = {
@@ -139,6 +140,16 @@ export async function POST(request: Request) {
     total,
   };
 
+  try {
+    await saveBooking(booking);
+  } catch (err) {
+    console.error("Failed to store booking", err);
+    return NextResponse.json(
+      { error: "Unable to submit booking right now. Please call us." },
+      { status: 500 }
+    );
+  }
+
   const webhook = process.env.RESERVATION_WEBHOOK_URL;
   if (webhook) {
     try {
@@ -149,20 +160,10 @@ export async function POST(request: Request) {
       });
       if (!res.ok) {
         console.error("Reservation webhook failed", res.status);
-        return NextResponse.json(
-          { error: "Unable to submit booking right now. Please call us." },
-          { status: 502 }
-        );
       }
     } catch (err) {
       console.error("Reservation webhook error", err);
-      return NextResponse.json(
-        { error: "Unable to submit booking right now. Please call us." },
-        { status: 502 }
-      );
     }
-  } else {
-    console.info("Booking received", booking);
   }
 
   return NextResponse.json({
@@ -170,7 +171,7 @@ export async function POST(request: Request) {
     booking,
     message:
       fulfillment === "collect"
-        ? "Collect order received. We'll confirm shortly."
-        : "Reservation request received. We'll confirm shortly.",
+        ? "Thanks for your collect order — we'll start preparing it for you."
+        : "Thanks for booking to eat in — we'll get your table ready for you.",
   });
 }

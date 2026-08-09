@@ -17,6 +17,12 @@
   "images": {
     "binding": "IMAGES"
   },
+  "kv_namespaces": [
+    {
+      "binding": "MIKES_BOOKINGS",
+      "id": "861b6d4cd27b433eb7568bb6bcea76e6"
+    }
+  ],
   "observability": {
     "enabled": true
   }
