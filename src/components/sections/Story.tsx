@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { timeline, GALLERY_SHOTS } from "@/lib/data";
+import { timeline } from "@/lib/data";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -78,19 +78,20 @@ export function Story() {
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <Reveal className="lg:col-span-5 relative" y={32}>
-            <div className="overflow-hidden rounded-sm aspect-[4/5] relative">
-              <div ref={imageRef} className="absolute inset-[-12%] will-change-transform">
+            <div className="overflow-hidden rounded-sm aspect-[4/5] md:aspect-[5/6] relative bg-vintage">
+              <div ref={imageRef} className="absolute inset-[-8%] will-change-transform">
                 <Image
-                  src={GALLERY_SHOTS.goodFoodVibes}
-                  alt="Inside Mike's Cafe - Good Food, Good Vibes"
+                  src="/images/heritage-storefront.jpg"
+                  alt="Mike's Cafe storefront - Family Cafe since 1962"
                   fill
-                  className="object-cover grayscale-[30%] contrast-[1.05]"
+                  priority
+                  className="object-cover object-[center_35%]"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
               </div>
             </div>
             <p className="mt-4 text-[11px] tracking-[0.2em] uppercase text-muted">
-              Blenheim Crescent · Notting Hill
+              Family Cafe since 1962 · 12 Blenheim Crescent
             </p>
           </Reveal>
 
