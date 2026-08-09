@@ -71,39 +71,39 @@ export const defaultContent: SiteContent = {
   reviews: [
     {
       id: "r1",
-      name: "Sofia R.",
+      name: "Rez Behnam",
       rating: 5,
-      text: "The panini and lasagna are excellent. Easy to order ahead and collect.",
-      date: "2 weeks ago",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
-    },
-    {
-      id: "r2",
-      name: "Marco L.",
-      rating: 5,
-      text: "Proper Italian deli. Coffee is strong, staff are lovely, food is generous.",
-      date: "1 month ago",
+      text: "Delicious pasta or pizza for under £10 in Kensington? Yes! What a wonderful restaurant/cafe/store. An amazing array of breakfast, lunch, dinner and coffee in a peaceful side street spot. Friendly, professional staff. Everything made fresh.",
+      date: "4 months ago",
       avatar:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
     },
     {
-      id: "r3",
-      name: "Elena P.",
+      id: "r2",
+      name: "John Doe",
       rating: 5,
-      text: "Caprese and aubergine parmigiana hit every time. Will be back.",
-      date: "3 weeks ago",
+      text: "Was brilliant. Chefs were kind and courteous, service was excellent, the food has the soul of Italian cuisine, and somehow despite being in London, the weather was absolutely lovely. Thank God and thank these fine lads for a brilliant experience.",
+      date: "2 months ago",
       avatar:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80",
+    },
+    {
+      id: "r3",
+      name: "Dean Gebauer",
+      rating: 5,
+      text: "Lovely little Italian cafe. The selection of authentic Italian food is incredible. The pastas are amazing! I can’t wait to come back and try more things. In the summer time they also have a little outdoor seating area with around 7 tables.",
+      date: "11 months ago",
+      avatar:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80",
     },
     {
       id: "r4",
-      name: "James T.",
-      rating: 4,
-      text: "Great for a quick lunch. Meatballs with rice were perfect.",
-      date: "1 week ago",
+      name: "Julia Gidley",
+      rating: 5,
+      text: "Love this place! We visited on 2 different nights pretty close to closing time (if not a bit after!) and they greeted us cheerily on both occasions! We were looking for an easy dinner that didn't involve going out to a formal restaurant, and this was the perfect spot in the neighborhood, lovely location and wonderful people!",
+      date: "3 months ago",
       avatar:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80",
     },
   ],
   gallery: [
