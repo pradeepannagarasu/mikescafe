@@ -86,7 +86,7 @@ export function Story() {
                   fill
                   priority
                   quality={92}
-                  className="object-cover object-center brightness-[1.05] contrast-[1.06] saturate-[1.1]"
+                  className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
               </div>
