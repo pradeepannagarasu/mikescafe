@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContent } from "@/context/ContentContext";
@@ -9,10 +9,14 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { formatPrice, cn } from "@/lib/utils";
 import type { MenuItem } from "@/types";
 
+const SPEED_PX_PER_SEC = 42;
+
 export function FeaturedBreakfast() {
   const { content } = useContent();
   const { addItem } = useCart();
   const [activeId, setActiveId] = useState<string | null>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
 
   const favourites = useMemo(
     () =>
@@ -22,7 +26,7 @@ export function FeaturedBreakfast() {
     [content.menuItems]
   );
 
-  // Triple for seamless CSS loop
+  // Duplicate for a seamless loop
   const loopItems = useMemo(
     () => [...favourites, ...favourites, ...favourites],
     [favourites]
@@ -32,6 +36,40 @@ export function FeaturedBreakfast() {
     ? favourites.find((i) => i.id === activeId) ?? null
     : null;
 
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track || favourites.length === 0) return;
+
+    let raf = 0;
+    let last = performance.now();
+    let started = false;
+
+    const tick = (now: number) => {
+      const loopWidth = track.scrollWidth / 3;
+      if (loopWidth > 0 && !started) {
+        // Start on the middle copy so LTR travel is seamless
+        offsetRef.current = -loopWidth;
+        started = true;
+      }
+
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+
+      // Content drifts left → right
+      offsetRef.current += SPEED_PX_PER_SEC * dt;
+
+      if (loopWidth > 0 && offsetRef.current >= 0) {
+        offsetRef.current -= loopWidth;
+      }
+
+      track.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`;
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [favourites.length]);
+
   if (favourites.length === 0) return null;
 
   return (
@@ -40,12 +78,16 @@ export function FeaturedBreakfast() {
         <SectionHeading
           eyebrow="Favourites"
           title="Italian Classics Worth Coming Back For"
-          subtitle="A continuous scroll of house favourites. Tap any plate to preview and add it to your order."
+          subtitle="House favourites scroll continuously. Tap any plate to preview and add it to your order."
         />
       </div>
 
-      <div className="relative marquee-mask mt-2">
-        <div className="marquee-track marquee-ltr gap-4 sm:gap-6 pl-4">
+      <div className="relative marquee-mask mt-2 overflow-hidden">
+        <div
+          ref={trackRef}
+          className="favourites-marquee flex w-max gap-4 sm:gap-6 pl-4 will-change-transform"
+          aria-label="Scrolling favourite dishes"
+        >
           {loopItems.map((item, idx) => (
             <FavouriteScrollCard
               key={`${item.id}-${idx}`}
