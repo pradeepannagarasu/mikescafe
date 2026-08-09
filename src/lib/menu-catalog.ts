@@ -192,16 +192,6 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Panzerotto Mediterraneo", price: 5.5, category: "savouries" },
   { name: "Arancino", price: 4.8, category: "savouries", favourite: true },
 
-  // ORDER: Sweet Bakery
-  { name: "Bombolone Cioccolata", price: 3.4, category: "bakery" },
-  { name: "Bombolone Crema", price: 3.4, category: "bakery" },
-  { name: "Bombolone Marmellata", price: 3.4, category: "bakery" },
-  { name: "Pasticciotto", price: 3.6, category: "bakery" },
-  { name: "Conchiglia Al Cioccolato", price: 3.6, category: "bakery" },
-  { name: "Banana Bread", price: 3.5, category: "bakery" },
-  { name: "Baci Di Dama", price: 1, category: "bakery" },
-  { name: "Cannolini", price: 1.5, category: "bakery" },
-
   // ORDER: Pasta
   { name: "Pasta Al Pesto", price: 8.5, category: "pasta", favourite: true },
   { name: "Pasta Al Pomodoro", price: 8.5, category: "pasta", favourite: true },
