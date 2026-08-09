@@ -1,7 +1,7 @@
 import type { SiteContent } from "@/types";
 import { defaultContent } from "@/lib/data";
 
-export const CONTENT_STORAGE_KEY = "piccola-deli-content-v8";
+export const CONTENT_STORAGE_KEY = "piccola-deli-content-v9";
 export const CONTENT_EVENT = "piccola-deli-content-change";
 
 let cachedRaw: string | null | undefined;
@@ -11,12 +11,12 @@ function mergeContent(parsed: Partial<SiteContent>): SiteContent {
   return {
     ...defaultContent,
     ...parsed,
-    address: { ...defaultContent.address, ...parsed.address },
+    address: defaultContent.address,
     specialOfTheDay: {
       ...defaultContent.specialOfTheDay,
       ...parsed.specialOfTheDay,
     },
-    openingHours: parsed.openingHours ?? defaultContent.openingHours,
+    openingHours: defaultContent.openingHours,
     menuItems: parsed.menuItems ?? defaultContent.menuItems,
     reviews: parsed.reviews ?? defaultContent.reviews,
     gallery: parsed.gallery ?? defaultContent.gallery,

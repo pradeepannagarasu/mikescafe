@@ -14,12 +14,12 @@ export default function HomePage() {
     <>
       <Hero />
       <Story />
+      <VisitUs />
       <FeaturedBreakfast />
       <InteractiveMenu />
       <SignatureDishes />
       <Gallery />
       <Reviews />
-      <VisitUs />
       <Reservation />
       <Instagram />
     </>
