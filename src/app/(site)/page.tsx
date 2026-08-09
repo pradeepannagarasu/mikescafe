@@ -14,7 +14,6 @@ export default function HomePage() {
     <>
       <Hero />
       <Story />
-      <VisitUs />
       <FeaturedBreakfast />
       <InteractiveMenu />
       <SignatureDishes />
@@ -22,6 +21,7 @@ export default function HomePage() {
       <Reviews />
       <Reservation />
       <Instagram />
+      <VisitUs />
     </>
   );
 }
