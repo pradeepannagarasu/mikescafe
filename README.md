@@ -19,24 +19,24 @@ This app is configured for **Cloudflare Workers** via [`@opennextjs/cloudflare`]
 
 ### Option A — Dashboard (Git connected)
 
-In **Workers & Pages → Create → Connect to Git**:
+In **Workers & Pages → mikescafe → Settings → Builds**:
 
 | Setting | Value |
 |---|---|
-| Framework preset | **Next.js (OpenNext)** if available, otherwise **None** |
-| Build command | `npx opennextjs-cloudflare build` |
-| Deploy command | `npx wrangler deploy` |
-| Build output directory | **Leave empty** (do **not** use `/dist`) |
+| Framework preset | **None** |
+| Build command | `npx opennextjs-cloudflare build && npx opennextjs-cloudflare deploy` |
+| Build output directory | `pages-bridge` |
+| Root directory | `/` |
 | Production branch | `main` |
-| Root directory | `/` (repo root) |
 
-**Important:** Do not set Build output directory to `/dist`. That is for Vite/static apps and will break this Next.js site.
+That keeps the real Next.js app on **Workers**, and makes **https://mikescafe.pages.dev** proxy to it.
 
-Environment variables (Workers → Settings → Variables):
+**Do not** set output to `/dist` — that caused the 404s.
 
-- `NEXT_PUBLIC_SITE_URL` = your live URL (e.g. `https://mikescafe.pages.dev` or custom domain)
-- `NEXT_PUBLIC_ADMIN_PIN` = a strong PIN
-- `RESERVATION_WEBHOOK_URL` = optional booking webhook
+### Live URLs
+
+- **https://mikescafe.pages.dev**
+- **https://mikescafe.pradeepandigital.workers.dev**
 
 ### Option B — CLI
 
@@ -44,12 +44,7 @@ Environment variables (Workers → Settings → Variables):
 npm run deploy
 ```
 
-Local Workers preview:
-
-```bash
-npm run preview
-```
-
+This builds the Worker and refreshes the Pages bridge in one step.
 ## Environment
 
 | Variable | Required | Purpose |
