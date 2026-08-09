@@ -141,7 +141,7 @@ export const timeline = [
   {
     year: "Kitchen",
     title: "From panini to pasta",
-    text: "Sandwiches, lasagna, mains and coffee — for eat-in or collect.",
+    text: "Panini, lasagna, mains and coffee — for eat-in or collect.",
   },
   {
     year: "Today",

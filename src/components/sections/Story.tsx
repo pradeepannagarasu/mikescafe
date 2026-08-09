@@ -43,10 +43,10 @@ export function Story() {
       if (items.length && list) {
         gsap.fromTo(
           items,
-          { opacity: 0, x: -28 },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
-            x: 0,
+            y: 0,
             stagger: 0.12,
             duration: 0.85,
             ease: "power3.out",
@@ -95,23 +95,27 @@ export function Story() {
             </p>
           </Reveal>
 
-          <div className="lg:col-span-7 timeline-list space-y-0">
+          <div className="lg:col-span-7 timeline-list space-y-0 min-w-0">
             {timeline.map((item, i) => (
               <div
                 key={item.year}
-                className="timeline-item grid grid-cols-[88px_1fr] md:grid-cols-[120px_1fr] gap-6 md:gap-10 border-t border-walnut/10 py-8 md:py-10"
+                className="timeline-item border-t border-walnut/10 py-7 sm:py-8 md:py-10"
               >
-                <span className="font-serif text-3xl md:text-4xl text-racing leading-none">
-                  {item.year}
-                </span>
-                <div>
-                  <h3 className="font-serif text-2xl md:text-3xl text-walnut mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted leading-relaxed max-w-xl">{item.text}</p>
+                <div className="flex flex-col gap-3 sm:gap-4 md:grid md:grid-cols-[minmax(7.5rem,9rem)_minmax(0,1fr)] md:gap-10 md:items-start">
+                  <p className="font-serif text-2xl sm:text-3xl md:text-4xl text-racing leading-none break-words">
+                    {item.year}
+                  </p>
+                  <div className="min-w-0">
+                    <h3 className="font-serif text-xl sm:text-2xl md:text-3xl text-walnut mb-2 sm:mb-3 leading-snug text-balance">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-muted leading-relaxed max-w-xl">
+                      {item.text}
+                    </p>
+                  </div>
                 </div>
                 {i === timeline.length - 1 && (
-                  <div className="col-span-2 mt-4 h-px w-full bg-gradient-to-r from-copper/60 to-transparent" />
+                  <div className="mt-6 sm:mt-8 h-px w-full bg-gradient-to-r from-copper/60 to-transparent" />
                 )}
               </div>
             ))}
