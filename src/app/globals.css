@@ -162,12 +162,7 @@ html.app-booting .boot-line {
 
 .marquee-track.marquee-ltr {
   animation-name: marquee-ltr;
-  animation-duration: 48s;
-}
-
-.marquee-mask:hover .marquee-track,
-.marquee-track.is-paused {
-  animation-play-state: paused;
+  animation-duration: 70s;
 }
 
 @keyframes marquee {
