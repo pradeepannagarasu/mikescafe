@@ -7,7 +7,6 @@ import { Gallery } from "@/components/sections/Gallery";
 import { Reviews } from "@/components/sections/Reviews";
 import { VisitUs } from "@/components/sections/VisitUs";
 import { Reservation } from "@/components/sections/Reservation";
-import { Instagram } from "@/components/sections/Instagram";
 
 export default function HomePage() {
   return (
@@ -20,7 +19,6 @@ export default function HomePage() {
       <Gallery />
       <Reviews />
       <Reservation />
-      <Instagram />
       <VisitUs />
     </>
   );

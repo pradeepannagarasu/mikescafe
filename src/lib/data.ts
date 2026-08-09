@@ -150,12 +150,3 @@ export const timeline = [
     text: "Browse the primary order menu first, then drinks, catering or the shop.",
   },
 ];
-
-export const instagramPosts = [
-  DISH_PHOTOS["Panino Al Crudo"],
-  DISH_PHOTOS["Arancino"],
-  DISH_PHOTOS["Lasagna Bolognese"],
-  DISH_PHOTOS["Pizza Margherita"],
-  DISH_PHOTOS["Pasta Al Pesto"],
-  DISH_PHOTOS["Croissant Chocolate"],
-];
