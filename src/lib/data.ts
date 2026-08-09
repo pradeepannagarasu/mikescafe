@@ -13,6 +13,7 @@ export const SITE = {
 /** Local plate photography */
 export const PLATES = {
   english: "/images/english-breakfast.jpg",
+  bigBoy: "/images/big-boy.jpg",
   eggsBenedict: "/images/eggs-benedict.jpg",
   frenchToast: "/images/french-toast.jpg",
   bagels: "/images/mikes-bagels.jpg",
@@ -105,7 +106,7 @@ export const defaultContent: SiteContent = {
         "Double everything. Built for the hungriest mornings in West London.",
       price: 17.5,
       category: "breakfast",
-      image: PLATES.english,
+      image: PLATES.bigBoy,
       favourite: true,
       featured: true,
       ingredients: [
@@ -456,8 +457,8 @@ export const defaultContent: SiteContent = {
     },
     {
       id: "g10",
-      src: PLATES.english,
-      alt: "Classic Full English at Mike's",
+      src: PLATES.bigBoy,
+      alt: "The Big Boy breakfast at Mike's",
       span: "tall",
     },
     {
