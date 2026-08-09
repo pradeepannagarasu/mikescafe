@@ -97,6 +97,9 @@ const CATERING_PHOTOS: Record<string, string> = {
   "Pizza Margherita (Catering)": DISH_PHOTOS["Pizza Margherita"],
   "Pizza Sausage And Mushroom (Catering)": DISH_PHOTOS["Pizza Bianca"],
   "Focaccia Ligure": DISH_PHOTOS["Focaccia Slice"],
+  "Tiramisu (Catering)": "/images/dishes/tiramisu.jpg",
+  "Baked Cheese Cake (Catering)": "/images/dishes/baked-cheese-cake.jpg",
+  "Large Fruit Tarte (Catering)": "/images/dishes/large-fruit-tarte.jpg",
 };
 
 function build(specs: Spec[]): MenuItem[] {
