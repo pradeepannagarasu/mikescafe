@@ -162,7 +162,7 @@ export function InteractiveMenu() {
         <SectionHeading
           eyebrow="The Menu"
           title="Order Made Simple"
-          subtitle="Browse by category, every item sits in its own section. Tap a category to focus, or All to scroll the full menu."
+          subtitle="See the full menu, or tap one category to open only those dishes."
         />
 
         {content.specialOfTheDay && (
@@ -184,7 +184,7 @@ export function InteractiveMenu() {
           </div>
         )}
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-8">
           {MENU_GROUPS.map((g) => (
             <button
               key={g.id}
@@ -210,68 +210,117 @@ export function InteractiveMenu() {
           ))}
         </div>
 
-        <p className="text-sm text-muted mb-6">{groupHint}</p>
+        <div className="relative mb-8 max-w-md">
+          <HiOutlineSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} />
+          <input
+            type="search"
+            placeholder={`Search ${group}…`}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full bg-cream border border-walnut/10 rounded-sm pl-11 pr-4 py-3.5 text-sm placeholder:text-muted/70 focus:border-copper/50 outline-none transition-colors"
+          />
+        </div>
 
-        <div className="flex flex-col gap-6 mb-10">
-          <div className="relative max-w-md">
-            <HiOutlineSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} />
-            <input
-              type="search"
-              placeholder={`Search ${group}…`}
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-full bg-cream border border-walnut/10 rounded-sm pl-11 pr-4 py-3.5 text-sm placeholder:text-muted/70 focus:border-copper/50 outline-none transition-colors"
-            />
-          </div>
-
-          {categoryTabs.length > 0 && (
-            <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
-              <button
-                type="button"
-                onClick={() => setCategory("all")}
+        {categoryTabs.length > 0 && (
+          <div className="mb-12 md:mb-14">
+            <button
+              type="button"
+              onClick={() => setCategory("all")}
+              className={cn(
+                "w-full rounded-sm border-2 px-5 py-4 text-left transition-colors min-h-16",
+                category === "all"
+                  ? "border-racing bg-racing text-ivory"
+                  : "border-copper/40 bg-cream text-walnut hover:border-racing hover:bg-racing/[0.06]"
+              )}
+            >
+              <span className="block font-serif text-2xl sm:text-3xl leading-none">
+                Full menu
+              </span>
+              <span
                 className={cn(
-                  "w-full px-3 py-2.5 text-[10px] sm:text-[11px] tracking-[0.14em] uppercase rounded-sm border transition-all min-h-11 text-left",
-                  category === "all"
-                    ? "bg-racing text-ivory border-racing"
-                    : "bg-transparent text-walnut/70 border-walnut/15 hover:border-walnut/35"
+                  "mt-2 block text-sm",
+                  category === "all" ? "text-ivory/75" : "text-muted"
                 )}
               >
-                All sections
-              </button>
+                Show every category and every dish in one scroll
+              </span>
+            </button>
+
+            <div className="mt-8 mb-4 flex items-center gap-3">
+              <p className="text-[11px] tracking-[0.22em] uppercase text-copper shrink-0">
+                Or pick a category
+              </p>
+              <div className="h-px flex-1 bg-walnut/10" />
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
               {categoryTabs.map((c) => {
                 const count = counts.get(c.id) ?? 0;
                 if (!count) return null;
+                const active = category === c.id;
                 return (
                   <button
                     key={c.id}
                     type="button"
-                    onClick={() => setCategory(c.id)}
+                    onClick={() => {
+                      setCategory(c.id);
+                      window.requestAnimationFrame(() => {
+                        document
+                          .getElementById(`menu-${c.id}`)
+                          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      });
+                    }}
                     className={cn(
-                      "w-full px-3 py-2.5 text-[10px] sm:text-[11px] tracking-[0.14em] uppercase rounded-sm border transition-all min-h-11 text-left flex items-center justify-between gap-2",
-                      category === c.id
-                        ? "bg-racing text-ivory border-racing"
-                        : "bg-transparent text-walnut/70 border-walnut/15 hover:border-walnut/35"
+                      "rounded-sm border px-4 py-4 text-left transition-colors min-h-[4.75rem] flex flex-col justify-between gap-3",
+                      active
+                        ? "border-racing bg-racing text-ivory shadow-[0_10px_28px_rgba(92,107,58,0.22)]"
+                        : "border-walnut/12 bg-cream/80 text-walnut hover:border-racing/50 hover:bg-ivory"
                     )}
                   >
-                    <span className="truncate">{c.label}</span>
+                    <span className="font-serif text-xl sm:text-2xl leading-tight">
+                      {c.label}
+                    </span>
                     <span
                       className={cn(
-                        "tabular-nums shrink-0",
-                        category === c.id ? "text-ivory/70" : "text-muted"
+                        "text-[11px] tracking-[0.14em] uppercase",
+                        active ? "text-ivory/70" : "text-muted"
                       )}
                     >
-                      {count}
+                      {count} {count === 1 ? "item" : "items"}
                     </span>
                   </button>
                 );
               })}
             </div>
-          )}
-        </div>
+
+            {category !== "all" && (
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-sm border border-racing/20 bg-racing/[0.05] px-4 py-3">
+                <p className="text-sm text-walnut">
+                  Showing{" "}
+                  <span className="font-serif text-lg text-racing">
+                    {categoryTabs.find((t) => t.id === category)?.label}
+                  </span>{" "}
+                  only
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setCategory("all")}
+                  className="min-h-10 px-4 text-[11px] tracking-[0.14em] uppercase border border-racing/30 rounded-sm text-racing hover:bg-racing hover:text-ivory transition-colors"
+                >
+                  Back to full menu
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {categoryTabs.length === 0 && (
+          <p className="text-sm text-muted mb-8">{groupHint}</p>
+        )}
 
         <div className="space-y-14 md:space-y-16">
           {sections.map((section) => (
-            <div key={String(section.id)} id={`menu-${section.id}`}>
+            <div key={String(section.id)} id={`menu-${section.id}`} className="scroll-mt-28">
               <div className="mb-6 flex items-end justify-between gap-4 border-b border-walnut/10 pb-3">
                 <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl text-walnut">
                   {section.label}
