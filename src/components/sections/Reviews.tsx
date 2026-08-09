@@ -16,10 +16,9 @@ function Stars({ rating }: { rating: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <motion.span
           key={i}
-          initial={{ opacity: 0, scale: 0.5 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: i * 0.06 }}
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.05 + i * 0.05, duration: 0.35 }}
         >
           <FaStar
             size={14}

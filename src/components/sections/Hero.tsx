@@ -20,8 +20,7 @@ export function Hero() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["0%", "28%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, reduce ? 1 : 0]);
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["0%", "22%"]);
 
   useEffect(() => {
     const connection = (
@@ -29,37 +28,15 @@ export function Hero() {
         connection?: { saveData?: boolean; effectiveType?: string };
       }
     ).connection;
-    const saveData = connection?.saveData;
-    const slow = connection?.effectiveType?.includes("2g");
-    const desktop = window.matchMedia("(min-width: 768px)").matches;
+    const saveData = Boolean(connection?.saveData);
+    const slow = Boolean(connection?.effectiveType?.includes("2g"));
     const allowMotion = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (!(desktop && allowMotion && !saveData && !slow)) return;
+    if (!allowMotion || saveData || slow) return;
 
-    let cancelled = false;
-    const enable = () => {
-      if (!cancelled) setLoadVideo(true);
-    };
-
-    let idleId: number | undefined;
-    let timeoutId: number | undefined;
-
-    if (typeof window.requestIdleCallback === "function") {
-      idleId = window.requestIdleCallback(enable, { timeout: 1800 });
-    } else {
-      timeoutId = window.setTimeout(enable, 900);
-    }
-
-    return () => {
-      cancelled = true;
-      if (idleId !== undefined && typeof window.cancelIdleCallback === "function") {
-        window.cancelIdleCallback(idleId);
-      }
-      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
-    };
+    const t = window.setTimeout(() => setLoadVideo(true), 400);
+    return () => window.clearTimeout(t);
   }, []);
-
-  const introDelay = reduce ? 0 : 0.15;
 
   return (
     <section
@@ -84,7 +61,7 @@ export function Hero() {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             poster={POSTER}
             aria-hidden
           >
@@ -95,42 +72,39 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(44,33,24,0.45)_100%)]" />
       </motion.div>
 
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 flex h-full flex-col items-center justify-center section-pad text-center text-ivory"
-      >
+      <div className="relative z-10 flex h-full flex-col items-center justify-center section-pad text-center text-ivory">
         <motion.p
           className="text-[11px] md:text-xs tracking-[0.4em] uppercase text-gold mb-6"
           initial={reduce ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: introDelay, duration: 0.8 }}
+          transition={{ delay: 0.1, duration: 0.7 }}
         >
           Since {SITE.established}
         </motion.p>
 
         <motion.h1
           className="font-serif text-[clamp(3.5rem,12vw,8.5rem)] leading-[0.92] tracking-tight"
-          initial={reduce ? false : { opacity: 0, y: 36 }}
+          initial={reduce ? false : { opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: introDelay + 0.1, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.2, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         >
           {SITE.name}
         </motion.h1>
 
         <motion.p
           className="mt-6 max-w-md text-base md:text-lg text-ivory/75 leading-relaxed"
-          initial={reduce ? false : { opacity: 0, y: 20 }}
+          initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: introDelay + 0.25, duration: 0.8 }}
+          transition={{ delay: 0.35, duration: 0.7 }}
         >
           {SITE.tagline}
         </motion.p>
 
         <motion.div
           className="mt-10 flex flex-col sm:flex-row gap-4"
-          initial={reduce ? false : { opacity: 0, y: 16 }}
+          initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: introDelay + 0.4, duration: 0.7 }}
+          transition={{ delay: 0.5, duration: 0.65 }}
         >
           <Button href="#reserve" variant="gold">
             Reserve Table
@@ -139,7 +113,7 @@ export function Hero() {
             View Menu
           </Button>
         </motion.div>
-      </motion.div>
+      </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 text-ivory/60">
         <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>

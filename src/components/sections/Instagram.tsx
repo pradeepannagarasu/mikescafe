@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { FaInstagram } from "react-icons/fa";
 import { instagramPosts } from "@/lib/data";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 
 export function Instagram() {
   return (
@@ -18,25 +18,33 @@ export function Instagram() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
           {instagramPosts.map((src, i) => (
-            <motion.a
+            <Reveal
               key={src}
-              href="https://instagram.com"
-              target="_blank"
-              rel="noreferrer"
               className="img-reveal relative aspect-square rounded-sm overflow-hidden group"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06, duration: 0.6 }}
+              y={20}
+              delay={i * 50}
             >
-              <Image src={src} alt={`Instagram post ${i + 1}`} fill className="object-cover" sizes="33vw" />
-              <div className="absolute inset-0 bg-walnut/0 group-hover:bg-walnut/45 transition-colors duration-400 flex items-center justify-center">
-                <FaInstagram
-                  size={28}
-                  className="text-ivory opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                className="absolute inset-0 block"
+              >
+                <Image
+                  src={src}
+                  alt={`Instagram post ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="33vw"
                 />
-              </div>
-            </motion.a>
+                <div className="absolute inset-0 bg-walnut/0 group-hover:bg-walnut/45 transition-colors duration-400 flex items-center justify-center">
+                  <FaInstagram
+                    size={28}
+                    className="text-ivory opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  />
+                </div>
+              </a>
+            </Reveal>
           ))}
         </div>
       </div>

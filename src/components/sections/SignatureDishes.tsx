@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { useContent } from "@/context/ContentContext";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import { formatPrice } from "@/lib/utils";
 
 export function SignatureDishes() {
@@ -29,14 +29,12 @@ export function SignatureDishes() {
                 key={dish.id}
                 className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center"
               >
-                <motion.div
+                <Reveal
                   className={`lg:col-span-7 relative aspect-[4/3] md:aspect-[16/11] overflow-hidden rounded-sm ${
                     reverse ? "lg:order-2" : ""
                   }`}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  y={36}
+                  delay={i * 40}
                 >
                   <div className="img-reveal absolute inset-0">
                     <Image
@@ -47,14 +45,12 @@ export function SignatureDishes() {
                       sizes="(max-width: 1024px) 100vw, 60vw"
                     />
                   </div>
-                </motion.div>
+                </Reveal>
 
-                <motion.div
+                <Reveal
                   className={`lg:col-span-5 ${reverse ? "lg:order-1" : ""}`}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, delay: 0.1 }}
+                  y={28}
+                  delay={80 + i * 40}
                 >
                   <p className="text-[11px] tracking-[0.28em] uppercase text-copper mb-4">
                     Signature · {formatPrice(dish.price)}
@@ -87,7 +83,7 @@ export function SignatureDishes() {
                       </p>
                     </blockquote>
                   )}
-                </motion.div>
+                </Reveal>
               </article>
             );
           })}

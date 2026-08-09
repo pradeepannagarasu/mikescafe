@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
@@ -23,19 +23,14 @@ export function SectionHeading({
   className,
   children,
 }: SectionHeadingProps) {
-  const reduce = useReducedMotion();
-
   return (
-    <motion.div
+    <Reveal
       className={cn(
         "mb-12 md:mb-16 max-w-3xl",
         align === "center" ? "mx-auto text-center" : "text-left",
         className
       )}
-      initial={reduce ? false : { opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      y={24}
     >
       {eyebrow && (
         <p
@@ -67,6 +62,6 @@ export function SectionHeading({
         </p>
       )}
       {children}
-    </motion.div>
+    </Reveal>
   );
 }

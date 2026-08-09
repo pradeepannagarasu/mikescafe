@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { timeline } from "@/lib/data";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,26 +18,30 @@ export function Story() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
-      gsap.to(imageRef.current, {
-        yPercent: -18,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      if (imageRef.current) {
+        gsap.to(imageRef.current, {
+          yPercent: -14,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
 
       gsap.from(".timeline-item", {
         opacity: 0,
-        x: -40,
-        stagger: 0.15,
-        duration: 0.9,
+        x: -32,
+        stagger: 0.12,
+        duration: 0.8,
         ease: "power3.out",
+        immediateRender: false,
         scrollTrigger: {
           trigger: ".timeline-list",
-          start: "top 75%",
+          start: "top 80%",
+          once: true,
         },
       });
     }, sectionRef);
@@ -54,7 +59,7 @@ export function Story() {
         />
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <div className="lg:col-span-5 relative">
+          <Reveal className="lg:col-span-5 relative" y={32}>
             <div className="overflow-hidden rounded-sm aspect-[4/5] relative">
               <div ref={imageRef} className="absolute inset-[-12%] will-change-transform">
                 <Image
@@ -69,7 +74,7 @@ export function Story() {
             <p className="mt-4 text-[11px] tracking-[0.2em] uppercase text-muted">
               Blenheim Crescent · Notting Hill
             </p>
-          </div>
+          </Reveal>
 
           <div className="lg:col-span-7 timeline-list space-y-0">
             {timeline.map((item, i) => (

@@ -132,10 +132,15 @@ html.app-booting .boot-line {
   display: flex;
   width: max-content;
   animation: marquee 45s linear infinite;
+  will-change: transform;
 }
 
 .marquee-track:hover {
   animation-play-state: paused;
+}
+
+.marquee-js {
+  animation: none !important;
 }
 
 @keyframes marquee {
@@ -220,6 +225,20 @@ html.app-booting .boot-line {
   transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.reveal-base {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 28px), 0);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-base.reveal-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
 input,
 textarea,
 select,
@@ -239,6 +258,12 @@ button {
   .boot-line,
   html.app-booting .boot-line {
     animation: none !important;
+  }
+
+  .reveal-base {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 
   .img-reveal img {
