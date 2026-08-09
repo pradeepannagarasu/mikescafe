@@ -65,6 +65,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: SITE.url,
+  },
   icons: {
     icon: [{ url: "/images/logo.png", type: "image/png" }],
     apple: [{ url: "/images/logo.png", type: "image/png" }],
