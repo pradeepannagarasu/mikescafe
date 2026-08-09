@@ -139,7 +139,7 @@ export function FeaturedBreakfast() {
               <button
                 type="button"
                 onClick={() => addItem(selected)}
-                className="w-full sm:w-auto min-h-12 px-6 py-3 bg-racing text-ivory text-[12px] tracking-[0.14em] uppercase rounded-sm hover:bg-racing-light transition-colors"
+                className="w-full sm:w-auto min-h-12 px-6 py-3 bg-copper text-ivory text-[12px] tracking-[0.14em] uppercase rounded-sm hover:bg-[#a34f4f] transition-colors"
               >
                 Add to order
               </button>
@@ -202,7 +202,7 @@ function FavouriteScrollCard({
             sizes="280px"
           />
         ) : null}
-        <span className="absolute top-2.5 left-2.5 text-[9px] tracking-[0.14em] uppercase bg-racing text-ivory px-2 py-1">
+        <span className="absolute top-2.5 left-2.5 text-[9px] tracking-[0.14em] uppercase bg-copper text-ivory px-2 py-1">
           Favourite
         </span>
       </div>

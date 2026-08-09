@@ -6,9 +6,9 @@
   --vintage-white: #ebe6dc;
   --walnut: #1a2018;
   --espresso: #142018;
-  /* Italian deli: deep olive + wine accent (kept as --racing* for class compatibility) */
-  --racing-green: #5c6b3a;
-  --racing-green-light: #7a8f4e;
+  /* Brand accent: logo maroon (kept as --racing* for class compatibility) */
+  --racing-green: #8b3a3a;
+  --racing-green-light: #a34f4f;
   --copper: #8b3a3a;
   --gold: #c4a35a;
   --neon: #9a4a3a;

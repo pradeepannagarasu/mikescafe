@@ -71,7 +71,7 @@ function MenuItemCard({
         type="button"
         onClick={() => onAdd(item)}
         className={cn(
-          "text-[10px] sm:text-[11px] tracking-[0.12em] uppercase border border-walnut/15 hover:border-racing hover:bg-racing hover:text-ivory transition-colors rounded-sm",
+          "text-[10px] sm:text-[11px] tracking-[0.12em] uppercase border border-walnut/15 hover:border-copper hover:bg-copper hover:text-ivory transition-colors rounded-sm",
           textOnly
             ? "shrink-0 px-4 min-h-10"
             : "mt-3 sm:mt-4 w-full min-h-10 sm:min-h-11"
@@ -166,9 +166,9 @@ export function InteractiveMenu() {
         />
 
         {content.specialOfTheDay && (
-          <div className="mb-12 md:mb-16 border border-racing/20 bg-racing/[0.04] px-6 py-5 md:px-8 md:py-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="mb-12 md:mb-16 border border-copper/20 bg-copper/[0.04] px-6 py-5 md:px-8 md:py-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <p className="text-[10px] tracking-[0.28em] uppercase text-racing mb-2">
+              <p className="text-[10px] tracking-[0.28em] uppercase text-copper mb-2">
                 Special of the Day
               </p>
               <p className="font-serif text-2xl md:text-3xl text-walnut">
@@ -193,7 +193,7 @@ export function InteractiveMenu() {
               className={cn(
                 "rounded-sm border px-4 py-3 text-left transition-colors min-h-14",
                 group === g.id
-                  ? "border-racing bg-racing text-ivory"
+                  ? "border-copper bg-copper text-ivory"
                   : "border-walnut/15 bg-cream/50 hover:border-walnut/35"
               )}
             >
@@ -229,8 +229,8 @@ export function InteractiveMenu() {
               className={cn(
                 "w-full rounded-sm border-2 px-5 py-4 text-left transition-colors min-h-16",
                 category === "all"
-                  ? "border-racing bg-racing text-ivory"
-                  : "border-copper/40 bg-cream text-walnut hover:border-racing hover:bg-racing/[0.06]"
+                  ? "border-copper bg-copper text-ivory"
+                  : "border-copper/40 bg-cream text-walnut hover:border-copper hover:bg-copper/[0.06]"
               )}
             >
               <span className="block font-serif text-2xl sm:text-3xl leading-none">
@@ -273,8 +273,8 @@ export function InteractiveMenu() {
                     className={cn(
                       "rounded-sm border px-4 py-4 text-left transition-colors min-h-[4.75rem] flex flex-col justify-between gap-3",
                       active
-                        ? "border-racing bg-racing text-ivory shadow-[0_10px_28px_rgba(92,107,58,0.22)]"
-                        : "border-walnut/12 bg-cream/80 text-walnut hover:border-racing/50 hover:bg-ivory"
+                        ? "border-copper bg-copper text-ivory shadow-[0_10px_28px_rgba(139,58,58,0.22)]"
+                        : "border-walnut/12 bg-cream/80 text-walnut hover:border-copper/50 hover:bg-ivory"
                     )}
                   >
                     <span className="font-serif text-xl sm:text-2xl leading-tight">
@@ -294,10 +294,10 @@ export function InteractiveMenu() {
             </div>
 
             {category !== "all" && (
-              <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-sm border border-racing/20 bg-racing/[0.05] px-4 py-3">
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-sm border border-copper/20 bg-copper/[0.05] px-4 py-3">
                 <p className="text-sm text-walnut">
                   Showing{" "}
-                  <span className="font-serif text-lg text-racing">
+                  <span className="font-serif text-lg text-copper">
                     {categoryTabs.find((t) => t.id === category)?.label}
                   </span>{" "}
                   only
@@ -305,7 +305,7 @@ export function InteractiveMenu() {
                 <button
                   type="button"
                   onClick={() => setCategory("all")}
-                  className="min-h-10 px-4 text-[11px] tracking-[0.14em] uppercase border border-racing/30 rounded-sm text-racing hover:bg-racing hover:text-ivory transition-colors"
+                  className="min-h-10 px-4 text-[11px] tracking-[0.14em] uppercase border border-copper/30 rounded-sm text-copper hover:bg-copper hover:text-ivory transition-colors"
                 >
                   Back to full menu
                 </button>
