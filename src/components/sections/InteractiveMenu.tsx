@@ -111,19 +111,15 @@ export function InteractiveMenu() {
           </div>
         </div>
 
-        <motion.div
-          layout
-          className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-7 sm:gap-x-5 sm:gap-y-8 md:gap-x-6 md:gap-y-10"
-        >
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-7 sm:gap-x-5 sm:gap-y-8 md:gap-x-6 md:gap-y-10">
           <AnimatePresence mode="popLayout">
             {filtered.map((item) => (
               <motion.article
                 key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.96 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.35 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.25 }}
                 className="group flex flex-col h-full"
               >
                 <div className="img-reveal relative aspect-[4/5] sm:aspect-[5/4] rounded-sm bg-vintage">
@@ -158,7 +154,7 @@ export function InteractiveMenu() {
               </motion.article>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
 
         {filtered.length === 0 && (
           <p className="text-center text-muted py-16">No dishes match your search.</p>

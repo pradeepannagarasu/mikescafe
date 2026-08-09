@@ -3,22 +3,39 @@ import type { Booking, BookingStatus } from "@/types/booking";
 export const BOOKINGS_STORAGE_KEY = "mikes-cafe-bookings-v1";
 export const BOOKINGS_EVENT = "mikes-cafe-bookings-change";
 
-export function readBookings(): Booking[] {
-  if (typeof window === "undefined") return [];
+const EMPTY_BOOKINGS: Booking[] = [];
+
+let cachedRaw: string | null | undefined;
+let cachedBookings: Booking[] = EMPTY_BOOKINGS;
+
+function parseBookings(raw: string | null): Booking[] {
+  if (!raw) return EMPTY_BOOKINGS;
   try {
-    const raw = localStorage.getItem(BOOKINGS_STORAGE_KEY);
-    if (!raw) return [];
     const parsed = JSON.parse(raw) as Booking[];
-    return Array.isArray(parsed)
-      ? parsed.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-      : [];
+    if (!Array.isArray(parsed) || parsed.length === 0) return EMPTY_BOOKINGS;
+    return [...parsed].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   } catch {
-    return [];
+    return EMPTY_BOOKINGS;
   }
 }
 
+export function readBookings(): Booking[] {
+  if (typeof window === "undefined") return EMPTY_BOOKINGS;
+  const raw = localStorage.getItem(BOOKINGS_STORAGE_KEY);
+  if (raw === cachedRaw) return cachedBookings;
+  cachedRaw = raw;
+  cachedBookings = parseBookings(raw);
+  return cachedBookings;
+}
+
 export function writeBookings(bookings: Booking[]) {
-  localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(bookings));
+  const sorted =
+    bookings.length > 0
+      ? [...bookings].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+      : EMPTY_BOOKINGS;
+  cachedBookings = sorted;
+  cachedRaw = JSON.stringify(sorted === EMPTY_BOOKINGS ? [] : sorted);
+  localStorage.setItem(BOOKINGS_STORAGE_KEY, cachedRaw);
   window.dispatchEvent(new Event(BOOKINGS_EVENT));
 }
 
@@ -37,7 +54,10 @@ export function removeBooking(id: string) {
 }
 
 export function subscribeBookings(onStoreChange: () => void) {
-  const handler = () => onStoreChange();
+  const handler = () => {
+    cachedRaw = undefined;
+    onStoreChange();
+  };
   window.addEventListener(BOOKINGS_EVENT, handler);
   window.addEventListener("storage", handler);
   return () => {

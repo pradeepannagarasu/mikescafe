@@ -116,11 +116,15 @@ export function FeaturedBreakfast() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className={cn("marquee-track marquee-ltr gap-4 sm:gap-6 pl-4", paused && "is-paused")}
+            transition={{ duration: 0.25 }}
+            className={cn(
+              "marquee-track marquee-ltr gap-4 sm:gap-6 pl-4",
+              paused && "is-paused"
+            )}
           >
             {loopItems.map((item, idx) => (
               <FavouriteScrollCard
-                key={`${item.id}-${idx}`}
+                key={`${category}-${item.id}-${idx}`}
                 item={item}
                 real={idx < filtered.length}
                 selected={activeId === item.id}

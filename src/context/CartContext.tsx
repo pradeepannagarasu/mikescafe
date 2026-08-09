@@ -25,7 +25,7 @@ type CartContextValue = {
   items: CartLine[];
   count: number;
   total: number;
-  addItem: (item: MenuItem, qty?: number) => void;
+  addItem: (item: MenuItem, qty?: number, opts?: { open?: boolean }) => void;
   setQty: (id: string, qty: number) => void;
   removeItem: (id: string) => void;
   clear: () => void;
@@ -35,11 +35,13 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+const EMPTY_CART: CartLine[] = [];
+
 export function CartProvider({ children }: { children: ReactNode }) {
-  const items = useSyncExternalStore(subscribeCart, readCart, () => [] as CartLine[]);
+  const items = useSyncExternalStore(subscribeCart, readCart, () => EMPTY_CART);
   const [open, setOpen] = useState(false);
 
-  const addItem = useCallback((item: MenuItem, qty = 1) => {
+  const addItem = useCallback((item: MenuItem, qty = 1, opts?: { open?: boolean }) => {
     const current = readCart();
     const existing = current.find((l) => l.id === item.id);
     if (existing) {
@@ -51,7 +53,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     } else {
       writeCart([...current, cartFromMenuItem(item, qty)]);
     }
-    setOpen(true);
+    if (opts?.open !== false) setOpen(true);
   }, []);
 
   const setQty = useCallback((id: string, qty: number) => {

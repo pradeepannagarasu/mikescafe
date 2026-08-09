@@ -3,20 +3,34 @@ import type { CartLine } from "@/types/booking";
 export const CART_STORAGE_KEY = "mikes-cafe-cart-v1";
 export const CART_EVENT = "mikes-cafe-cart-change";
 
-export function readCart(): CartLine[] {
-  if (typeof window === "undefined") return [];
+const EMPTY_CART: CartLine[] = [];
+
+let cachedRaw: string | null | undefined;
+let cachedCart: CartLine[] = EMPTY_CART;
+
+function parseCart(raw: string | null): CartLine[] {
+  if (!raw) return EMPTY_CART;
   try {
-    const raw = localStorage.getItem(CART_STORAGE_KEY);
-    if (!raw) return [];
     const parsed = JSON.parse(raw) as CartLine[];
-    return Array.isArray(parsed) ? parsed : [];
+    return Array.isArray(parsed) && parsed.length > 0 ? parsed : EMPTY_CART;
   } catch {
-    return [];
+    return EMPTY_CART;
   }
 }
 
+export function readCart(): CartLine[] {
+  if (typeof window === "undefined") return EMPTY_CART;
+  const raw = localStorage.getItem(CART_STORAGE_KEY);
+  if (raw === cachedRaw) return cachedCart;
+  cachedRaw = raw;
+  cachedCart = parseCart(raw);
+  return cachedCart;
+}
+
 export function writeCart(items: CartLine[]) {
-  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+  cachedCart = items.length > 0 ? items : EMPTY_CART;
+  cachedRaw = JSON.stringify(cachedCart === EMPTY_CART ? [] : cachedCart);
+  localStorage.setItem(CART_STORAGE_KEY, cachedRaw);
   window.dispatchEvent(new Event(CART_EVENT));
 }
 
@@ -25,7 +39,11 @@ export function clearCart() {
 }
 
 export function subscribeCart(onStoreChange: () => void) {
-  const handler = () => onStoreChange();
+  const handler = () => {
+    // Invalidate cache so the next read picks up fresh storage (e.g. other tabs)
+    cachedRaw = undefined;
+    onStoreChange();
+  };
   window.addEventListener(CART_EVENT, handler);
   window.addEventListener("storage", handler);
   return () => {

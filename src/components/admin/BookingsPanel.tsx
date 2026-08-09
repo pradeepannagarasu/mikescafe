@@ -21,8 +21,14 @@ const STATUSES: BookingStatus[] = [
   "cancelled",
 ];
 
+const EMPTY_BOOKINGS: Booking[] = [];
+
 export function BookingsPanel() {
-  const bookings = useSyncExternalStore(subscribeBookings, readBookings, () => []);
+  const bookings = useSyncExternalStore(
+    subscribeBookings,
+    readBookings,
+    () => EMPTY_BOOKINGS
+  );
   const [filter, setFilter] = useState<BookingStatus | "all">("all");
   const [showManual, setShowManual] = useState(false);
 
