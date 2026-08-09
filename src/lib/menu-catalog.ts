@@ -214,7 +214,6 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Gnocchi Alla Sorrentina", price: 10.5, category: "pasta" },
   { name: "Cous Cous Main", price: 9.5, category: "pasta" },
   { name: "Cous Cous Chicken Main", price: 12, category: "pasta" },
-  { name: "Set Menu Pasta", price: 10.5, category: "pasta" },
 
   // —— ORDER: Lasagna ——
   {
@@ -268,7 +267,6 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Mini Sausage And Potatoes", price: 12.5, category: "mains" },
   { name: "Leek And Potatoes Soup", price: 6.5, category: "mains" },
   { name: "Butternut Squash Soup", price: 6.5, category: "mains" },
-  { name: "Set Menu Protein", price: 12.5, category: "mains" },
 
   // —— ORDER: Sides ——
   { name: "Roasted Potatoes", price: 6.5, category: "sides" },
