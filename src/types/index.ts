@@ -55,6 +55,10 @@ export interface BuilderItem {
   name: string;
   price: number;
   category: "eggs" | "meat" | "sides" | "veg";
+  /** Cropped dish photo used while mixing on the plate */
+  image: string;
+  /** CSS object-position for ingredient crop */
+  focus?: string;
 }
 
 export interface SiteContent {
