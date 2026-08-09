@@ -71,9 +71,9 @@ export function Story() {
     <section id="story" ref={sectionRef} className="relative overflow-hidden bg-ivory py-24 md:py-36">
       <div className="section-pad mx-auto max-w-[1400px]">
         <SectionHeading
-          eyebrow="Our Heritage"
-          title="Serving London's Breakfast Since 1962"
-          subtitle="From a humble Notting Hill morning spot to a beloved London institution - Mike's Cafe has welcomed locals, dreamers and travellers for over sixty years."
+          eyebrow="Our Story"
+          title="Italian Deli Favourites, Made Fresh"
+          subtitle="La Piccola Deli is a neighbourhood counter for panini, piadina, lasagna and Italian mains — cooked simply, served generously."
         />
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -81,17 +81,17 @@ export function Story() {
             <div className="overflow-hidden rounded-sm aspect-[4/5] md:aspect-[5/6] relative bg-vintage">
               <div ref={imageRef} className="absolute inset-[-8%] will-change-transform">
                 <Image
-                  src="/images/heritage-storefront.jpg"
-                  alt="Mike's Cafe storefront - Family Cafe since 1962"
+                  src="/images/menu/parma-panini.jpg"
+                  alt="Parma panini at La Piccola Deli"
                   fill
                   priority
-                  className="object-cover object-[center_35%]"
+                  className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
               </div>
             </div>
             <p className="mt-4 text-[11px] tracking-[0.2em] uppercase text-muted">
-              Family Cafe since 1962 · 12 Blenheim Crescent
+              Fresh fillings · Grilled breads · Ready to collect
             </p>
           </Reveal>
 

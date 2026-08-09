@@ -1,5 +1,5 @@
 {
-  "name": "mikes-cafe",
+  "name": "la-piccola-deli",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy && npm run pages:bridge",
-    "pages:bridge": "wrangler pages deploy pages-bridge --project-name=mikescafe --commit-dirty=true",
+    "pages:bridge": "wrangler pages deploy pages-bridge --project-name=piccola --commit-dirty=true",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },

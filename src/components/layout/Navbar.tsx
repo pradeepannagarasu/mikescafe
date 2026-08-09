@@ -40,26 +40,12 @@ export function Navbar() {
         )}
       >
         <div className="section-pad mx-auto max-w-[1400px] flex items-center justify-between gap-6">
-          <a href="#home" className="group relative z-10 inline-flex items-center gap-3" aria-label="Mike's Cafe home">
-            <Logo size="nav" priority />
-            <span className="hidden sm:flex flex-col leading-tight">
-              <span
-                className={cn(
-                  "font-serif text-lg md:text-xl tracking-tight transition-colors",
-                  scrolled || open ? "text-walnut" : "text-ivory"
-                )}
-              >
-                Mike&apos;s Cafe
-              </span>
-              <span
-                className={cn(
-                  "text-[9px] tracking-[0.28em] uppercase transition-colors",
-                  scrolled || open ? "text-copper" : "text-gold"
-                )}
-              >
-                Good vibes only
-              </span>
-            </span>
+          <a href="#home" className="group relative z-10 inline-flex items-center gap-3" aria-label="La Piccola Deli home">
+            <Logo
+              size="nav"
+              priority
+              className={cn(scrolled || open ? "text-walnut" : "text-ivory")}
+            />
           </a>
 
           <nav className="hidden lg:flex items-center gap-7">

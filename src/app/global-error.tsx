@@ -26,7 +26,7 @@ export default function GlobalError({
           <p style={{ letterSpacing: "0.2em", textTransform: "uppercase", fontSize: 12 }}>
             Critical error
           </p>
-          <h1 style={{ fontSize: "2.5rem", marginTop: 12 }}>Mike&apos;s Cafe</h1>
+          <h1 style={{ fontSize: "2.5rem", marginTop: 12 }}>La Piccola Deli</h1>
           <p style={{ opacity: 0.7, maxWidth: 420, margin: "1rem auto" }}>
             {error.message || "Something went wrong loading the site."}
           </p>

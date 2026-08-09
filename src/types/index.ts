@@ -1,9 +1,8 @@
 export type MenuCategory =
-  | "breakfast"
-  | "traditional"
-  | "vegetarian"
-  | "lunch"
-  | "sandwiches"
+  | "panini"
+  | "piadina"
+  | "lasagna"
+  | "mains"
   | "drinks"
   | "desserts";
 
@@ -55,9 +54,7 @@ export interface BuilderItem {
   name: string;
   price: number;
   category: "eggs" | "meat" | "sides" | "veg";
-  /** Cropped dish photo used while mixing on the plate */
   image: string;
-  /** CSS object-position for ingredient crop */
   focus?: string;
 }
 

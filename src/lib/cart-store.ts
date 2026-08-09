@@ -1,8 +1,8 @@
 import type { CartLine } from "@/types/booking";
 
-export const CART_STORAGE_KEY = "mikes-cafe-cart-v1";
-export const CART_EVENT = "mikes-cafe-cart-change";
-export const ORDER_SUBMITTED_EVENT = "mikes-cafe-order-submitted";
+export const CART_STORAGE_KEY = "piccola-deli-cart-v1";
+export const CART_EVENT = "piccola-deli-cart-change";
+export const ORDER_SUBMITTED_EVENT = "piccola-deli-order-submitted";
 
 const EMPTY_CART: CartLine[] = [];
 

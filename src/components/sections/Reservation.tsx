@@ -85,7 +85,7 @@ export function Reservation() {
       <div
         className="absolute inset-0 opacity-30"
         style={{
-          backgroundImage: "url(/images/gallery/good-food-good-vibes.jpg)",
+          backgroundImage: "url(/images/menu/beef-lasagna.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -196,7 +196,7 @@ export function Reservation() {
               {items.length === 0 && (
                 <p className="text-sm text-ivory/55">
                   No dishes in your bag yet. You can still book a table, or{" "}
-                  <a href="#breakfast" className="text-gold underline-offset-2 hover:underline">
+                  <a href="#favourites" className="text-gold underline-offset-2 hover:underline">
                     add favourites
                   </a>{" "}
                   first.

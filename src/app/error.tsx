@@ -20,7 +20,7 @@ export default function Error({
       <p className="text-[11px] tracking-[0.28em] uppercase text-copper mb-4">Something went wrong</p>
       <h1 className="font-serif text-4xl md:text-5xl text-walnut">We spilled the tea</h1>
       <p className="mt-4 text-muted max-w-md">
-        An unexpected error occurred. Please try again, or return home for breakfast.
+        An unexpected error occurred. Please try again, or return home for lunch.
       </p>
       <div className="mt-8 flex flex-wrap gap-3 justify-center">
         <Button type="button" onClick={reset} variant="primary">

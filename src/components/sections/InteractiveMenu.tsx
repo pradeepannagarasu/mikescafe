@@ -12,11 +12,10 @@ import type { MenuCategory } from "@/types";
 
 const categories: { id: MenuCategory | "all"; label: string }[] = [
   { id: "all", label: "All" },
-  { id: "breakfast", label: "Breakfast" },
-  { id: "traditional", label: "Traditional" },
-  { id: "vegetarian", label: "Vegetarian" },
-  { id: "lunch", label: "Lunch" },
-  { id: "sandwiches", label: "Sandwiches" },
+  { id: "panini", label: "Panini" },
+  { id: "piadina", label: "Piadina" },
+  { id: "lasagna", label: "Lasagna" },
+  { id: "mains", label: "Mains" },
   { id: "drinks", label: "Drinks" },
   { id: "desserts", label: "Desserts" },
 ];

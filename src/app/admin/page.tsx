@@ -6,15 +6,16 @@ import { useContent } from "@/context/ContentContext";
 import { formatPrice, cn } from "@/lib/utils";
 import type { MenuItem, OpeningHours, Review, GalleryImage, Announcement } from "@/types";
 import { BookingsPanel } from "@/components/admin/BookingsPanel";
+import { Logo } from "@/components/ui/Logo";
 
-const AUTH_KEY = "mikes-admin";
+const AUTH_KEY = "piccola-admin";
 
 function subscribeAuth(cb: () => void) {
   window.addEventListener("storage", cb);
-  window.addEventListener("mikes-admin-auth", cb);
+  window.addEventListener("piccola-admin-auth", cb);
   return () => {
     window.removeEventListener("storage", cb);
-    window.removeEventListener("mikes-admin-auth", cb);
+    window.removeEventListener("piccola-admin-auth", cb);
   };
 }
 
@@ -70,7 +71,7 @@ export default function AdminPage() {
     e.preventDefault();
     if (pin === expectedPin) {
       sessionStorage.setItem(AUTH_KEY, "1");
-      window.dispatchEvent(new Event("mikes-admin-auth"));
+      window.dispatchEvent(new Event("piccola-admin-auth"));
       setAuthError("");
       setPin("");
     } else {
@@ -80,7 +81,7 @@ export default function AdminPage() {
 
   const logout = () => {
     sessionStorage.removeItem(AUTH_KEY);
-    window.dispatchEvent(new Event("mikes-admin-auth"));
+    window.dispatchEvent(new Event("piccola-admin-auth"));
   };
 
   if (!hydrated) {
@@ -137,17 +138,10 @@ export default function AdminPage() {
       <header className="border-b border-walnut/10 bg-ivory sticky top-0 z-20">
         <div className="section-pad mx-auto max-w-6xl py-4 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/mikeslogo.png"
-              alt=""
-              width={40}
-              height={40}
-              className="h-10 w-10 rounded-sm object-cover ring-1 ring-walnut/10"
-            />
+            <Logo size="admin" className="text-walnut" />
             <div>
-              <p className="font-serif text-2xl text-walnut">Mike&apos;s Cafe Admin</p>
-              <p className="text-xs text-muted">Content saves in this browser until a backend CMS is connected</p>
+              <p className="font-serif text-2xl text-walnut">La Piccola Admin</p>
+              <p className="text-xs text-muted">Bookings sync live · content saves in this browser</p>
             </div>
           </div>
           <div className="flex items-center gap-3">

@@ -21,7 +21,7 @@ export function LoadingScreen() {
       className="boot-screen fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black text-ivory pointer-events-none"
       aria-hidden
     >
-      <p className="text-[11px] tracking-[0.35em] uppercase text-gold mb-8">Est. 1962</p>
+      <p className="text-[11px] tracking-[0.35em] uppercase text-gold mb-8">Italian Deli</p>
       <Logo size="boot" priority />
       <div className="mt-10 h-px w-24 bg-copper boot-line" />
     </div>

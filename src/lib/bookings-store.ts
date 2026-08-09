@@ -1,7 +1,7 @@
 import type { Booking, BookingStatus } from "@/types/booking";
 
-export const BOOKINGS_STORAGE_KEY = "mikes-cafe-bookings-v1";
-export const BOOKINGS_EVENT = "mikes-cafe-bookings-change";
+export const BOOKINGS_STORAGE_KEY = "piccola-deli-bookings-v1";
+export const BOOKINGS_EVENT = "piccola-deli-bookings-change";
 
 const EMPTY_BOOKINGS: Booking[] = [];
 

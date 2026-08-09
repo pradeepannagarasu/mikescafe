@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #f6efe6;
-  --ivory: #fbf7f1;
-  --vintage-white: #f2e8dc;
-  --walnut: #1a1410;
-  --espresso: #2a1c14;
-  /* Brand tokens aligned to logo: neon ember + marquee copper (kept as --racing* for class compatibility) */
-  --racing-green: #c44a22;
-  --racing-green-light: #e05a2c;
-  --copper: #d4893c;
-  --gold: #f0b84a;
-  --neon: #ff5a2a;
-  --muted: #8a7a6a;
+  --cream: #f3f0e8;
+  --ivory: #faf8f3;
+  --vintage-white: #ebe6dc;
+  --walnut: #1a2018;
+  --espresso: #142018;
+  /* Italian deli: deep olive + wine accent (kept as --racing* for class compatibility) */
+  --racing-green: #5c6b3a;
+  --racing-green-light: #7a8f4e;
+  --copper: #8b3a3a;
+  --gold: #c4a35a;
+  --neon: #9a4a3a;
+  --muted: #6f7468;
   --background: var(--cream);
   --foreground: var(--walnut);
 }

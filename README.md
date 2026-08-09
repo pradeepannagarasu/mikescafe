@@ -1,8 +1,8 @@
-# Mike's Cafe - Production Website
+# La Piccola Deli
 
-Premium Next.js site for **Mike's Cafe**, Notting Hill (est. 1962).
+Italian deli template site — panini, piadina, lasagna & mains. Eat in or collect.
 
-Live Worker: `https://mikescafe.pradeepandigital.workers.dev`
+Live Worker: `https://piccola.pradeepandigital.workers.dev`
 
 ## Quick start
 
@@ -21,38 +21,17 @@ npm run dev
 Edit → commit → push main → Cloudflare builds → live
 ```
 
-**Build settings** (Workers & Pages → mikescafe → Settings → Builds):
-
-| Setting | Value |
-|---|---|
-| Build command | `npx opennextjs-cloudflare build && npx opennextjs-cloudflare deploy` |
-| Build output directory | `pages-bridge` |
-| Production branch | `main` |
-
-Optional CLI: `npm run deploy` (still push to Git so the repo stays the source of truth).
+Worker name: `piccola` (short URL). Bindings include `MIKES_BOOKINGS` KV for live bookings.
 
 ## Environment
 
 | Variable | Required | Purpose |
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | Yes | Canonical URL (no trailing slash) |
-| `NEXT_PUBLIC_ADMIN_PIN` | Yes | PIN for `/admin` - change before launch |
-| `RESERVATION_WEBHOOK_URL` | Recommended | Zapier / Make / Slack / Sheets for bookings |
+| `NEXT_PUBLIC_ADMIN_PIN` | Yes | PIN for `/admin` |
+| `RESERVATION_WEBHOOK_URL` | Optional | Zapier / Make / Slack / Sheets |
 
-Set these in Cloudflare → Settings → Environment variables (Production).
+## Notes
 
-## Launch checklist
-
-- [x] Production build / typecheck
-- [x] Security headers, SEO schema, sitemap, robots
-- [x] Reservation API (validation, honeypot, rate limit)
-- [x] Order bag + eat-in / collect bookings
-- [x] Admin bookings tracker + export
-- [ ] Change `NEXT_PUBLIC_ADMIN_PIN` from `1962`
-- [ ] Set `NEXT_PUBLIC_SITE_URL` to your final domain
-- [ ] Connect `RESERVATION_WEBHOOK_URL` for staff alerts
-- [ ] Confirm phone / hours in admin after deploy
-
-## Stack
-
-Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · Framer Motion · GSAP · Lenis · Embla · OpenNext Cloudflare · Wrangler
+- Logo: text wordmark until a logo file is added
+- Address / phone / hours: placeholders editable in Admin

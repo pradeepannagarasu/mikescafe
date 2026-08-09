@@ -10,12 +10,11 @@ import { formatPrice, cn } from "@/lib/utils";
 import type { MenuCategory, MenuItem } from "@/types";
 
 const CATEGORY_ORDER: { id: MenuCategory; label: string }[] = [
-  { id: "breakfast", label: "Breakfast" },
-  { id: "traditional", label: "Traditional" },
-  { id: "vegetarian", label: "Vegetarian" },
+  { id: "panini", label: "Panini" },
+  { id: "piadina", label: "Piadina" },
+  { id: "lasagna", label: "Lasagna" },
+  { id: "mains", label: "Mains" },
   { id: "drinks", label: "Drinks" },
-  { id: "sandwiches", label: "Sandwiches" },
-  { id: "lunch", label: "Lunch" },
   { id: "desserts", label: "Desserts" },
 ];
 
@@ -36,7 +35,7 @@ export function FeaturedBreakfast() {
   }, [favourites]);
 
   const [active, setActive] = useState<MenuCategory | null>(null);
-  const category = active ?? tabs[0]?.id ?? "breakfast";
+  const category = active ?? tabs[0]?.id ?? "panini";
 
   const filtered = useMemo(
     () => favourites.filter((i) => i.category === category),
@@ -56,12 +55,12 @@ export function FeaturedBreakfast() {
   if (favourites.length === 0) return null;
 
   return (
-    <section id="breakfast" className="bg-cream py-20 sm:py-24 md:py-32 overflow-hidden">
+    <section id="favourites" className="bg-cream py-20 sm:py-24 md:py-32 overflow-hidden">
       <div className="section-pad mx-auto max-w-[1400px]">
         <SectionHeading
-          eyebrow="Morning Favourites"
-          title="Breakfast Worth Crossing London For"
-          subtitle="Browse by category. The strip scrolls for you - hover or tap to pause, then add to your order."
+          eyebrow="Favourites"
+          title="Italian Classics Worth Coming Back For"
+          subtitle="Browse by category. The strip scrolls for you — hover or tap to pause, then add to your order."
         />
 
         <div

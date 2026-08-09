@@ -18,9 +18,9 @@ const outfit = Outfit({
   display: "swap",
 });
 
-const title = `${SITE.name} | Breakfast Notting Hill | Since ${SITE.established}`;
+const title = `${SITE.name} | Italian Deli | Panini, Piadina & Lasagna`;
 const description =
-  "Mike's Cafe - London's beloved breakfast destination since 1962. Full English, eggs Benedict & more at 12 Blenheim Crescent, Notting Hill. ★ 4.6 from 1000+ reviews.";
+  "La Piccola Deli — Italian panini, piadina, lasagna and mains. Order ahead to eat in or collect.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -30,14 +30,13 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "Mike's Cafe",
-    "Breakfast Notting Hill",
-    "English Breakfast London",
-    "Cafe Kensington",
-    "Breakfast London",
-    "Full English Breakfast",
-    "Notting Hill Cafe",
-    "Blenheim Crescent",
+    "La Piccola Deli",
+    "Italian Deli London",
+    "Panini",
+    "Piadina",
+    "Lasagna",
+    "Italian lunch",
+    "Collect order",
   ],
   authors: [{ name: SITE.name }],
   openGraph: {
@@ -49,10 +48,10 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "/images/english-breakfast.jpg",
+        url: "/images/menu/parma-panini.jpg",
         width: 1200,
         height: 630,
-        alt: "Mike's Cafe Full English Breakfast",
+        alt: "Parma panini at La Piccola Deli",
       },
     ],
   },
@@ -60,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/images/english-breakfast.jpg"],
+    images: ["/images/menu/parma-panini.jpg"],
   },
   robots: {
     index: true,
@@ -69,79 +68,43 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE.url,
   },
-  icons: {
-    icon: [{ url: "/mikeslogo.png", type: "image/png" }],
-    apple: [{ url: "/mikeslogo.png", type: "image/png" }],
-  },
 };
 
 const restaurantSchema = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   name: SITE.name,
-  image: `${SITE.url}/images/english-breakfast.jpg`,
+  image: `${SITE.url}/images/menu/parma-panini.jpg`,
   url: SITE.url,
-  telephone: "+44-20-7229-3757",
-  servesCuisine: ["British", "Breakfast", "Cafe"],
+  servesCuisine: ["Italian", "Deli", "Sandwiches"],
   priceRange: "££",
   menu: `${SITE.url}/#menu`,
   acceptsReservations: true,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "12 Blenheim Crescent",
-    addressLocality: "Notting Hill",
-    addressRegion: "London",
-    postalCode: "W11 1NN",
+    streetAddress: "Address coming soon",
+    addressLocality: "London",
     addressCountry: "GB",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 51.5152,
-    longitude: -0.2055,
   },
   aggregateRating: {
     "@type": "AggregateRating",
-    ratingValue: "4.6",
-    reviewCount: "1000",
-    bestRating: "5",
+    ratingValue: SITE.rating,
+    reviewCount: SITE.reviewCount,
   },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Wednesday", "Thursday", "Friday", "Saturday"],
-      opens: "08:30",
-      closes: "15:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Sunday",
-      opens: "09:00",
-      closes: "15:00",
-    },
-  ],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html
-      lang="en-GB"
-      className={`${cormorant.variable} ${outfit.variable} h-full antialiased`}
-    >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('app-booting');}}catch(e){}})();`,
-          }}
-        />
+    <html lang="en-GB" className={`${cormorant.variable} ${outfit.variable}`}>
+      <body className="antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantSchema) }}
         />
-      </head>
-      <body className="min-h-full flex flex-col bg-cream text-walnut">
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
         <Providers>{children}</Providers>
       </body>
     </html>

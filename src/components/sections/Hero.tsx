@@ -22,19 +22,19 @@ export function Hero() {
       id="home"
       ref={ref}
       className="relative h-[100svh] min-h-[640px] overflow-hidden bg-walnut"
-      aria-label="Mike's Cafe hero"
+      aria-label="La Piccola Deli hero"
     >
       <motion.div style={{ y }} className="absolute inset-0">
         <Image
           src={HERO_IMAGE}
-          alt="Mike's Cafe dining room — Good vibes only neon, Notting Hill"
+          alt="Parma panini at La Piccola Deli"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_40%] scale-105"
+          className="object-cover object-center scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-walnut/55 via-walnut/35 to-walnut/75" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(44,33,24,0.45)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-walnut/60 via-walnut/40 to-walnut/80" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(26,32,24,0.5)_100%)]" />
       </motion.div>
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center section-pad text-center text-ivory">
@@ -44,11 +44,11 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.7 }}
         >
-          Since {SITE.established}
+          Italian Deli
         </motion.p>
 
         <motion.h1
-          className="font-serif text-[clamp(3.5rem,12vw,8.5rem)] leading-[0.92] tracking-tight"
+          className="font-serif text-[clamp(2.8rem,10vw,6.5rem)] leading-[0.92] tracking-tight"
           initial={reduce ? false : { opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
@@ -72,7 +72,7 @@ export function Hero() {
           transition={{ delay: 0.5, duration: 0.65 }}
         >
           <Button href="#reserve" variant="gold">
-            Reserve Table
+            Order / Collect
           </Button>
           <Button href="#menu" variant="secondary">
             View Menu

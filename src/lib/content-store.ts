@@ -1,8 +1,8 @@
 import type { SiteContent } from "@/types";
 import { defaultContent } from "@/lib/data";
 
-export const CONTENT_STORAGE_KEY = "mikes-cafe-content-v8";
-export const CONTENT_EVENT = "mikes-cafe-content-change";
+export const CONTENT_STORAGE_KEY = "piccola-deli-content-v1";
+export const CONTENT_EVENT = "piccola-deli-content-change";
 
 let cachedRaw: string | null | undefined;
 let cachedContent: SiteContent = defaultContent;

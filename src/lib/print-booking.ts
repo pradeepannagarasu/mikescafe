@@ -28,7 +28,7 @@ export function printBookingTicket(booking: Booking) {
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Mike's Cafe — ${esc(kind)}</title>
+  <title>La Piccola Deli — ${esc(kind)}</title>
   <style>
     @page { margin: 10mm; }
     body { font-family: Georgia, "Times New Roman", serif; color: #1a1a1a; padding: 12px; }
@@ -44,7 +44,7 @@ export function printBookingTicket(booking: Booking) {
   </style>
 </head>
 <body>
-  <h1>Mike's Cafe</h1>
+  <h1>La Piccola Deli</h1>
   <div class="meta">${esc(kind)} · ${esc(BOOKING_STATUS_LABEL[booking.status])}</div>
   <div class="row"><div class="label">Guest</div><strong>${esc(booking.name)}</strong></div>
   <div class="row"><div class="label">Phone</div>${esc(booking.phone)}</div>

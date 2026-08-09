@@ -31,8 +31,8 @@ export function Gallery() {
       <div className="section-pad mx-auto max-w-[1400px]">
         <SectionHeading
           eyebrow="Atmosphere"
-          title="Moments From Blenheim Crescent"
-          subtitle="Steam, sunlight, and red booths - a Pinterest-style look at mornings at Mike's."
+          title="Plates From the Counter"
+          subtitle="Panini, piadina, lasagna and Italian mains — a look at what’s cooking at La Piccola."
         />
 
         <div className="columns-2 md:columns-3 gap-4 md:gap-5 space-y-4 md:space-y-5">

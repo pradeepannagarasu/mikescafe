@@ -1,6 +1,6 @@
 "use client";
 
-import { FaInstagram, FaFacebookF, FaTripadvisor } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 import { SITE, navLinks } from "@/lib/data";
 import { useContent } from "@/context/ContentContext";
 import { Logo } from "@/components/ui/Logo";
@@ -14,15 +14,14 @@ export function Footer() {
       <div className="section-pad mx-auto max-w-[1400px] py-20 md:py-28">
         <div className="grid gap-14 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
-            <a href="#home" className="inline-block" aria-label="Mike's Cafe home">
+            <a href="#home" className="inline-block" aria-label="La Piccola Deli home">
               <Logo size="footer" />
             </a>
             <p className="mt-5 text-[11px] tracking-[0.28em] uppercase text-gold">
-              Since {SITE.established} · Good vibes only
+              Italian Deli
             </p>
             <p className="mt-6 text-ivory/65 leading-relaxed max-w-xs">
-              A legendary Notting Hill breakfast café - warm mornings, red booths,
-              and London heritage on every plate.
+              Panini, piadina, lasagna and Italian mains — made fresh for eat-in or collect.
             </p>
           </div>
 
@@ -79,8 +78,6 @@ export function Footer() {
             <div className="flex gap-3 mt-8">
               {[
                 { Icon: FaInstagram, href: SITE.instagram, label: "Instagram" },
-                { Icon: FaFacebookF, href: "https://facebook.com", label: "Facebook" },
-                { Icon: FaTripadvisor, href: "https://tripadvisor.com", label: "TripAdvisor" },
               ].map(({ Icon, href, label }) => (
                 <a
                   key={label}
@@ -102,13 +99,8 @@ export function Footer() {
           <div className="flex gap-6">
             <a href="/privacy" className="hover:text-ivory/80">Privacy</a>
             <a href="/terms" className="hover:text-ivory/80">Terms</a>
-            <a
-              href="https://maps.google.com/?q=12+Blenheim+Crescent+Notting+Hill+London"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-ivory/80"
-            >
-              Google Maps
+            <a href="#visit" className="hover:text-ivory/80">
+              Find us
             </a>
           </div>
         </div>
