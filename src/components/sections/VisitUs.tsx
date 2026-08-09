@@ -10,6 +10,19 @@ const MAP_QUERY = encodeURIComponent("20 Stratford Rd, London W8 6QD");
 const MAP_EMBED = `https://maps.google.com/maps?q=${MAP_QUERY}&z=16&output=embed`;
 const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
 
+const SISTER_LOCATIONS = [
+  {
+    name: "La Pasticceria Kensington",
+    line1: "270 Kensington High St",
+    locality: "London W8 6ND",
+  },
+  {
+    name: "",
+    line1: "4 Clarendon Rd",
+    locality: "London W11 3AA",
+  },
+] as const;
+
 export function VisitUs() {
   const { content } = useContent();
   const { address, openingHours, phone } = content;
@@ -23,13 +36,13 @@ export function VisitUs() {
         <SectionHeading
           eyebrow="Find Us"
           title={`Visit ${SITE.name}`}
-          subtitle="On Stratford Road in Kensington, open seven days for eat-in or collect."
+          subtitle="Stratford Road in Kensington, plus our sister spots nearby. Open seven days for eat-in or collect."
         />
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12">
           <div className="lg:col-span-7 min-h-[360px] md:min-h-[480px] rounded-sm overflow-hidden border border-walnut/10 bg-vintage">
             <iframe
-              title="La Piccola Deli on Google Maps"
+              title="La Piccola Deli on Stratford Road, Google Maps"
               src={MAP_EMBED}
               className="h-full w-full min-h-[360px] md:min-h-[480px] border-0"
               loading="lazy"
@@ -42,25 +55,51 @@ export function VisitUs() {
             <div>
               <div className="flex items-center gap-2 text-copper mb-3">
                 <HiOutlineLocationMarker size={18} />
-                <span className="text-[11px] tracking-[0.22em] uppercase">Address</span>
+                <span className="text-[11px] tracking-[0.22em] uppercase">Locations</span>
               </div>
-              <address className="not-italic text-walnut leading-relaxed">
-                <p className="font-serif text-2xl">{address.line1}</p>
-                <p className="mt-1 text-muted">{locality}</p>
-                <p className="text-muted">{address.country}</p>
-              </address>
-              <a
-                href={MAP_LINK}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-block mt-4 text-sm text-racing hover:text-racing-light transition-colors"
-              >
-                Open in Google Maps
-              </a>
+
+              <ul className="space-y-6">
+                <li>
+                  <address className="not-italic text-walnut leading-relaxed">
+                    <p className="text-[11px] tracking-[0.18em] uppercase text-copper mb-1">
+                      {SITE.name}
+                    </p>
+                    <p className="font-serif text-2xl">{address.line1}</p>
+                    <p className="mt-1 text-muted">{locality}</p>
+                    <p className="text-muted">{address.country}</p>
+                  </address>
+                  <a
+                    href={MAP_LINK}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block mt-3 text-sm text-racing hover:text-racing-light transition-colors"
+                  >
+                    Open in Google Maps
+                  </a>
+                </li>
+
+                {SISTER_LOCATIONS.map((loc) => (
+                  <li
+                    key={loc.line1}
+                    className="border-t border-walnut/10 pt-6"
+                  >
+                    <address className="not-italic text-walnut leading-relaxed">
+                      {loc.name ? (
+                        <p className="text-[11px] tracking-[0.18em] uppercase text-copper mb-1">
+                          {loc.name}
+                        </p>
+                      ) : null}
+                      <p className="font-serif text-xl">{loc.line1}</p>
+                      <p className="mt-1 text-muted">{loc.locality}</p>
+                    </address>
+                  </li>
+                ))}
+              </ul>
+
               {phone && phone !== "0000 000 0000" ? (
                 <a
                   href={`tel:${phone.replace(/\s/g, "")}`}
-                  className="block mt-3 text-racing hover:text-racing-light transition-colors"
+                  className="block mt-6 text-racing hover:text-racing-light transition-colors"
                 >
                   {phone}
                 </a>
