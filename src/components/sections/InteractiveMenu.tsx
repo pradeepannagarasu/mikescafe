@@ -224,12 +224,12 @@ export function InteractiveMenu() {
           </div>
 
           {categoryTabs.length > 0 && (
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-none">
+            <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
               <button
                 type="button"
                 onClick={() => setCategory("all")}
                 className={cn(
-                  "shrink-0 px-4 py-2.5 text-[11px] tracking-[0.16em] uppercase rounded-sm border transition-all min-h-11",
+                  "w-full px-3 py-2.5 text-[10px] sm:text-[11px] tracking-[0.14em] uppercase rounded-sm border transition-all min-h-11 text-left",
                   category === "all"
                     ? "bg-racing text-ivory border-racing"
                     : "bg-transparent text-walnut/70 border-walnut/15 hover:border-walnut/35"
@@ -246,16 +246,16 @@ export function InteractiveMenu() {
                     type="button"
                     onClick={() => setCategory(c.id)}
                     className={cn(
-                      "shrink-0 px-4 py-2.5 text-[11px] tracking-[0.16em] uppercase rounded-sm border transition-all min-h-11",
+                      "w-full px-3 py-2.5 text-[10px] sm:text-[11px] tracking-[0.14em] uppercase rounded-sm border transition-all min-h-11 text-left flex items-center justify-between gap-2",
                       category === c.id
                         ? "bg-racing text-ivory border-racing"
                         : "bg-transparent text-walnut/70 border-walnut/15 hover:border-walnut/35"
                     )}
                   >
-                    {c.label}
+                    <span className="truncate">{c.label}</span>
                     <span
                       className={cn(
-                        "ml-2 tabular-nums",
+                        "tabular-nums shrink-0",
                         category === c.id ? "text-ivory/70" : "text-muted"
                       )}
                     >
