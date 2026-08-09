@@ -111,7 +111,10 @@ export function InteractiveMenu() {
           </div>
         </div>
 
-        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <motion.div
+          layout
+          className="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-7 sm:gap-x-5 sm:gap-y-8 md:gap-x-6 md:gap-y-10"
+        >
           <AnimatePresence mode="popLayout">
             {filtered.map((item) => (
               <motion.article
@@ -121,28 +124,34 @@ export function InteractiveMenu() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.35 }}
-                className="group"
+                className="group flex flex-col h-full"
               >
-                <div className="img-reveal relative aspect-[5/4] rounded-sm bg-vintage">
+                <div className="img-reveal relative aspect-[4/5] sm:aspect-[5/4] rounded-sm bg-vintage">
                   <Image
                     src={item.image}
                     alt={item.name}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 50vw, 33vw"
                   />
                 </div>
-                <div className="mt-4 flex justify-between gap-3">
-                  <div>
-                    <h3 className="font-serif text-xl md:text-2xl text-walnut">{item.name}</h3>
-                    <p className="mt-1.5 text-sm text-muted line-clamp-2">{item.description}</p>
+                <div className="mt-3 sm:mt-4 flex flex-col gap-1.5 flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="font-serif text-base sm:text-xl md:text-2xl text-walnut leading-tight">
+                      {item.name}
+                    </h3>
+                    <span className="text-copper text-sm whitespace-nowrap pt-0.5">
+                      {formatPrice(item.price)}
+                    </span>
                   </div>
-                  <span className="text-copper whitespace-nowrap pt-1">{formatPrice(item.price)}</span>
+                  <p className="text-xs sm:text-sm text-muted line-clamp-2">
+                    {item.description}
+                  </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => addItem(item)}
-                  className="mt-4 w-full min-h-11 text-[11px] tracking-[0.14em] uppercase border border-walnut/15 hover:border-racing hover:bg-racing hover:text-ivory transition-colors rounded-sm"
+                  className="mt-3 sm:mt-4 w-full min-h-10 sm:min-h-11 text-[10px] sm:text-[11px] tracking-[0.12em] uppercase border border-walnut/15 hover:border-racing hover:bg-racing hover:text-ivory transition-colors rounded-sm"
                 >
                   Add to order
                 </button>
