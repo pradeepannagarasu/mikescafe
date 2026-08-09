@@ -31,15 +31,15 @@ export function Footer() {
             </h3>
             <address className="not-italic text-ivory/75 leading-relaxed space-y-1">
               <p>{address.line1}</p>
-              <p>
-                {address.line2}, {address.city}
-              </p>
+              <p>{[address.line2, address.city].filter(Boolean).join(", ")}</p>
               <p>{address.postcode}</p>
-              <p className="pt-3">
-                <a href={`tel:${phone.replace(/\s/g, "")}`} className="hover:text-gold transition-colors">
-                  {phone}
-                </a>
-              </p>
+              {phone && phone !== "0000 000 0000" ? (
+                <p className="pt-3">
+                  <a href={`tel:${phone.replace(/\s/g, "")}`} className="hover:text-gold transition-colors">
+                    {phone}
+                  </a>
+                </p>
+              ) : null}
             </address>
           </div>
 

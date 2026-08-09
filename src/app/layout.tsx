@@ -86,8 +86,9 @@ const restaurantSchema = {
   acceptsReservations: true,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Address coming soon",
+    streetAddress: "20 Stratford Rd",
     addressLocality: "London",
+    postalCode: "W8 6QD",
     addressCountry: "GB",
   },
   aggregateRating: {
