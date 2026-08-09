@@ -10,6 +10,21 @@ export const SITE = {
   logo: "/mikeslogo.png",
 };
 
+/** Local plate photography */
+export const PLATES = {
+  english: "/images/english-breakfast.jpg",
+  eggsBenedict: "/images/eggs-benedict.jpg",
+  frenchToast: "/images/french-toast.jpg",
+  bagels: "/images/mikes-bagels.jpg",
+  mediterranean: "/images/mediterranean.jpg",
+  spicyScramble: "/images/spicy-scrambled-eggs.jpg",
+  pancake: "/images/homemade-pancake.jpg",
+  veggie: "/images/veggie-english.jpg",
+  bloodyMary: "/images/bloody-mary.jpg",
+  gammonEggs: "/images/gammon-eggs.jpg",
+  smashedAvocado: "/images/smashed-avocado-bacon.jpg",
+} as const;
+
 export const defaultContent: SiteContent = {
   phone: "+44 20 7229 5491",
   email: "hello@mikescafenottinghill.co.uk",
@@ -35,7 +50,12 @@ export const defaultContent: SiteContent = {
     { day: "Saturday", hours: "8:00 AM – 4:00 PM" },
     { day: "Sunday", hours: "8:00 AM – 4:00 PM" },
   ],
-  featuredDishIds: ["full-english", "big-boy", "eggs-benedict", "french-toast"],
+  featuredDishIds: [
+    "full-english",
+    "eggs-benedict",
+    "french-toast",
+    "smashed-avocado",
+  ],
   announcements: [
     {
       id: "a1",
@@ -51,8 +71,7 @@ export const defaultContent: SiteContent = {
         "Two eggs, bacon, sausage, beans, mushrooms, tomato, toast — the London classic since 1962.",
       price: 13.5,
       category: "breakfast",
-      image:
-        "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=900&q=80",
+      image: PLATES.english,
       favourite: true,
       featured: true,
       ingredients: [
@@ -75,8 +94,7 @@ export const defaultContent: SiteContent = {
         "Double everything. Built for the hungriest mornings in West London.",
       price: 17.5,
       category: "breakfast",
-      image:
-        "https://images.unsplash.com/photo-1525351484163-7529414348b8?w=900&q=80",
+      image: PLATES.english,
       favourite: true,
       featured: true,
       ingredients: [
@@ -98,8 +116,7 @@ export const defaultContent: SiteContent = {
         "Poached eggs, honey-roast ham, toasted muffin, hollandaise.",
       price: 12.5,
       category: "breakfast",
-      image:
-        "https://images.unsplash.com/photo-1608039829574-ccc4878758cd?w=900&q=80",
+      image: PLATES.eggsBenedict,
       favourite: true,
       featured: true,
       ingredients: ["Poached eggs", "Ham", "English muffin", "Hollandaise"],
@@ -113,8 +130,7 @@ export const defaultContent: SiteContent = {
         "Brioche soaked overnight, berry compote, maple butter, crème fraîche.",
       price: 11.5,
       category: "breakfast",
-      image:
-        "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=900&q=80",
+      image: PLATES.frenchToast,
       favourite: true,
       featured: true,
     },
@@ -125,8 +141,7 @@ export const defaultContent: SiteContent = {
         "Toasted bagel, cream cheese, smoked salmon, dill, lemon.",
       price: 10.5,
       category: "breakfast",
-      image:
-        "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=900&q=80",
+      image: PLATES.bagels,
       favourite: true,
     },
     {
@@ -136,8 +151,7 @@ export const defaultContent: SiteContent = {
         "Grilled halloumi, avocado, roasted peppers, olives, warm flatbread.",
       price: 12.0,
       category: "vegetarian",
-      image:
-        "https://images.unsplash.com/photo-1511690659454-c1336d2e5c3c?w=900&q=80",
+      image: PLATES.mediterranean,
       favourite: true,
     },
     {
@@ -147,8 +161,29 @@ export const defaultContent: SiteContent = {
         "Soft scrambled eggs with chilli, spring onion, coriander on sourdough.",
       price: 9.5,
       category: "breakfast",
-      image:
-        "https://images.unsplash.com/photo-1525351484163-7529414348b8?w=900&q=80",
+      image: PLATES.spicyScramble,
+      favourite: true,
+    },
+    {
+      id: "smashed-avocado",
+      name: "Smashed Avocado & Bacon",
+      description:
+        "Smashed avocado on toast with smoked bacon, chilli flakes and lemon.",
+      price: 11.5,
+      category: "breakfast",
+      image: PLATES.smashedAvocado,
+      favourite: true,
+      featured: true,
+    },
+    {
+      id: "gammon-eggs",
+      name: "Gammon & Eggs",
+      description:
+        "Thick-cut gammon steak, two eggs your way, grilled tomato and toast.",
+      price: 12.5,
+      category: "traditional",
+      image: PLATES.gammonEggs,
+      favourite: true,
     },
     {
       id: "yogurt",
@@ -166,8 +201,7 @@ export const defaultContent: SiteContent = {
         "Fluffy buttermilk stack, maple syrup, butter, fresh berries.",
       price: 10.0,
       category: "breakfast",
-      image:
-        "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=900&q=80",
+      image: PLATES.pancake,
       favourite: true,
     },
     {
@@ -195,8 +229,7 @@ export const defaultContent: SiteContent = {
         "Eggs, halloumi, mushrooms, tomatoes, beans, hash browns, toast.",
       price: 12.5,
       category: "vegetarian",
-      image:
-        "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80",
+      image: PLATES.veggie,
       favourite: true,
     },
     {
@@ -252,6 +285,16 @@ export const defaultContent: SiteContent = {
       category: "drinks",
       image:
         "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=900&q=80",
+    },
+    {
+      id: "bloody-mary",
+      name: "Bloody Mary",
+      description:
+        "House vodka, tomato juice, Worcestershire, Tabasco, celery salt — a Mike's morning classic.",
+      price: 8.5,
+      category: "drinks",
+      image: PLATES.bloodyMary,
+      favourite: true,
     },
     {
       id: "fresh-oj",
@@ -349,75 +392,69 @@ export const defaultContent: SiteContent = {
   gallery: [
     {
       id: "g1",
-      src: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=800&q=80",
-      alt: "Full English breakfast",
+      src: PLATES.english,
+      alt: "Full English breakfast at Mike's Cafe",
       span: "tall",
     },
     {
       id: "g2",
-      src: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80",
-      alt: "Coffee pour",
-      span: "normal",
-    },
-    {
-      id: "g3",
-      src: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80",
-      alt: "Cafe interior",
-      span: "wide",
-    },
-    {
-      id: "g4",
-      src: "https://images.unsplash.com/photo-1608039829574-ccc4878758cd?w=800&q=80",
+      src: PLATES.eggsBenedict,
       alt: "Eggs Benedict",
       span: "normal",
     },
     {
+      id: "g3",
+      src: PLATES.frenchToast,
+      alt: "French toast",
+      span: "wide",
+    },
+    {
+      id: "g4",
+      src: PLATES.bagels,
+      alt: "Mike's bagels",
+      span: "normal",
+    },
+    {
       id: "g5",
-      src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
-      alt: "Morning atmosphere",
+      src: PLATES.mediterranean,
+      alt: "Mediterranean breakfast",
       span: "tall",
     },
     {
       id: "g6",
-      src: "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=800&q=80",
-      alt: "French toast",
+      src: PLATES.pancake,
+      alt: "Homemade pancakes",
       span: "normal",
     },
     {
       id: "g7",
-      src: "https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=800&q=80",
-      alt: "Cafe seating",
+      src: PLATES.veggie,
+      alt: "Vegetarian English",
       span: "wide",
     },
     {
       id: "g8",
-      src: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80",
-      alt: "Pancakes",
+      src: PLATES.spicyScramble,
+      alt: "Spicy scrambled eggs",
       span: "normal",
     },
     {
       id: "g9",
-      src: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=80",
-      alt: "Coffee shop morning",
+      src: PLATES.smashedAvocado,
+      alt: "Smashed avocado and bacon",
       span: "tall",
     },
     {
       id: "g10",
-      src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
-      alt: "Table setting",
+      src: PLATES.gammonEggs,
+      alt: "Gammon and eggs",
       span: "normal",
     },
     {
       id: "g11",
-      src: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80",
-      alt: "Brunch spread",
+      src: PLATES.bloodyMary,
+      alt: "Bloody Mary",
       span: "wide",
-    },
-    {
-      id: "g12",
-      src: "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800&q=80",
-      alt: "Street cafe Notting Hill",
-      span: "normal",
     },
   ],
 };
@@ -472,10 +509,10 @@ export const timeline = [
 ];
 
 export const instagramPosts = [
-  "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=600&q=80",
-  "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80",
-  "https://images.unsplash.com/photo-1608039829574-ccc4878758cd?w=600&q=80",
-  "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=80",
-  "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80",
-  "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80",
+  PLATES.english,
+  PLATES.eggsBenedict,
+  PLATES.frenchToast,
+  PLATES.bagels,
+  PLATES.mediterranean,
+  PLATES.pancake,
 ];

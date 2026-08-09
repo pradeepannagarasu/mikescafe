@@ -1,42 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { SITE } from "@/lib/data";
+import { PLATES, SITE } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
 
-const POSTER =
-  "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1600&q=80";
-const VIDEO_SRC =
-  "https://videos.pexels.com/video-files/4259119/4259119-hd_1920_1080_25fps.mp4";
+const HERO_IMAGE = PLATES.english;
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  const [loadVideo, setLoadVideo] = useState(false);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["0%", "22%"]);
-
-  useEffect(() => {
-    const connection = (
-      navigator as Navigator & {
-        connection?: { saveData?: boolean; effectiveType?: string };
-      }
-    ).connection;
-    const saveData = Boolean(connection?.saveData);
-    const slow = Boolean(connection?.effectiveType?.includes("2g"));
-    const allowMotion = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (!allowMotion || saveData || slow) return;
-
-    const t = window.setTimeout(() => setLoadVideo(true), 400);
-    return () => window.clearTimeout(t);
-  }, []);
 
   return (
     <section
@@ -47,27 +26,13 @@ export function Hero() {
     >
       <motion.div style={{ y }} className="absolute inset-0">
         <Image
-          src={POSTER}
-          alt=""
+          src={HERO_IMAGE}
+          alt="Full English breakfast at Mike's Cafe"
           fill
           priority
           sizes="100vw"
           className="object-cover scale-105"
         />
-        {loadVideo && (
-          <video
-            className="absolute inset-0 h-full w-full object-cover scale-105"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster={POSTER}
-            aria-hidden
-          >
-            <source src={VIDEO_SRC} type="video/mp4" />
-          </video>
-        )}
         <div className="absolute inset-0 bg-gradient-to-b from-walnut/55 via-walnut/35 to-walnut/75" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(44,33,24,0.45)_100%)]" />
       </motion.div>

@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1200&q=80",
+        url: "/images/english-breakfast.jpg",
         width: 1200,
         height: 630,
         alt: "Mike's Cafe Full English Breakfast",
@@ -60,9 +60,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: [
-      "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1200&q=80",
-    ],
+    images: ["/images/english-breakfast.jpg"],
   },
   robots: {
     index: true,
@@ -81,8 +79,7 @@ const restaurantSchema = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   name: SITE.name,
-  image:
-    "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1200&q=80",
+  image: "/images/english-breakfast.jpg",
   url: SITE.url,
   telephone: "+44-20-7229-5491",
   servesCuisine: ["British", "Breakfast", "Cafe"],
