@@ -44,7 +44,7 @@ export function Navbar() {
             <Logo
               size="nav"
               priority
-              className={cn(scrolled || open ? "text-walnut" : "text-ivory")}
+              variant={scrolled || open ? "dark" : "light"}
             />
           </a>
 

@@ -22,7 +22,7 @@ export function LoadingScreen() {
       aria-hidden
     >
       <p className="text-[11px] tracking-[0.35em] uppercase text-gold mb-8">Italian Deli</p>
-      <Logo size="boot" priority />
+      <Logo size="boot" variant="light" priority />
       <div className="mt-10 h-px w-24 bg-copper boot-line" />
     </div>
   );

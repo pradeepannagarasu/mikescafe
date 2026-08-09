@@ -24,6 +24,8 @@ export function printBookingTicket(booking: Booking) {
           .join("")
       : `<tr><td colspan="2">No menu items listed</td></tr>`;
 
+  const logoUrl = `${window.location.origin}/images/logo.png`;
+
   const html = `<!doctype html>
 <html>
 <head>
@@ -32,7 +34,8 @@ export function printBookingTicket(booking: Booking) {
   <style>
     @page { margin: 10mm; }
     body { font-family: Georgia, "Times New Roman", serif; color: #1a1a1a; padding: 12px; }
-    h1 { font-size: 22px; margin: 0 0 4px; }
+    .logo { display:block; height: 48px; width: auto; margin: 0 0 10px; }
+    h1 { font-size: 18px; margin: 0 0 4px; }
     .meta { font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 16px; }
     .row { margin: 6px 0; font-size: 15px; }
     .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: #555; }
@@ -44,6 +47,7 @@ export function printBookingTicket(booking: Booking) {
   </style>
 </head>
 <body>
+  <img class="logo" src="${logoUrl}" alt="La Piccola Deli" />
   <h1>La Piccola Deli</h1>
   <div class="meta">${esc(kind)} · ${esc(BOOKING_STATUS_LABEL[booking.status])}</div>
   <div class="row"><div class="label">Guest</div><strong>${esc(booking.name)}</strong></div>

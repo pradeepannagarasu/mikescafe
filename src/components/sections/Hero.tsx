@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { GALLERY_SHOTS, SITE } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/ui/Logo";
 
 const HERO_IMAGE = GALLERY_SHOTS.hero;
 
@@ -38,29 +39,21 @@ export function Hero() {
       </motion.div>
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center section-pad text-center text-ivory">
-        <motion.p
-          className="text-[11px] md:text-xs tracking-[0.4em] uppercase text-gold mb-6"
-          initial={reduce ? false : { opacity: 0, y: 20 }}
+        <h1 className="sr-only">{SITE.name}</h1>
+        <motion.div
+          className="mb-8"
+          initial={reduce ? false : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.7 }}
+          transition={{ delay: 0.08, duration: 0.7 }}
         >
-          Italian Deli
-        </motion.p>
-
-        <motion.h1
-          className="font-serif text-[clamp(2.8rem,10vw,6.5rem)] leading-[0.92] tracking-tight"
-          initial={reduce ? false : { opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {SITE.name}
-        </motion.h1>
+          <Logo size="hero" variant="light" priority />
+        </motion.div>
 
         <motion.p
-          className="mt-6 max-w-md text-base md:text-lg text-ivory/75 leading-relaxed"
+          className="mt-2 max-w-md text-base md:text-lg text-ivory/75 leading-relaxed"
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.7 }}
+          transition={{ delay: 0.28, duration: 0.7 }}
         >
           {SITE.tagline}
         </motion.p>
@@ -69,7 +62,7 @@ export function Hero() {
           className="mt-10 flex flex-col sm:flex-row gap-4"
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.65 }}
+          transition={{ delay: 0.45, duration: 0.65 }}
         >
           <Button href="#reserve" variant="gold">
             Order / Collect

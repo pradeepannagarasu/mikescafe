@@ -99,8 +99,11 @@ export default function AdminPage() {
           onSubmit={login}
           className="w-full max-w-sm bg-ivory border border-walnut/10 p-8 rounded-sm"
         >
-          <p className="font-serif text-3xl text-walnut mb-2">Admin</p>
-          <p className="text-sm text-muted mb-6">
+          <div className="mb-6 flex justify-center">
+            <Logo size="login" variant="dark" priority />
+          </div>
+          <p className="font-serif text-2xl text-walnut mb-2 text-center">Admin</p>
+          <p className="text-sm text-muted mb-6 text-center">
             Enter your admin PIN to manage site content.
           </p>
           <input

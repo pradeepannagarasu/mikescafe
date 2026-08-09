@@ -15,7 +15,7 @@ export function Footer() {
         <div className="grid gap-14 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-1">
             <a href="#home" className="inline-block" aria-label="La Piccola Deli home">
-              <Logo size="footer" />
+              <Logo size="footer" variant="light" />
             </a>
             <p className="mt-5 text-[11px] tracking-[0.28em] uppercase text-gold">
               Italian Deli
