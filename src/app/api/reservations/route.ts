@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import type { Booking, BookingItem, FulfillmentType } from "@/types/booking";
 
 type ReservationBody = {
   name?: string;
@@ -8,6 +9,9 @@ type ReservationBody = {
   time?: string;
   notes?: string;
   website?: string;
+  fulfillment?: FulfillmentType;
+  items?: BookingItem[];
+  total?: number;
 };
 
 const RATE_LIMIT_WINDOW_MS = 60_000;
@@ -46,6 +50,10 @@ function isValidDate(date: string) {
   return d >= today;
 }
 
+function makeId() {
+  return `bk_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
+}
+
 export async function POST(request: Request) {
   const ip = getClientIp(request);
   if (isRateLimited(ip)) {
@@ -73,6 +81,23 @@ export async function POST(request: Request) {
   const time = body.time?.trim() ?? "";
   const notes = body.notes?.trim() ?? "";
   const guests = Number(body.guests);
+  const fulfillment: FulfillmentType =
+    body.fulfillment === "collect" ? "collect" : "dine-in";
+  const items = Array.isArray(body.items)
+    ? body.items
+        .filter((i) => i && i.name && Number(i.qty) > 0)
+        .map((i) => ({
+          id: String(i.id || i.name),
+          name: String(i.name).slice(0, 80),
+          price: Math.max(0, Number(i.price) || 0),
+          qty: Math.min(20, Math.max(1, Number(i.qty) || 1)),
+        }))
+    : [];
+  const computedTotal = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const total =
+    typeof body.total === "number" && Number.isFinite(body.total)
+      ? body.total
+      : computedTotal;
 
   if (!name || name.length < 2 || name.length > 80) {
     return NextResponse.json({ error: "Please enter a valid name." }, { status: 400 });
@@ -92,15 +117,26 @@ export async function POST(request: Request) {
   if (notes.length > 500) {
     return NextResponse.json({ error: "Notes are too long." }, { status: 400 });
   }
+  if (fulfillment === "collect" && items.length === 0) {
+    return NextResponse.json(
+      { error: "Add dishes to your order bag before requesting collection." },
+      { status: 400 }
+    );
+  }
 
-  const payload = {
+  const booking: Booking = {
+    id: makeId(),
+    createdAt: new Date().toISOString(),
+    status: "new",
+    fulfillment,
     name,
     phone,
     guests,
     date,
     time,
     notes: notes || undefined,
-    receivedAt: new Date().toISOString(),
+    items,
+    total,
   };
 
   const webhook = process.env.RESERVATION_WEBHOOK_URL;
@@ -109,28 +145,32 @@ export async function POST(request: Request) {
       const res = await fetch(webhook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(booking),
       });
       if (!res.ok) {
         console.error("Reservation webhook failed", res.status);
         return NextResponse.json(
-          { error: "Unable to submit reservation right now. Please call us." },
+          { error: "Unable to submit booking right now. Please call us." },
           { status: 502 }
         );
       }
     } catch (err) {
       console.error("Reservation webhook error", err);
       return NextResponse.json(
-        { error: "Unable to submit reservation right now. Please call us." },
+        { error: "Unable to submit booking right now. Please call us." },
         { status: 502 }
       );
     }
   } else {
-    console.info("Reservation received", payload);
+    console.info("Booking received", booking);
   }
 
   return NextResponse.json({
     ok: true,
-    message: "Reservation request received. We'll confirm shortly.",
+    booking,
+    message:
+      fulfillment === "collect"
+        ? "Collect order received. We'll confirm shortly."
+        : "Reservation request received. We'll confirm shortly.",
   });
 }

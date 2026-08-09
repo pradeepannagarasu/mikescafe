@@ -5,11 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { useContent } from "@/context/ContentContext";
+import { useCart } from "@/context/CartContext";
+import { addBooking } from "@/lib/bookings-store";
+import { formatPrice, cn } from "@/lib/utils";
+import type { Booking, FulfillmentType } from "@/types/booking";
 
 export function Reservation() {
   const { content } = useContent();
+  const { items, total, clear } = useCart();
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [fulfillment, setFulfillment] = useState<FulfillmentType>("dine-in");
   const minDate = useMemo(() => new Date().toISOString().slice(0, 10), []);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -19,6 +25,13 @@ export function Reservation() {
 
     const form = e.currentTarget;
     const data = new FormData(form);
+
+    const payloadItems = items.map((i) => ({
+      id: i.id,
+      name: i.name,
+      price: i.price,
+      qty: i.qty,
+    }));
 
     try {
       const res = await fetch("/api/reservations", {
@@ -32,10 +45,17 @@ export function Reservation() {
           time: data.get("time"),
           notes: data.get("notes"),
           website: data.get("website"),
+          fulfillment,
+          items: payloadItems,
+          total,
         }),
       });
 
-      const json = (await res.json()) as { error?: string; message?: string };
+      const json = (await res.json()) as {
+        error?: string;
+        message?: string;
+        booking?: Booking;
+      };
 
       if (!res.ok) {
         setStatus("error");
@@ -43,9 +63,19 @@ export function Reservation() {
         return;
       }
 
+      if (json.booking) {
+        addBooking(json.booking);
+      }
+
       setStatus("success");
-      setMessage(json.message ?? "Thank you - we'll confirm shortly.");
+      setMessage(
+        json.message ??
+          (fulfillment === "collect"
+            ? "Collect order received. We'll confirm shortly."
+            : "Table booking received. We'll confirm shortly.")
+      );
       form.reset();
+      clear();
     } catch {
       setStatus("error");
       setMessage(`Unable to send. Please call ${content.phone}.`);
@@ -57,8 +87,7 @@ export function Reservation() {
       <div
         className="absolute inset-0 opacity-30"
         style={{
-          backgroundImage:
-            "url(/images/gallery/good-food-good-vibes.jpg)",
+          backgroundImage: "url(/images/gallery/good-food-good-vibes.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -69,21 +98,71 @@ export function Reservation() {
       <div className="section-pad mx-auto max-w-3xl relative">
         <SectionHeading
           light
-          eyebrow="Reservations"
-          title="Reserve Your Table"
-          subtitle="Weekend mornings fill quickly. Tell us when you'd like to join us."
+          eyebrow="Bookings"
+          title="Reserve or Collect"
+          subtitle="Book a table to eat in, or place a collect order from your bag. We'll confirm by phone."
         />
 
         <form
           onSubmit={onSubmit}
           className="glass-dark border border-ivory/10 rounded-sm p-6 md:p-10 space-y-5"
-          noValidate={false}
         >
-          {/* Honeypot */}
           <div className="absolute -left-[9999px] opacity-0 h-0 overflow-hidden" aria-hidden>
             <label htmlFor="website">Website</label>
             <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
           </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            {(
+              [
+                { id: "dine-in", label: "Eat in", hint: "Reserve a table" },
+                { id: "collect", label: "Collect", hint: "Takeaway order" },
+              ] as const
+            ).map((opt) => (
+              <button
+                key={opt.id}
+                type="button"
+                onClick={() => setFulfillment(opt.id)}
+                className={cn(
+                  "rounded-sm border px-4 py-3 text-left transition-colors",
+                  fulfillment === opt.id
+                    ? "border-copper bg-copper/15"
+                    : "border-ivory/15 hover:border-ivory/35"
+                )}
+              >
+                <span className="block text-[12px] tracking-[0.14em] uppercase">{opt.label}</span>
+                <span className="block text-xs text-ivory/55 mt-1">{opt.hint}</span>
+              </button>
+            ))}
+          </div>
+
+          {items.length > 0 && (
+            <div className="rounded-sm border border-ivory/10 bg-black/20 px-4 py-3 space-y-2">
+              <p className="text-[10px] tracking-[0.2em] uppercase text-gold">Your order</p>
+              {items.map((line) => (
+                <div key={line.id} className="flex justify-between gap-3 text-sm">
+                  <span className="text-ivory/80">
+                    {line.qty}× {line.name}
+                  </span>
+                  <span className="text-copper">{formatPrice(line.price * line.qty)}</span>
+                </div>
+              ))}
+              <div className="flex justify-between border-t border-ivory/10 pt-2 font-serif text-xl">
+                <span>Total</span>
+                <span>{formatPrice(total)}</span>
+              </div>
+            </div>
+          )}
+
+          {items.length === 0 && (
+            <p className="text-sm text-ivory/55">
+              No dishes in your bag yet. You can still book a table, or{" "}
+              <a href="#breakfast" className="text-gold underline-offset-2 hover:underline">
+                add favourites
+              </a>{" "}
+              first.
+            </p>
+          )}
 
           <div className="grid sm:grid-cols-2 gap-5">
             <Field label="Name" name="name" required autoComplete="name" placeholder="Your name" />
@@ -99,7 +178,7 @@ export function Reservation() {
           </div>
           <div className="grid sm:grid-cols-3 gap-5">
             <Field
-              label="Guests"
+              label={fulfillment === "collect" ? "Portions" : "Guests"}
               name="guests"
               type="number"
               required
@@ -118,41 +197,39 @@ export function Reservation() {
               id="notes"
               name="notes"
               rows={3}
-              maxLength={500}
+              className="w-full bg-black/25 border border-ivory/15 rounded-sm px-4 py-3 text-sm placeholder:text-ivory/35 focus:border-copper/50 outline-none"
               placeholder="Allergies, occasion, preferred booth…"
-              className="w-full bg-ivory/5 border border-ivory/15 rounded-sm px-4 py-3 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold/50 outline-none resize-none"
             />
           </div>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-            <Button
-              type="submit"
-              variant="gold"
-              className="flex-1 sm:flex-none"
-              disabled={status === "loading"}
-            >
-              {status === "loading" ? "Sending…" : "Request Reservation"}
-            </Button>
-            <AnimatePresence mode="wait">
-              {message && (
-                <motion.p
-                  key={message}
-                  role="status"
-                  aria-live="polite"
-                  initial={{ opacity: 0, x: 8 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0 }}
-                  className={`text-sm ${status === "error" ? "text-red-300" : "text-gold"}`}
-                >
-                  {message}
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </div>
+          <Button type="submit" variant="gold" className="w-full" disabled={status === "loading"}>
+            {status === "loading"
+              ? "Sending…"
+              : fulfillment === "collect"
+                ? "Request collect order"
+                : "Request table reservation"}
+          </Button>
 
-          <p className="text-xs text-ivory/45 pt-2">
+          <AnimatePresence>
+            {message && (
+              <motion.p
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className={cn(
+                  "text-sm text-center",
+                  status === "error" ? "text-red-300" : "text-gold"
+                )}
+                role="status"
+              >
+                {message}
+              </motion.p>
+            )}
+          </AnimatePresence>
+
+          <p className="text-center text-sm text-ivory/50">
             Prefer to call?{" "}
-            <a href={`tel:${content.phone.replace(/\s/g, "")}`} className="underline hover:text-gold">
+            <a href={`tel:${content.phone.replace(/\s/g, "")}`} className="text-gold">
               {content.phone}
             </a>
           </p>
@@ -164,18 +241,19 @@ export function Reservation() {
 
 function Field({
   label,
+  name,
   ...props
-}: InputHTMLAttributes<HTMLInputElement> & { label: string }) {
-  const id = props.id ?? props.name;
+}: { label: string; name: string } & InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
-      <label htmlFor={id} className="block text-[11px] tracking-[0.2em] uppercase text-gold mb-2">
+      <label htmlFor={name} className="block text-[11px] tracking-[0.2em] uppercase text-gold mb-2">
         {label}
       </label>
       <input
-        id={id}
+        id={name}
+        name={name}
+        className="w-full bg-black/25 border border-ivory/15 rounded-sm px-4 py-3 text-sm placeholder:text-ivory/35 focus:border-copper/50 outline-none"
         {...props}
-        className="w-full bg-ivory/5 border border-ivory/15 rounded-sm px-4 py-3.5 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold/50 outline-none min-h-12"
       />
     </div>
   );

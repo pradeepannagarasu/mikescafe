@@ -148,7 +148,13 @@ html.app-booting .boot-line {
   will-change: transform;
 }
 
-.marquee-mask:hover .marquee-track {
+.marquee-track.marquee-ltr {
+  animation-name: marquee-ltr;
+  animation-duration: 48s;
+}
+
+.marquee-mask:hover .marquee-track,
+.marquee-track.is-paused {
   animation-play-state: paused;
 }
 
@@ -157,8 +163,16 @@ html.app-booting .boot-line {
     transform: translate3d(0, 0, 0);
   }
   to {
-    /* Triple-duplicated track → shift by one third */
     transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
+@keyframes marquee-ltr {
+  from {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
   }
 }
 

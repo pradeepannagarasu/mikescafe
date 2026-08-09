@@ -7,6 +7,7 @@ import { navLinks } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
+import { CartButton } from "@/components/cart/CartDrawer";
 import { useContent } from "@/context/ContentContext";
 
 export function Navbar() {
@@ -76,7 +77,14 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div
+              className={cn(
+                scrolled || open ? "text-walnut" : "text-ivory"
+              )}
+            >
+              <CartButton />
+            </div>
             <Button
               href="#reserve"
               variant="gold"

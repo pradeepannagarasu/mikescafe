@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useContent } from "@/context/ContentContext";
 import { formatPrice, cn } from "@/lib/utils";
 import type { MenuItem, OpeningHours, Review, GalleryImage, Announcement } from "@/types";
+import { BookingsPanel } from "@/components/admin/BookingsPanel";
 
 const AUTH_KEY = "mikes-admin";
 
@@ -26,6 +27,7 @@ function getAuthServerSnapshot() {
 }
 
 type Tab =
+  | "bookings"
   | "menu"
   | "hours"
   | "gallery"
@@ -35,6 +37,7 @@ type Tab =
   | "announcements";
 
 const tabs: { id: Tab; label: string }[] = [
+  { id: "bookings", label: "Bookings" },
   { id: "menu", label: "Menu" },
   { id: "hours", label: "Hours" },
   { id: "gallery", label: "Gallery" },
@@ -46,7 +49,7 @@ const tabs: { id: Tab; label: string }[] = [
 
 export default function AdminPage() {
   const { content, updateContent, resetContent, hydrated } = useContent();
-  const [tab, setTab] = useState<Tab>("menu");
+  const [tab, setTab] = useState<Tab>("bookings");
   const [saved, setSaved] = useState(false);
   const [pin, setPin] = useState("");
   const [authError, setAuthError] = useState("");
@@ -202,6 +205,8 @@ export default function AdminPage() {
       </header>
 
       <div className="section-pad mx-auto max-w-6xl py-10">
+        {tab === "bookings" && <BookingsPanel />}
+
         {tab === "menu" && (
           <MenuEditor
             items={content.menuItems}

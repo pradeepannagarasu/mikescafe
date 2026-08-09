@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
+import { CartDrawer } from "@/components/cart/CartDrawer";
 
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
@@ -19,6 +20,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <Footer />
+      <CartDrawer />
     </>
   );
 }

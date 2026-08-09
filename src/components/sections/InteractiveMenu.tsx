@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useContent } from "@/context/ContentContext";
+import { useCart } from "@/context/CartContext";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { formatPrice, cn } from "@/lib/utils";
 import type { MenuCategory } from "@/types";
@@ -22,6 +23,7 @@ const categories: { id: MenuCategory | "all"; label: string }[] = [
 
 export function InteractiveMenu() {
   const { content } = useContent();
+  const { addItem } = useCart();
   const [category, setCategory] = useState<MenuCategory | "all">("all");
   const [query, setQuery] = useState("");
   const [favouritesOnly, setFavouritesOnly] = useState(false);
@@ -137,6 +139,13 @@ export function InteractiveMenu() {
                   </div>
                   <span className="text-copper whitespace-nowrap pt-1">{formatPrice(item.price)}</span>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => addItem(item)}
+                  className="mt-4 w-full min-h-11 text-[11px] tracking-[0.14em] uppercase border border-walnut/15 hover:border-racing hover:bg-racing hover:text-ivory transition-colors rounded-sm"
+                >
+                  Add to order
+                </button>
               </motion.article>
             ))}
           </AnimatePresence>
