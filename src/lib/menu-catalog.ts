@@ -309,17 +309,6 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Diet Coke In Can", price: 2.5, category: "soft-drinks" },
   { name: "Estathe Lemon", price: 3.5, category: "soft-drinks" },
   { name: "Estathe Peach", price: 3.5, category: "soft-drinks" },
-  { name: "Lemonade Organic", price: 4, category: "soft-drinks" },
-  { name: "Blood Orange Organic", price: 4, category: "soft-drinks" },
-  { name: "Chinotto Organic", price: 4, category: "soft-drinks" },
-  { name: "Pear Juice Organic", price: 3.5, category: "soft-drinks" },
-  { name: "Peach Juice Organic", price: 3.5, category: "soft-drinks" },
-  { name: "Apricot Juice Organic", price: 3.5, category: "soft-drinks" },
-  { name: "Ace Juice Organic", price: 3.5, category: "soft-drinks" },
-  { name: "Apple Juice Organic", price: 3.5, category: "soft-drinks" },
-  { name: "Orange Juice Organic", price: 3.5, category: "soft-drinks" },
-  { name: "Still Water", price: 2, category: "soft-drinks" },
-  { name: "Sparkling Water", price: 2, category: "soft-drinks" },
 
   // CATERING
   { name: "Lasagna Bolognese (Catering)", price: 55, category: "catering" },
@@ -393,6 +382,4 @@ export const DRINK_CATEGORIES: { id: MenuCategory; label: string }[] = [
   { id: "coffee", label: "Coffee & Tea" },
   { id: "juice", label: "Fresh Juice" },
   { id: "soft-drinks", label: "Soft Drinks" },
-  { id: "beer", label: "Beers" },
-  { id: "wine", label: "Wine" },
 ];
