@@ -8,6 +8,8 @@ export const SITE = {
   reviewCount: 1000,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mikescafe.pradeepandigital.workers.dev",
   logo: "/mikeslogo.png",
+  instagram: "https://www.instagram.com/mikescafeportobello/",
+  instagramHandle: "@mikescafeportobello",
 };
 
 /** Local plate photography */

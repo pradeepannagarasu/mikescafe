@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { FaInstagram } from "react-icons/fa";
-import { instagramPosts } from "@/lib/data";
+import { SITE, instagramPosts } from "@/lib/data";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -12,8 +12,8 @@ export function Instagram() {
       <div className="section-pad mx-auto max-w-[1400px]">
         <SectionHeading
           eyebrow="Instagram"
-          title="@mikescafenottinghill"
-          subtitle="Follow the morning rush - plates, pours, and Notting Hill light."
+          title={SITE.instagramHandle}
+          subtitle="Follow the morning rush - plates, pours, and Portobello light."
         />
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
@@ -25,7 +25,7 @@ export function Instagram() {
               delay={i * 50}
             >
               <a
-                href="https://instagram.com"
+                href={SITE.instagram}
                 target="_blank"
                 rel="noreferrer"
                 className="absolute inset-0 block"
