@@ -17,34 +17,29 @@ npm run dev
 
 This app is configured for **Cloudflare Workers** via [`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare) — not a static `/dist` Pages build.
 
-### Option A — Dashboard (Git connected)
+### Deploy flow (Git → Cloudflare)
 
-In **Workers & Pages → mikescafe → Settings → Builds**:
+This project is connected to **Cloudflare Pages via GitHub**.
+
+```
+Your edits → git push to main → Cloudflare builds → mikescafe.pages.dev
+```
+
+1. Change code locally
+2. **Commit + push to `main`** on GitHub
+3. Cloudflare Pages picks up the commit and deploys automatically
+
+You do **not** need manual `wrangler deploy` for day-to-day updates if Git Pages is connected.
+
+**Build settings** (Workers & Pages → mikescafe → Settings → Builds):
 
 | Setting | Value |
 |---|---|
-| Framework preset | **None** |
 | Build command | `npx opennextjs-cloudflare build && npx opennextjs-cloudflare deploy` |
 | Build output directory | `pages-bridge` |
-| Root directory | `/` |
 | Production branch | `main` |
 
-That keeps the real Next.js app on **Workers**, and makes **https://mikescafe.pages.dev** proxy to it.
-
-**Do not** set output to `/dist` — that caused the 404s.
-
-### Live URLs
-
-- **https://mikescafe.pages.dev**
-- **https://mikescafe.pradeepandigital.workers.dev**
-
-### Option B — CLI
-
-```bash
-npm run deploy
-```
-
-This builds the Worker and refreshes the Pages bridge in one step.
+Optional CLI (same result, bypasses Git wait): `npm run deploy` — still **push to Git** so the repo stays the source of truth.
 ## Environment
 
 | Variable | Required | Purpose |

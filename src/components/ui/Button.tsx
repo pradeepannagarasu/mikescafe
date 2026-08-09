@@ -8,12 +8,12 @@ type Variant = "primary" | "secondary" | "ghost" | "gold";
 
 const styles: Record<Variant, string> = {
   primary:
-    "bg-racing text-ivory hover:bg-racing-light shadow-[0_8px_30px_rgba(27,58,47,0.25)]",
+    "bg-racing text-ivory hover:bg-racing-light shadow-[0_8px_30px_rgba(196,74,34,0.35)]",
   secondary:
     "bg-transparent text-ivory border border-ivory/40 hover:bg-ivory/10",
   ghost:
     "bg-transparent text-walnut border border-walnut/20 hover:border-walnut/50 hover:bg-walnut/[0.03]",
-  gold: "bg-copper text-ivory hover:brightness-110 shadow-[0_8px_24px_rgba(184,115,51,0.28)]",
+  gold: "bg-copper text-ivory hover:brightness-110 shadow-[0_8px_24px_rgba(212,137,60,0.35)]",
 };
 
 interface ButtonProps {

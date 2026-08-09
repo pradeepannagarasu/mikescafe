@@ -53,7 +53,7 @@ export function Reservation() {
   };
 
   return (
-    <section id="reserve" className="relative bg-racing text-ivory py-24 md:py-32 overflow-hidden">
+    <section id="reserve" className="relative bg-espresso text-ivory py-24 md:py-32 overflow-hidden">
       <div
         className="absolute inset-0 opacity-30"
         style={{
@@ -64,7 +64,7 @@ export function Reservation() {
         }}
         aria-hidden
       />
-      <div className="absolute inset-0 bg-racing/88" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-espresso/90 to-black/85" aria-hidden />
 
       <div className="section-pad mx-auto max-w-3xl relative">
         <SectionHeading

@@ -6,7 +6,6 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 import { SITE } from "@/lib/data";
 import { Button } from "@/components/ui/Button";
-import { Logo } from "@/components/ui/Logo";
 
 const POSTER =
   "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1600&q=80";
@@ -75,7 +74,7 @@ export function Hero() {
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center section-pad text-center text-ivory">
         <motion.p
-          className="text-[11px] md:text-xs tracking-[0.4em] uppercase text-gold mb-5"
+          className="text-[11px] md:text-xs tracking-[0.4em] uppercase text-gold mb-6"
           initial={reduce ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.7 }}
@@ -83,21 +82,20 @@ export function Hero() {
           Since {SITE.established}
         </motion.p>
 
-        <motion.div
-          className="flex flex-col items-center"
-          initial={reduce ? false : { opacity: 0, y: 28, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+        <motion.h1
+          className="font-serif text-[clamp(3.5rem,12vw,8.5rem)] leading-[0.92] tracking-tight"
+          initial={reduce ? false : { opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h1 className="sr-only">{SITE.name}</h1>
-          <Logo size="hero" priority />
-        </motion.div>
+          {SITE.name}
+        </motion.h1>
 
         <motion.p
-          className="mt-7 max-w-md text-base md:text-lg text-ivory/75 leading-relaxed"
+          className="mt-6 max-w-md text-base md:text-lg text-ivory/75 leading-relaxed"
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.7 }}
+          transition={{ delay: 0.35, duration: 0.7 }}
         >
           {SITE.tagline}
         </motion.p>
@@ -106,7 +104,7 @@ export function Hero() {
           className="mt-10 flex flex-col sm:flex-row gap-4"
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.65 }}
+          transition={{ delay: 0.5, duration: 0.65 }}
         >
           <Button href="#reserve" variant="gold">
             Reserve Table
