@@ -68,6 +68,8 @@ function fallbackImage(category: MenuCategory): string | undefined {
       return PLATES.parmaPiadina;
     case "desserts":
       return undefined;
+    case "shop":
+      return undefined;
     case "catering":
       return PLATES.beefLasagna;
     default:
@@ -353,28 +355,28 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Baked Cheese Cake (Catering)", price: 38, category: "catering" },
   { name: "Large Fruit Tarte (Catering)", price: 55, category: "catering" },
 
-  // SHOP (curated retail, easy browse, not every SKU)
-  { name: "Mortadella Bologna IGP With Pistachio 170g", price: 6, category: "shop", description: "Charcuterie" },
-  { name: "Cooked Ham High Quality 170g", price: 9.5, category: "shop", description: "Charcuterie" },
-  { name: "Bresaola Punta D'Anca 100g", price: 9.5, category: "shop", description: "Charcuterie" },
-  { name: "Nduja Di Spilinga 230g", price: 8.5, category: "shop", description: "Charcuterie" },
-  { name: "Guanciale 250g", price: 10, category: "shop", description: "Charcuterie" },
-  { name: "Salsicciamo Luganega Classic 400g", price: 8.5, category: "shop", description: "Fresh meat" },
-  { name: "Spaghetti Gentile 500g", price: 4.5, category: "shop", description: "Pasta & rice" },
-  { name: "Rigatoni Gentile 500g", price: 4.5, category: "shop", description: "Pasta & rice" },
-  { name: "Paccheri Gentile 500g", price: 4.5, category: "shop", description: "Pasta & rice" },
-  { name: "Arborio Rice 1kg", price: 5.2, category: "shop", description: "Pasta & rice" },
-  { name: "Fresh Basil Pesto 250g", price: 11.3, category: "shop", description: "Sauces & jars" },
-  { name: "Passata - La Torrente 800g", price: 3.8, category: "shop", description: "Sauces & jars" },
-  { name: "Parmigiano Reggiano DOP Aged 24 Months 200g", price: 7, category: "shop", description: "Cheeses" },
-  { name: "Pecorino Romano DOP 100g", price: 5, category: "shop", description: "Cheeses" },
-  { name: "Smoked Scamorza - Sabelli 250g", price: 5.9, category: "shop", description: "Cheeses" },
-  { name: "Mascarpone Cheese - Sabelli 500g", price: 6.5, category: "shop", description: "Cheeses" },
-  { name: "Extra Virgin Oil Intense Fruity - Donnafranca 500ml", price: 22, category: "shop", description: "Oil & dressing" },
-  { name: "Baiocchi Mulino Bianco 260g", price: 3.9, category: "shop", description: "Biscuits & snack" },
-  { name: "Pan Di Stelle Mulino Bianco 350g", price: 4.5, category: "shop", description: "Biscuits & snack" },
-  { name: "Still Water - San Benedetto 500ml", price: 1.5, category: "shop", description: "Soft drinks" },
-  { name: "Sparkling Water - San Pellegrino 500ml", price: 1.5, category: "shop", description: "Soft drinks" },
+  // SHOP (text-only retail list, no product photos)
+  { name: "Mortadella Bologna IGP With Pistachio 170g", price: 6, category: "shop", description: "Charcuterie", image: "" },
+  { name: "Cooked Ham High Quality 170g", price: 9.5, category: "shop", description: "Charcuterie", image: "" },
+  { name: "Bresaola Punta D'Anca 100g", price: 9.5, category: "shop", description: "Charcuterie", image: "" },
+  { name: "Nduja Di Spilinga 230g", price: 8.5, category: "shop", description: "Charcuterie", image: "" },
+  { name: "Guanciale 250g", price: 10, category: "shop", description: "Charcuterie", image: "" },
+  { name: "Salsicciamo Luganega Classic 400g", price: 8.5, category: "shop", description: "Fresh meat", image: "" },
+  { name: "Spaghetti Gentile 500g", price: 4.5, category: "shop", description: "Pasta & rice", image: "" },
+  { name: "Rigatoni Gentile 500g", price: 4.5, category: "shop", description: "Pasta & rice", image: "" },
+  { name: "Paccheri Gentile 500g", price: 4.5, category: "shop", description: "Pasta & rice", image: "" },
+  { name: "Arborio Rice 1kg", price: 5.2, category: "shop", description: "Pasta & rice", image: "" },
+  { name: "Fresh Basil Pesto 250g", price: 11.3, category: "shop", description: "Sauces & jars", image: "" },
+  { name: "Passata - La Torrente 800g", price: 3.8, category: "shop", description: "Sauces & jars", image: "" },
+  { name: "Parmigiano Reggiano DOP Aged 24 Months 200g", price: 7, category: "shop", description: "Cheeses", image: "" },
+  { name: "Pecorino Romano DOP 100g", price: 5, category: "shop", description: "Cheeses", image: "" },
+  { name: "Smoked Scamorza - Sabelli 250g", price: 5.9, category: "shop", description: "Cheeses", image: "" },
+  { name: "Mascarpone Cheese - Sabelli 500g", price: 6.5, category: "shop", description: "Cheeses", image: "" },
+  { name: "Extra Virgin Oil Intense Fruity - Donnafranca 500ml", price: 22, category: "shop", description: "Oil & dressing", image: "" },
+  { name: "Baiocchi Mulino Bianco 260g", price: 3.9, category: "shop", description: "Biscuits & snack", image: "" },
+  { name: "Pan Di Stelle Mulino Bianco 350g", price: 4.5, category: "shop", description: "Biscuits & snack", image: "" },
+  { name: "Still Water - San Benedetto 500ml", price: 1.5, category: "shop", description: "Soft drinks", image: "" },
+  { name: "Sparkling Water - San Pellegrino 500ml", price: 1.5, category: "shop", description: "Soft drinks", image: "" },
 ]);
 
 export const MENU_GROUPS: { id: MenuGroup; label: string; hint: string }[] = [
