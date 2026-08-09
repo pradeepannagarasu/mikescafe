@@ -321,20 +321,6 @@ export const menuCatalog: MenuItem[] = build([
   { name: "Still Water", price: 2, category: "soft-drinks" },
   { name: "Sparkling Water", price: 2, category: "soft-drinks" },
 
-  // DRINKS: Beer
-  { name: "Moretti Beer", price: 5.5, category: "beer" },
-  { name: "Moretti Beer Zero", price: 5.5, category: "beer" },
-  { name: "Messina Cristalli Di Sale", price: 5.5, category: "beer" },
-  { name: "Ichnusa Non Filtrata", price: 5.5, category: "beer" },
-
-  // DRINKS: Wine (priced only)
-  { name: "Gavi 125ml", price: 6.7, category: "wine", description: "Wine by the glass" },
-  { name: "Chianti 125ml", price: 6.7, category: "wine", description: "Wine by the glass" },
-  { name: "Prosecco 125ml", price: 6.7, category: "wine", description: "Wine by the glass" },
-  { name: "Le Pianure Pinot Grigio", price: 25.5, category: "wine", description: "White wine bottle" },
-  { name: "Piccolo Gavi Di Gavi", price: 35, category: "wine", description: "White wine bottle" },
-  { name: "Amarone Classico - Velluto Meroni", price: 69.9, category: "wine", description: "Red wine bottle" },
-
   // CATERING
   { name: "Lasagna Bolognese (Catering)", price: 55, category: "catering" },
   { name: "Lasagna Al Pesto (Catering)", price: 55, category: "catering" },
@@ -382,7 +368,7 @@ export const menuCatalog: MenuItem[] = build([
 
 export const MENU_GROUPS: { id: MenuGroup; label: string; hint: string }[] = [
   { id: "order", label: "Order", hint: "Primary food menu" },
-  { id: "drinks", label: "Drinks", hint: "Coffee, juice, soft & wine" },
+  { id: "drinks", label: "Drinks", hint: "Coffee, juice & soft drinks" },
   { id: "catering", label: "Catering", hint: "Party trays & sharing" },
   { id: "shop", label: "Shop", hint: "Retail to take home" },
 ];
